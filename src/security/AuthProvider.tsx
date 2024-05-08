@@ -2,10 +2,14 @@ import { createContext, useState, ReactNode } from "react";
 import { authProvider, User } from "../services/authFacade";
 import { useContext } from "react";
 import { LoginResponse, LoginRequest } from "../services/authFacade";
+// import { SpecialUser } from "./specialUserProvider";
+// import { SpecialUserResponse } from "./specialUserProvider";
+import React from "react";
 
 interface AuthContextType {
   username: string | null;
   signIn: (user: User) => Promise<LoginResponse>;
+  // signUp: (user: SpecialUser) => Promise<SpecialUserResponse>;
   signOut: () => void;
   isLoggedIn: () => boolean;
   isLoggedInAs: (role: string[]) => boolean;

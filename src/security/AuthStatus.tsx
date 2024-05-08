@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "./AuthProvider";
+import "./AuthStatus.css";
 
 export default function AuthStatus() {
   const auth = useAuth();
@@ -8,7 +9,12 @@ export default function AuthStatus() {
   if (!auth.isLoggedIn()) {
     return (
       <li>
-        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/login">
+          <img
+            className="login-logo"
+            src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
+          />
+        </NavLink>
       </li>
     );
   } else {

@@ -1,7 +1,7 @@
 .login-wrapper {
   background-color: white;
   padding: 20px;
-  margin-top: 50px;  
+  margin-top: 50px;
   width: 350px;
   padding-top: 0px;
   border-radius: 5px;
@@ -42,4 +42,30 @@
 
 .login-btn:hover {
   background-color: #004494;
+}
+
+.create-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.create-btn:hover {
+  background-color: #004494;
+}
+
+.login-logo-form {
+  width: 110px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.error-msg {
+  color: red;
 }

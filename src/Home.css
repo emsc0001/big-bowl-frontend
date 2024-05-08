@@ -1,0 +1,90 @@
+/* Generelle stilarter */
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("https://files.oaiusercontent.com/file-BclbXMpW4u960IQJlmZjYNOF?se=2024-05-08T12%3A07%3A55Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D4bd669c8-e776-43d0-b3d3-766ebbdf96ad.webp&sig=FF0xlqU13rHppWIZhkqAbQRyOJLZpbqGWMpDLh6auBY%3D")
+    no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 20px;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 15px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 20px 0;
+  border-radius: 12px;
+}
+
+.info-section,
+.promo-section {
+  margin-bottom: 30px;
+}
+
+.info-section h2,
+.promo-section h2 {
+  margin-bottom: 15px;
+}
+
+.info-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Responsivt layout */
+@media (max-width: 768px) {
+  .header,
+  .main-content,
+  .footer {
+    padding: 20px;
+    margin: 10px 0;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .main-content {
+    flex-direction: column;
+  }
+}
+
+.logo {
+  width: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}

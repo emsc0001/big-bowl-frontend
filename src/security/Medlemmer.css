@@ -1,0 +1,31 @@
+.medlemmer-container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.medlemmer-header {
+  color: #333;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.medlemmer-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.medlemmer-table th,
+.medlemmer-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.medlemmer-table th {
+  background-color: #00a6ff;
+}
