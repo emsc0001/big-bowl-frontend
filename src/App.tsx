@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import { Categories } from "./recipes/Categories";
+import CategoryForm from "./recipes/CategoryForm";
+import Recipe from "./recipes/Recipe";
+// import Recipes from "./recipes/RecipeList";
+import RecipesLayout from "./recipes/RecipesLayout";
+import RecipeForm from "./recipes/RecipeForm";
+import Login from "./security/Login";
+import Logout from "./security/Logout";
+import RequireAuth from "./security/RequireAuth";
+import Layout from "./Layout";
+import Home from "./Home";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  //const auth = useAuth();
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/categories/" element={<Categories />} />
+        <Route path="/recipes/" element={<RecipesLayout />}>
+          <Route path=":id" element={<Recipe />} />
+        </Route>
 
-export default App
+        <Route
+          path="/addRecipe"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <RecipeForm />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/addCategory"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <CategoryForm />
+            </RequireAuth>
+          }
+        />
+        {/* <Route path="/add" */}
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+      </Routes>
+    </Layout>
+  );
+}
