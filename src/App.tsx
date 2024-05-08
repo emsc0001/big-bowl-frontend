@@ -7,6 +7,7 @@ import RecipesLayout from "./recipes/RecipesLayout";
 import RecipeForm from "./recipes/RecipeForm";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
+import OpretForm from "./security/OpretForm";
 import RequireAuth from "./security/RequireAuth";
 import Layout from "./Layout";
 import Home from "./Home";
@@ -44,6 +45,7 @@ export default function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/opret" element={<OpretForm />} />
       </Routes>
     </Layout>
   );

@@ -41,6 +41,12 @@ const Login = () => {
           src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png"
           alt="user-icon"
         />
+
+        <img
+          className="logo"
+          src="https://files.oaiusercontent.com/file-8glmOSoVN7HHst8vnFxeP6uW?se=2024-05-08T12%3A08%3A49Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D3dae81c2-506f-4a8f-b341-d340d690d715.webp&sig=/BHRp6h9d9xtF/KWOSSQGlwzPhJffSv5HLt9nE%2Bq88o%3D"
+          alt="Big Bowl Logo"
+        />
         <div className="login-form-group">
           <label htmlFor="username">Brugernavn</label>
           <input type="text" name="username" value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} required />

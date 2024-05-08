@@ -24,7 +24,7 @@ export default function Home() {
           alt="Big Bowl Logo"
         />
 
-        <h1>Velkommen til Big Bowl</h1>
+        <h1>Velkommen til Big Bowl🎳</h1>
         <p>Dit ultimative sted for sjov og bowling!</p>
       </header>
 
