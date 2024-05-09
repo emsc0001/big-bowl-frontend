@@ -40,7 +40,7 @@ export default function OpretForm() {
     };
 
     // Ændre URL'en til den eksterne adresse
-    return fetch("http://localhost:8080/api/specialusers", options);
+    return fetch("aem-big-bowl.azurewebsites.net/api/specialusers", options);
   };
 
   return (

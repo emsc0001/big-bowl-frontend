@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getProducts, Product } from "../services/apiFacade";
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
-import "./Products.css"; // Sørg for at dette peger på CSS-filen
+import "./Products.css";
 
 export const Products = () => {
   const [products, setProducts] = useState<Product[]>();

@@ -1,7 +1,7 @@
 import { API_URL } from "../settings";
 import { makeOptions, handleHttpErrors } from "../services/fetchUtils";
 
-const OPRET_URL = "http://localhost:8080" + "/api/specialusers";
+const OPRET_URL = "aem-big-bowl.azurewebsites.net" + "/api/specialusers";
 
 export interface SpecialUser {
   username: string;

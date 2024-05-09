@@ -40,10 +40,21 @@ let info: Info | null = null;
 
 async function getProducts(): Promise<Array<Product>> {
   if (products.length > 0) return [...products];
-  products = await fetch(PRODUCT_URL).then(handleHttpErrors);
-  return products;
-}
+  try {
+    const res = await fetch(PRODUCT_URL);
+    if (!res.ok) {
+      throw new Error("Fetch request failed");
+    }
 
+    const productsData = await res.json(); // Parse responsen som JSON
+    console.log("Products fetched successfully:", productsData); // Log dataene
+    products = productsData; // Tildel dataene til biografer-arrayen
+    return products;
+  } catch (error) {
+    console.log("An error occurred while fetching products:", error);
+    return [];
+  }
+}
 async function getProduct(id: number): Promise<Product> {
   return fetch(PRODUCT_URL + "/" + id).then(handleHttpErrors);
 }
