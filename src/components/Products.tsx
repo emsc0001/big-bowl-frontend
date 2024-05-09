@@ -18,12 +18,18 @@ export const Products = () => {
         <h2>Produkter</h2>
         <p>Se Produkter:</p>
       </header>
-
+      <img
+        className="logo"
+        src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
+        alt="Big Bowl Logo"
+      />
       <main className="main-content">
         <ul className="product-list">
           {products?.map((product, index) => (
             <li className="product-item" key={index}>
-              <Link to={`/${product.id}`}>{product.name}</Link>
+              <Link to={`/${product.id}`}>
+                {product.name} - {product.price}
+              </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="product-btn" to="/addProduct" state={product}>
                   Edit

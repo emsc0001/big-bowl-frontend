@@ -4,11 +4,17 @@ const CATEGORIES_URL = API_URL + "/categories";
 const RECIPE_URL = API_URL + "/recipes";
 const INFO_URL = API_URL + "/info";
 const PRODUCT_URL = API_URL + "/products";
+const AIRHOCKEY_URL = API_URL + "/airhockey";
 
 interface Product {
   id: number | null;
   name: string;
   price: number;
+}
+
+interface AirHockey {
+  id: number | null;
+  tableNumber: number;
 }
 
 interface Recipe {
@@ -34,6 +40,7 @@ interface Info {
 }
 
 let products: Array<Product> = [];
+let airhockey: Array<AirHockey> = [];
 let categories: Array<string> = [];
 let recipes: Array<Recipe> = [];
 let info: Info | null = null;
@@ -57,6 +64,28 @@ async function getProducts(): Promise<Array<Product>> {
 }
 async function getProduct(id: number): Promise<Product> {
   return fetch(PRODUCT_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function getAirHockeys(): Promise<Array<AirHockey>> {
+  if (airhockey.length > 0) return [...airhockey];
+  try {
+    const res = await fetch(AIRHOCKEY_URL);
+    if (!res.ok) {
+      throw new Error("Fetch request failed");
+    }
+
+    const airhockeyData = await res.json(); // Parse responsen som JSON
+    console.log("Airhockey fetched successfully:", airhockeyData); // Log dataene
+    airhockey = airhockeyData; // Tildel dataene til biografer-arrayen
+    return airhockey;
+  } catch (error) {
+    console.log("An error occurred while fetching airhockey:", error);
+    return [];
+  }
+}
+
+async function getAirHockey(id: number): Promise<AirHockey> {
+  return fetch(AIRHOCKEY_URL + "/" + id).then(handleHttpErrors);
 }
 
 async function getCategories(): Promise<Array<string>> {
@@ -105,6 +134,6 @@ async function getInfo(): Promise<Info> {
   return info;
 }
 
-export type { Recipe, Info, Category, Product };
+export type { Recipe, Info, Category, Product, AirHockey };
 // eslint-disable-next-line react-refresh/only-export-components
-export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo, addCategory, getProduct, getProducts };
+export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo, addCategory, getProduct, getProducts, getAirHockeys, getAirHockey };

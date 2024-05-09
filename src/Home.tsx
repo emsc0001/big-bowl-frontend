@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react";
-import { getInfo, Info } from "./services/apiFacade";
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 export default function Home() {
-  const [info, setInfo] = useState<Info | null>(null);
-  const [err, setErr] = useState("");
-
-  useEffect(() => {
-    setErr("");
-    getInfo()
-      .then((data) => setInfo(data))
-      .catch(() => {
-        setErr("Fejl ved indlæsning af data fra backend");
-      });
-  }, []);
-
   return (
     <div className="home-container">
       <header className="hero-section">
         <img
-          className="logo"
+          className="logo1"
           src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
           alt="Big Bowl Logo"
         />
@@ -29,23 +16,37 @@ export default function Home() {
       </header>
 
       <main className="main-content">
-        <section className="info-section">
+        <section className="faciliteter-section">
           <h2>Udforsk vores faciliteter</h2>
-          <p style={{ color: "red" }}>{err}</p>
-          {info && (
-            <>
-              <h3>Information om Backend-data</h3>
-              <ul>
-                <li>
-                  <strong>Data hentet fra:</strong> {info.reference}
-                </li>
-                <li>
-                  <strong>Data oprettet:</strong> {info.created}
-                </li>
-                <li>{info.info}</li>
-              </ul>
-            </>
-          )}
+          <div className="faciliteter">
+            <h3>Vælg din oplevelse</h3>
+            <div className="facility-cards">
+              <Link to="/bowling" className="facility-card">
+                <h4>🎳 Bowling</h4>
+                <img
+                  className="bowlingImg"
+                  src="https://i.ibb.co/42hMwNV/DALL-E-2024-05-09-18-45-14-A-vibrant-animated-scene-depicting-a-booking-area-for-bowling-The-scene-i.webp"
+                  alt="🎳 Bowling"
+                />
+              </Link>
+              <Link to="/airhockey" className="facility-card">
+                <h4>🏒 Airhockey</h4>
+                <img
+                  className="bowlingImg"
+                  src="https://i.ibb.co/L6QMnGd/DALL-E-2024-05-09-18-45-20-A-vibrant-animated-scene-of-an-air-hockey-game-in-action-featuring-colorf.webp"
+                  alt="🏒 Airhockey"
+                />
+              </Link>
+              <Link to="/spisning" className="facility-card">
+                <h4> 🍽️ Spisning</h4>
+                <img
+                  className="bowlingImg"
+                  src="https://i.ibb.co/sPVYnDD/DALL-E-2024-05-09-18-46-22-A-vibrant-animated-dining-scene-showing-a-beautifully-set-dining-table-wi.webp"
+                  alt="🍽️ Spisning"
+                />
+              </Link>
+            </div>
+          </div>
         </section>
 
         <section className="promo-section">
