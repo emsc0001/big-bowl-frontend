@@ -9,11 +9,14 @@ export const BowlingLanes = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    getBowlingLanes().then((res) => setBowlingLanes(res));
+    getBowlingLanes().then((res) => {
+      console.log("Fetched Bowling Lanes:", res);
+      setBowlingLanes(res);
+    });
   }, []);
 
   const getForKidsLabel = (isForKids: boolean) => {
-    return isForKids ? "🧒 Kids-friendly" : "🔞 Adults-only";
+    return isForKids ? "🧒 Egnet til børn" : "🔞 Ikke egnet til børn";
   };
 
   return (
@@ -30,9 +33,9 @@ export const BowlingLanes = () => {
       <main className="main-content">
         <ul className="bowling-list">
           {bowlingLanes?.map((bowlingLane, index) => (
-            <li className={`bowling-item ${bowlingLane.isForKids ? "kids-lane" : "adults-lane"}`} key={index}>
+            <li className={`bowling-item ${bowlingLane.forKids ? "kids-lane" : "adults-lane"}`} key={index}>
               <Link to={`/${bowlingLane.id}`}>
-                🎳 Bowling lane: {bowlingLane.laneNumber} - {getForKidsLabel(bowlingLane.isForKids)}
+                🎳 Bowling lane: {bowlingLane.laneNumber} - {getForKidsLabel(bowlingLane.forKids)}
               </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="bowling-btn" to="/addBowlingLane" state={bowlingLane}>

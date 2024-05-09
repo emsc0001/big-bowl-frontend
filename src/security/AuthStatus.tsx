@@ -20,7 +20,7 @@ export default function AuthStatus() {
   } else {
     return (
       <li>
-        <Link to="/logout">Logout (Logged in as {auth.username}) </Link>
+        <Link to="/logout">Logout (Logged in as {auth.username}👤) </Link>
       </li>
     );
   }

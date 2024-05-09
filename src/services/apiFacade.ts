@@ -16,7 +16,7 @@ interface Product {
 interface BowlingLane {
   id: number | null;
   laneNumber: number;
-  isForKids: boolean;
+  forKids: boolean;
 }
 interface AirHockey {
   id: number | null;

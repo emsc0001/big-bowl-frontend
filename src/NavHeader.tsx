@@ -12,21 +12,21 @@ export default function NavHeader() {
       <ul>
         <li>
           {/* <a href="/">Home</a> */}
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">🏠Home</NavLink>
         </li>
         <li>
           {/* <a href="/categories">Categories</a> */}
-          <NavLink to="/products">Produkter</NavLink>
-        </li>
-
-        <li>
-          {/* <a href="/categories">Categories</a> */}
-          <NavLink to="/bowlinglanes">Bowling baner</NavLink>
+          <NavLink to="/products">📦Produkter</NavLink>
         </li>
 
         <li>
           {/* <a href="/categories">Categories</a> */}
-          <NavLink to="/airhockey">AirHockey</NavLink>
+          <NavLink to="/bowlinglanes">🎳Bowling baner</NavLink>
+        </li>
+
+        <li>
+          {/* <a href="/categories">Categories</a> */}
+          <NavLink to="/airhockey">🏒AirHockey</NavLink>
         </li>
 
         <AuthStatus />
