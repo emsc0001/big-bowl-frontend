@@ -24,6 +24,8 @@ export const Products = () => {
           {products?.map((product, index) => (
             <li className="product-item" key={index}>
               <Link to={`/${product.id}`}>{product.name}</Link>
+              <p>{product.price} kr.</p>
+              <img src={product.image} alt={product.name} />
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="product-btn" to="/addProduct" state={product}>
                   Edit

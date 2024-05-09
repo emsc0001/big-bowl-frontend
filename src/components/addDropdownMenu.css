@@ -1,0 +1,48 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #333; /* Justeret til at matche nav header baggrund */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Tilføjer overgangseffekt */
+}
+
+/* Justerer stilen for dropdown-indholdet til at matche NavHeader temaet */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #444; /* Mørkere baggrund for dropdown-indhold */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 8px 8px; /* Tilføjer afrundede hjørner */
+  z-index: 1;
+}
+
+/* Stilindstillinger for links inden i dropdown-menuen */
+.dropdown-content a {
+  color: white; /* Skifter tekstfarve til hvid */
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s; /* Glatte baggrundsændringer */
+}
+
+/* Hover-effekt for links inden i dropdown */
+.dropdown-content a:hover {
+  background-color: #555; /* Lysere baggrund ved hover */
+}
+
+/* Viser dropdown-indhold når hover og justerer knapstil */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #0056b3; /* Lysere blå farve for knappen ved hover */
+}

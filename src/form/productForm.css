@@ -1,0 +1,52 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#productForm {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#productForm label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#productForm input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+#productForm button {
+  padding: 12px 24px;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 10px; /* Tilføj lidt margin på toppen for at adskille knapperne */
+}
+
+#productForm button[type="submit"] {
+  background-color: #007bff;
+}
+
+#productForm button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+#productForm button[type="button"] {
+  background-color: #dc3545; /* Gør "Delete" knappen rød */
+}
+
+#productForm button[type="button"]:hover {
+  background-color: #c82333; /* Gør "Delete" knappen mørkere rød når musen er over */
+}

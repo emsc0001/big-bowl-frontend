@@ -9,6 +9,7 @@ interface Product {
   id: number | null;
   name: string;
   price: number;
+  image: string;
 }
 
 interface Recipe {
@@ -78,6 +79,13 @@ async function getRecipe(id: number): Promise<Recipe> {
   return fetch(RECIPE_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function addProduct(newProduct: Product): Promise<Product> {
+  const method = newProduct.id ? "PUT" : "POST";
+  const options = makeOptions(method, newProduct, true);
+  const URL = newProduct.id ? `${PRODUCT_URL}/${newProduct.id}` : PRODUCT_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
 async function addRecipe(newRecipe: Recipe): Promise<Recipe> {
   const method = newRecipe.id ? "PUT" : "POST";
   const options = makeOptions(method, newRecipe, true);
@@ -97,6 +105,11 @@ async function deleteRecipe(id: number): Promise<Recipe> {
   return fetch(`${RECIPE_URL}/${id}`, options).then(handleHttpErrors);
 }
 
+async function deleteProduct(id: number): Promise<Product> {
+  const options = makeOptions("DELETE", null, true);
+  return fetch(`${PRODUCT_URL}/${id}`, options).then(handleHttpErrors);
+}
+
 async function getInfo(): Promise<Info> {
   if (info) {
     return info;
@@ -108,3 +121,5 @@ async function getInfo(): Promise<Info> {
 export type { Recipe, Info, Category, Product };
 // eslint-disable-next-line react-refresh/only-export-components
 export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo, addCategory, getProduct, getProducts };
+export { addProduct };
+export { deleteProduct };
