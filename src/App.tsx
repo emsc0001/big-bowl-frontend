@@ -1,10 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { Products } from "./recipes/Products";
-import CategoryForm from "./recipes/CategoryForm";
-import Recipe from "./recipes/Recipe";
-// import Recipes from "./recipes/RecipeList";
-import RecipesLayout from "./recipes/RecipesLayout";
-import RecipeForm from "./recipes/RecipeForm";
+import { Products } from "./components/Products";
+
+
 import Login from "./security/Login";
 import Logout from "./security/Logout";
 import OpretForm from "./security/OpretForm";
@@ -20,27 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products/" element={<Products />} />
-        <Route path="/recipes/" element={<RecipesLayout />}>
-          <Route path=":id" element={<Recipe />} />
-        </Route>
 
-        <Route
-          path="/addRecipe"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <RecipeForm />
-            </RequireAuth>
-          }
-        />
-
-        <Route
-          path="/addCategory"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <CategoryForm />
-            </RequireAuth>
-          }
-        />
         {/* <Route path="/add" */}
 
         <Route path="/login" element={<Login />} />

@@ -16,21 +16,7 @@ export default function NavHeader() {
           {/* <a href="/categories">Categories</a> */}
           <NavLink to="/products">Produkter</NavLink>
         </li>
-        <li>
-          {/* <a href="/recipes">Recipes</a> */}
-          <NavLink to="/recipes">Recipes</NavLink>
-        </li>
-        {auth.isLoggedIn() && (
-          <li>
-            <NavLink to="/addRecipe">Add Recipe</NavLink>
-          </li>
-        )}
 
-        {auth.isLoggedIn() && (
-          <li>
-            <NavLink to="/addCategory">Add Category</NavLink>
-          </li>
-        )}
 
         <AuthStatus />
       </ul>
