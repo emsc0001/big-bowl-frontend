@@ -23,7 +23,7 @@ export const BowlingLanes = () => {
     <div className="bowling-container">
       <header className="header">
         <h2>Bowlingbaner</h2>
-        <p>Se Bowlingbaner:</p>
+        <p>Se Ledige Bowlingbaner:</p>
       </header>
       <img
         className="logo"

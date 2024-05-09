@@ -20,19 +20,19 @@
 }
 
 .header {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 40px;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-top: 20px;
   animation: fadeIn 2s ease-in forwards;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10%);
+    transform: translateY(-15%);
   }
   to {
     opacity: 1;
@@ -41,14 +41,14 @@
 }
 
 .logo {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   position: absolute;
   top: 20px;
   left: 20px;
   border-radius: 50%;
-  border: 4px solid #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
   object-fit: cover;
   z-index: 100;
   animation: rotateLogo 4s linear infinite;
@@ -66,12 +66,12 @@
 /* Main Content */
 .main-content {
   flex: 1;
-  padding: 40px;
+  padding: 30px;
   background-color: rgba(0, 0, 0, 0.85);
   margin: 20px 0;
   border-radius: 16px;
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
   animation: fadeIn 2s ease-in forwards;
 }
 
@@ -85,13 +85,12 @@
 }
 
 .bowling-item {
-  background-color: rgba(0, 0, 0, 0.75);
-  color: #ffffff;
   border-radius: 12px;
-  padding: 20px;
+  margin: 15px 0;
+  padding: 15px 20px;
   font-weight: bold;
   text-align: center;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s, background-color 0.3s;
   width: 220px;
   animation: bounceIn 1.5s ease-in-out forwards;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
@@ -111,34 +110,33 @@
   }
 }
 
-.bowling-item.available {
-  background-color: #28a745; /* Green for available */
+/* Kids and Adults Lane Styles */
+.kids-lane {
+  background-color: #28a745; /* Green for kids */
+  color: white;
+  border-left: 5px solid #155724; /* Darker border */
 }
 
-.bowling-item.occupied {
-  background-color: #dc3545; /* Red for occupied */
-}
-
-.bowling-item:hover {
-  transform: scale(1.1);
-  background-color: rgba(0, 0, 0, 0.9);
+.adults-lane {
+  background-color: #dc3545; /* Red for adults */
+  color: white;
+  border-left: 5px solid #721c24; /* Darker border */
 }
 
 .bowling-btn {
+  margin-top: 10px;
   display: inline-block;
-  background-color: #007bff;
-  color: #ffffff;
-  padding: 10px 18px;
-  margin-top: 12px;
-  border-radius: 10px;
+  background-color: #17a2b8; /* Uniform color for buttons */
+  color: white;
+  padding: 10px 15px;
   text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .bowling-btn:hover {
-  background-color: #ffffff;
+  background-color: #ffffff; /* Slightly darker shade */
   transform: scale(1.05);
 }
 
@@ -148,7 +146,7 @@
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 12px;
   margin-bottom: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
 /* Responsive Design */
@@ -161,8 +159,8 @@
   }
 
   .logo {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
 
   .bowling-list {
@@ -175,47 +173,3 @@
     height: auto;
   }
 }
-
-.bowling-container {
-  /* Existing styles */
-}
-
-.kids-lane {
-  background-color: #28a745; /* Green indicates kid-friendly */
-  color: white;
-  border-left: 8px solid #155724; /* Darker shade for the border */
-}
-
-.adults-lane {
-  background-color: #dc3545; /* Red indicates adults-only */
-  color: white;
-  border-left: 8px solid #721c24; /* Darker shade for the border */
-}
-
-.bowling-item {
-  border-radius: 10px;
-  margin: 15px 0;
-  padding: 15px 20px;
-  transition: transform 0.3s, background-color 0.3s;
-}
-
-.bowling-item:hover {
-  transform: scale(1.05);
-}
-
-.bowling-btn {
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-}
-
-.bowling-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Additional styles (header, footer, etc.) as needed */
