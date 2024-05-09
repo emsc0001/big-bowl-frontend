@@ -20,7 +20,7 @@ export default function Home() {
       <header className="hero-section">
         <img
           className="logo"
-          src="https://files.oaiusercontent.com/file-8glmOSoVN7HHst8vnFxeP6uW?se=2024-05-08T12%3A08%3A49Z&sp=r&sv=2023-11-03&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D3dae81c2-506f-4a8f-b341-d340d690d715.webp&sig=/BHRp6h9d9xtF/KWOSSQGlwzPhJffSv5HLt9nE%2Bq88o%3D"
+          src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
           alt="Big Bowl Logo"
         />
 
