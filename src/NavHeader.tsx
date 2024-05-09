@@ -17,6 +17,10 @@ export default function NavHeader() {
           <NavLink to="/products">Produkter</NavLink>
         </li>
 
+        <li>
+          {/* <a href="/categories">Categories</a> */}
+          <NavLink to="/airhockey">AirHockey</NavLink>
+        </li>
 
         <AuthStatus />
       </ul>

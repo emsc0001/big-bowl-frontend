@@ -1,0 +1,197 @@
+/* Container og Header */
+.airhockey-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 20px;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBackground 40s linear infinite alternate;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  text-align: center;
+  border-radius: 12px;
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in forwards;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Logo */
+.logo {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+  z-index: 100;
+  animation: rotateLogo 4s linear infinite;
+}
+
+@keyframes rotateLogo {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hovedindhold */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.85);
+  margin: 20px 0;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 2s ease-in forwards;
+}
+
+.airhockey-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.airhockey-item {
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  width: 200px;
+  animation: bounceIn 1.5s ease-in-out forwards;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.airhockey-item.available {
+  background-color: #28a745; /* Grøn for ledigt */
+}
+
+.airhockey-item.occupied {
+  background-color: #dc3545; /* Rød for optaget */
+}
+
+.airhockey-item:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.airhockeyImg {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+}
+
+.airhockeyImg:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  border: 3px solid #00ffcc;
+}
+
+.airhockeyImg:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.airhockey-btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 18px;
+  margin-top: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.airhockey-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsivt Design */
+@media (max-width: 768px) {
+  .header,
+  .main-content,
+  .footer {
+    padding: 20px;
+    margin: 10px 0;
+  }
+
+  .logo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .airhockey-list {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .airhockey-item {
+    width: 100%;
+    height: auto;
+  }
+}
