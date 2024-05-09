@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Categories } from "./recipes/Categories";
+import { Products } from "./recipes/Products";
 import CategoryForm from "./recipes/CategoryForm";
 import Recipe from "./recipes/Recipe";
 // import Recipes from "./recipes/RecipeList";
@@ -19,7 +19,7 @@ export default function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/categories/" element={<Categories />} />
+        <Route path="/products/" element={<Products />} />
         <Route path="/recipes/" element={<RecipesLayout />}>
           <Route path=":id" element={<Recipe />} />
         </Route>

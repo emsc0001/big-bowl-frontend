@@ -3,6 +3,13 @@ import { makeOptions, handleHttpErrors } from "./fetchUtils";
 const CATEGORIES_URL = API_URL + "/categories";
 const RECIPE_URL = API_URL + "/recipes";
 const INFO_URL = API_URL + "/info";
+const PRODUCT_URL = API_URL + "/products";
+
+interface Product {
+  id: number | null;
+  name: string;
+  price: number;
+}
 
 interface Recipe {
   id: number | null;
@@ -26,9 +33,20 @@ interface Info {
   info: string;
 }
 
+let products: Array<Product> = [];
 let categories: Array<string> = [];
 let recipes: Array<Recipe> = [];
 let info: Info | null = null;
+
+async function getProducts(): Promise<Array<Product>> {
+  if (products.length > 0) return [...products];
+  products = await fetch(PRODUCT_URL).then(handleHttpErrors);
+  return products;
+}
+
+async function getProduct(id: number): Promise<Product> {
+  return fetch(PRODUCT_URL + "/" + id).then(handleHttpErrors);
+}
 
 async function getCategories(): Promise<Array<string>> {
   if (categories.length > 0) return [...categories];
@@ -76,6 +94,6 @@ async function getInfo(): Promise<Info> {
   return info;
 }
 
-export type { Recipe, Info, Category };
+export type { Recipe, Info, Category, Product };
 // eslint-disable-next-line react-refresh/only-export-components
-export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo, addCategory };
+export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo, addCategory, getProduct, getProducts };

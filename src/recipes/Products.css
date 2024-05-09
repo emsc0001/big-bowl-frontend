@@ -1,0 +1,120 @@
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("https://i.ibb.co/m8Xj1Tg/DALL-E-2024-05-09-14-15-50-A-bowling-alley-with-animated-elements-like-colorful-bowling-pins-and-a-g.webp")
+    no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+}
+
+.products-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 20px;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 15px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 20px 0;
+  border-radius: 12px;
+}
+
+.product-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.product-item {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+}
+
+.product-item a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.product-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.product-btn:hover {
+  background-color: #218838;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Responsivt layout */
+@media (max-width: 768px) {
+  .header,
+  .main-content,
+  .footer {
+    padding: 20px;
+    margin: 10px 0;
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .main-content {
+    flex-direction: column;
+  }
+
+  .product-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .product-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

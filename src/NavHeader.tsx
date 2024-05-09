@@ -14,7 +14,7 @@ export default function NavHeader() {
         </li>
         <li>
           {/* <a href="/categories">Categories</a> */}
-          <NavLink to="/categories">Categories</NavLink>
+          <NavLink to="/products">Produkter</NavLink>
         </li>
         <li>
           {/* <a href="/recipes">Recipes</a> */}
