@@ -6,3 +6,5 @@ const MODE = isProduction ? "Production" : "Development";
 console.info(MODE + " API URL: " + URL);
 // export const API_URL = URL;
 export const API_URL = URL || "https://aem-big-bowl.azurewebsites.net";
+
+// export const API_URL = URL || "http://localhost:8080";

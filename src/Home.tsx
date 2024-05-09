@@ -21,7 +21,7 @@ export default function Home() {
           <div className="faciliteter">
             <h3>Vælg din oplevelse</h3>
             <div className="facility-cards">
-              <Link to="/bowling" className="facility-card">
+              <Link to="/bowlinglanes" className="facility-card">
                 <h4>🎳 Bowling</h4>
                 <img
                   className="bowlingImg"

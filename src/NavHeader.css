@@ -1,0 +1,86 @@
+/* Navigation container */
+nav {
+  background-color: rgba(0, 0, 0, 0.85); /* Dark background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+  border-radius: 10px;
+  padding: 15px 30px;
+  margin: 20px auto;
+  max-width: 1200px;
+  text-align: center;
+  animation: fadeInDown 1s ease-in forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navigation list */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Spacing between items */
+  flex-wrap: wrap; /* Wrap items on smaller screens */
+}
+
+li {
+  position: relative;
+}
+
+/* Navigation link styles */
+a {
+  color: #ffffff; /* White text */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  padding: 8px 15px;
+  border-radius: 8px;
+}
+
+a:hover,
+a.active {
+  background-color: #007bff; /* Blue for bowling theme */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  color: #ffffff; /* Keep text white */
+}
+
+a:active {
+  transform: scale(0.95); /* Shrink on click */
+}
+
+/* AuthStatus adjustments */
+.auth-status {
+  margin-left: auto; /* Push to the right end */
+  color: #28a745; /* Green for logged-in users */
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    padding: 15px 20px;
+    margin: 10px auto;
+  }
+
+  ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  a {
+    font-size: 1rem;
+    padding: 8px 10px;
+  }
+}

@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Products } from "./components/Products";
 import { AirHockeys } from "./components/AirHockey";
+import { BowlingLanes } from "./components/Bowling";
 
 import Login from "./security/Login";
 import Logout from "./security/Logout";
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products/" element={<Products />} />
         <Route path="/airhockey" element={<AirHockeys />} />
+        <Route path="/bowlinglanes" element={<BowlingLanes />} />
 
         {/* <Route path="/add" */}
 

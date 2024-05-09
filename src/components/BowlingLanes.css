@@ -1,5 +1,5 @@
-/* Container and Header */
-.airhockey-container {
+/* General Container Styles */
+.bowling-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -40,7 +40,6 @@
   }
 }
 
-/* Logo */
 .logo {
   width: 80px;
   height: 80px;
@@ -76,7 +75,7 @@
   animation: fadeIn 2s ease-in forwards;
 }
 
-.airhockey-list {
+.bowling-list {
   list-style: none;
   padding: 0;
   display: flex;
@@ -85,7 +84,7 @@
   gap: 20px;
 }
 
-.airhockey-item {
+.bowling-item {
   background-color: rgba(0, 0, 0, 0.75);
   color: #ffffff;
   border-radius: 12px;
@@ -95,6 +94,7 @@
   transition: transform 0.3s ease, background-color 0.3s ease;
   width: 220px;
   animation: bounceIn 1.5s ease-in-out forwards;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes bounceIn {
@@ -111,36 +111,20 @@
   }
 }
 
-.airhockey-item.available {
+.bowling-item.available {
   background-color: #28a745; /* Green for available */
 }
 
-.airhockey-item.occupied {
+.bowling-item.occupied {
   background-color: #dc3545; /* Red for occupied */
 }
 
-.airhockey-item:hover {
+.bowling-item:hover {
   transform: scale(1.1);
   background-color: rgba(0, 0, 0, 0.9);
 }
 
-.airhockeyImg {
-  width: 100%;
-  max-width: 280px;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-  margin-bottom: 10px;
-  transition: all 0.3s ease;
-  border: 3px solid transparent;
-}
-
-.airhockeyImg:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-  border: 3px solid #00ffcc;
-}
-
-.airhockey-btn {
+.bowling-btn {
   display: inline-block;
   background-color: #007bff;
   color: #ffffff;
@@ -153,12 +137,11 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.airhockey-btn:hover {
+.bowling-btn:hover {
   background-color: #0056b3;
   transform: scale(1.05);
 }
 
-/* Footer */
 .footer {
   text-align: center;
   padding: 20px;
@@ -182,13 +165,57 @@
     height: 60px;
   }
 
-  .airhockey-list {
+  .bowling-list {
     flex-direction: column;
     gap: 15px;
   }
 
-  .airhockey-item {
+  .bowling-item {
     width: 100%;
     height: auto;
   }
 }
+
+.bowling-container {
+  /* Existing styles */
+}
+
+.kids-lane {
+  background-color: #28a745; /* Green indicates kid-friendly */
+  color: white;
+  border-left: 8px solid #155724; /* Darker shade for the border */
+}
+
+.adults-lane {
+  background-color: #dc3545; /* Red indicates adults-only */
+  color: white;
+  border-left: 8px solid #721c24; /* Darker shade for the border */
+}
+
+.bowling-item {
+  border-radius: 10px;
+  margin: 15px 0;
+  padding: 15px 20px;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.bowling-item:hover {
+  transform: scale(1.05);
+}
+
+.bowling-btn {
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.bowling-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Additional styles (header, footer, etc.) as needed */

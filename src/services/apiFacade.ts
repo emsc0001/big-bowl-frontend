@@ -4,7 +4,8 @@ const CATEGORIES_URL = API_URL + "/categories";
 const RECIPE_URL = API_URL + "/recipes";
 const INFO_URL = API_URL + "/info";
 const PRODUCT_URL = API_URL + "/products";
-const AIRHOCKEY_URL = API_URL + "/airhockey";
+const BOWLING_URL = API_URL + "/BowlingLanes";
+const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
 
 interface Product {
   id: number | null;
@@ -12,6 +13,11 @@ interface Product {
   price: number;
 }
 
+interface BowlingLane {
+  id: number | null;
+  laneNumber: number;
+  isForKids: boolean;
+}
 interface AirHockey {
   id: number | null;
   tableNumber: number;
@@ -40,6 +46,7 @@ interface Info {
 }
 
 let products: Array<Product> = [];
+let bowlingLanes: Array<BowlingLane> = [];
 let airhockey: Array<AirHockey> = [];
 let categories: Array<string> = [];
 let recipes: Array<Recipe> = [];
@@ -64,6 +71,28 @@ async function getProducts(): Promise<Array<Product>> {
 }
 async function getProduct(id: number): Promise<Product> {
   return fetch(PRODUCT_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function getBowlingLanes(): Promise<Array<BowlingLane>> {
+  if (bowlingLanes.length > 0) return [...bowlingLanes];
+  try {
+    const res = await fetch(BOWLING_URL);
+    if (!res.ok) {
+      throw new Error("Fetch request failed");
+    }
+
+    const bowlingLanesData = await res.json(); // Parse responsen som JSON
+    console.log("BowlingLanes fetched successfully:", bowlingLanesData); // Log dataene
+    bowlingLanes = bowlingLanesData; // Tildel dataene til biografer-arrayen
+    return bowlingLanes;
+  } catch (error) {
+    console.log("An error occurred while fetching bowlingLanes:", error);
+    return [];
+  }
+}
+
+async function getBowlingLane(id: number): Promise<BowlingLane> {
+  return fetch(BOWLING_URL + "/" + id).then(handleHttpErrors);
 }
 
 async function getAirHockeys(): Promise<Array<AirHockey>> {
@@ -134,6 +163,20 @@ async function getInfo(): Promise<Info> {
   return info;
 }
 
-export type { Recipe, Info, Category, Product, AirHockey };
+export type { Recipe, Info, Category, Product, AirHockey, BowlingLane };
 // eslint-disable-next-line react-refresh/only-export-components
-export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo, addCategory, getProduct, getProducts, getAirHockeys, getAirHockey };
+export {
+  getCategories,
+  getRecipes,
+  getRecipe,
+  addRecipe,
+  deleteRecipe,
+  getInfo,
+  addCategory,
+  getProduct,
+  getProducts,
+  getAirHockeys,
+  getAirHockey,
+  getBowlingLanes,
+  getBowlingLane,
+};

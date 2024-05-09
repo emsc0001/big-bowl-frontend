@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { getAirHockeys, AirHockey, getProducts, Product } from "../services/apiFacade";
+import { getAirHockeys, AirHockey } from "../services/apiFacade";
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
 import "./AirHockey.css";
 
 export const AirHockeys = () => {
   const [airHockeys, setAirHockeys] = useState<AirHockey[]>();
-  const [products, setProducts] = useState<Product[]>();
 
   const auth = useAuth();
 
@@ -14,15 +13,11 @@ export const AirHockeys = () => {
     getAirHockeys().then((res) => setAirHockeys(res));
   }, []);
 
-  useEffect(() => {
-    getProducts().then((res) => setProducts(res));
-  }, []);
-
   return (
     <div className="airhockey-container">
       <header className="header">
-        <h2>AirHockey</h2>
-        <p>Se AirHockey:</p>
+        <h2>AirHockey🏒</h2>
+        <p>Se Ledige Borde:</p>
       </header>
       <img
         className="logo"
@@ -31,10 +26,10 @@ export const AirHockeys = () => {
       />
       <main className="main-content">
         <ul className="airhockey-list">
-          {products?.map((airHockey, index) => (
+          {airHockeys?.map((airHockey, index) => (
             <li className="airhockey-item" key={index}>
               <Link to={`/${airHockey.id}`}>
-                {airHockey.id} - {airHockey.name}
+                🏒Airhockey Bord: {airHockey.tableNumber}
                 <img
                   className="airhockeyImg"
                   src="https://i.ibb.co/c8QM3b1/DALL-E-2024-05-09-19-44-06-A-3-D-dynamic-illustration-of-an-air-hockey-table-seen-from-a-top-down-pe.webp"

@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import AuthStatus from "./security/AuthStatus";
 import { useAuth } from "./security/AuthProvider";
 
+import "./NavHeader.css";
+
 export default function NavHeader() {
   const auth = useAuth();
 
@@ -15,6 +17,11 @@ export default function NavHeader() {
         <li>
           {/* <a href="/categories">Categories</a> */}
           <NavLink to="/products">Produkter</NavLink>
+        </li>
+
+        <li>
+          {/* <a href="/categories">Categories</a> */}
+          <NavLink to="/bowlinglanes">Bowling baner</NavLink>
         </li>
 
         <li>
