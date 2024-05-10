@@ -14,14 +14,14 @@ export const Dinner = () => {
 
   return (
     <div className="dinner-container">
-      <h1>Spisning</h1>
+      <h1>Book Bord Her!</h1>
 
       <div className="dinner-tables">
         {dinnerTables.map((table) => (
           <Link key={table.id} to={auth.isLoggedIn() ? `/dinner/${table.id}` : "/login"}>
             <div className="dinner-table">
-              <h2>Bord {table.id}</h2>
-              <p>{table.tableNumber ? "Optaget" : "Ledigt"}</p>
+              <h2>Bord {table.tableNumber}</h2>
+              {/* <p>{ "Optaget" : "Ledigt"}</p> */}
             </div>
           </Link>
         ))}
