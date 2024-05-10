@@ -1,4 +1,3 @@
-/* Container and Header */
 .dinner-container {
   display: flex;
   flex-direction: column;
@@ -9,8 +8,8 @@
   background-size: cover;
   animation: moveBackground 40s linear infinite alternate;
   cursor: pointer;
-  backdrop-filter: blur(4px); /* Giver et sløret effekt for dybde */
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6); /* Skaber en hyggelig skyggeeffekt */
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
 }
 
 @keyframes moveBackground {
@@ -31,16 +30,14 @@
   }
 }
 
-/* Main Heading */
 h1 {
-  font-size: 3rem; /* Større skrifttype for at skabe et stærkere indtryk */
+  font-size: 3rem;
   margin-bottom: 30px;
   color: #f4f4f4;
   text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Tilføjer tekstskygge for kontrast */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Dining Table Grid */
 .dinner-tables {
   display: flex;
   flex-wrap: wrap;
@@ -52,9 +49,10 @@ h1 {
 
 .dinner-table {
   position: relative;
-  width: 200px;
+  width: 233px;
   height: 140px;
-  background: linear-gradient(to bottom right, #002aff, rgb(5, 255, 247)); /* Naturfarver */
+  background: url("https://i.ibb.co/3hThNm6/2378170.webp") no-repeat center center;
+  background-size: cover;
   color: white;
   border-radius: 15px;
   display: flex;
@@ -62,27 +60,26 @@ h1 {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Dyb skygge for dybde */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .dinner-table h2 {
   margin: 5px 0;
   font-size: 1.5rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Tekstskygge for kontrast */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .dinner-table p {
   font-size: 1.1rem;
   margin: 0;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Tekstskygge */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
-/* Hover Effects */
 .dinner-table:hover {
   transform: scale(1.1);
-  background: linear-gradient(to bottom right, #002aff, rgb(5, 255, 247)); /* Naturfarver */
-  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.4); /* Større skyggeeffekt */
+  background: linear-gradient(to bottom right, #002aff, rgb(5, 255, 247));
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.4);
 }
 
 .dinner-table::before,
@@ -93,7 +90,7 @@ h1 {
   height: 30px;
   background: #f4f4f4;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Lidt større skygge */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .dinner-table::before {
@@ -108,7 +105,6 @@ h1 {
   transform: translateX(-50%);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .dinner-container {
     padding: 20px 10px;

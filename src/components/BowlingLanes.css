@@ -29,6 +29,14 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  color: #f4f4f4;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Tilføjer tekstskygge for kontrast */
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

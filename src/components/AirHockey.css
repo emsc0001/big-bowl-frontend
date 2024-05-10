@@ -29,6 +29,14 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  color: #f4f4f4;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -112,11 +120,11 @@
 }
 
 .airhockey-item.available {
-  background-color: #28a745; /* Green for available */
+  background-color: #28a745;
 }
 
 .airhockey-item.occupied {
-  background-color: #dc3545; /* Red for occupied */
+  background-color: #dc3545;
 }
 
 .airhockey-item:hover {
