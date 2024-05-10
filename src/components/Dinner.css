@@ -1,0 +1,98 @@
+/* Container and Header */
+.dinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 20px;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBackground 40s linear infinite alternate;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Main Heading */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #e7e7e7;
+}
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #cfcfcf;
+}
+
+/* Dining Table Grid */
+.dinner-tables {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+}
+
+.dinner-table {
+  width: 200px;
+  height: 150px;
+  background: linear-gradient(to bottom right, #4b79a1, #283e51);
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.dinner-table h2 {
+  margin: 10px 0;
+}
+
+.dinner-table p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Hover Effects */
+.dinner-table:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to bottom right, #283e51, #4b79a1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dinner-container {
+    margin: 20px 10px;
+    padding: 20px 10px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .dinner-tables {
+    gap: 15px;
+  }
+
+  .dinner-table {
+    width: 100%;
+    height: auto;
+  }
+}

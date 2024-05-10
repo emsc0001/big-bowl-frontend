@@ -29,6 +29,11 @@ export default function NavHeader() {
           <NavLink to="/airhockey">🏒AirHockey</NavLink>
         </li>
 
+        <li>
+          {/* <a href="/categories">Categories</a> */}
+          <NavLink to="/dinner">🍽️Spisning</NavLink>
+        </li>
+
         <AuthStatus />
       </ul>
     </nav>

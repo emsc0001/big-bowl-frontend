@@ -6,6 +6,7 @@ const INFO_URL = API_URL + "/info";
 const PRODUCT_URL = API_URL + "/products";
 const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
+const DINNER_URL = API_URL + "/DinnerTable";
 
 interface Product {
   id: number | null;
@@ -19,6 +20,11 @@ interface BowlingLane {
   forKids: boolean;
 }
 interface AirHockey {
+  id: number | null;
+  tableNumber: number;
+}
+
+interface DinnerTable {
   id: number | null;
   tableNumber: number;
 }
@@ -48,6 +54,7 @@ interface Info {
 let products: Array<Product> = [];
 let bowlingLanes: Array<BowlingLane> = [];
 let airhockey: Array<AirHockey> = [];
+let dinnerTables: Array<DinnerTable> = [];
 let categories: Array<string> = [];
 let recipes: Array<Recipe> = [];
 let info: Info | null = null;
@@ -117,6 +124,28 @@ async function getAirHockey(id: number): Promise<AirHockey> {
   return fetch(AIRHOCKEY_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function getDinnerTables(): Promise<Array<DinnerTable>> {
+  if (dinnerTables.length > 0) return [...dinnerTables];
+  try {
+    const res = await fetch(DINNER_URL);
+    if (!res.ok) {
+      throw new Error("Fetch request failed");
+    }
+
+    const dinnerTablesData = await res.json(); // Parse responsen som JSON
+    console.log("DinnerTables fetched successfully:", dinnerTablesData); // Log dataene
+    dinnerTables = dinnerTablesData; // Tildel dataene til biografer-arrayen
+    return dinnerTables;
+  } catch (error) {
+    console.log("An error occurred while fetching dinnerTables:", error);
+    return [];
+  }
+}
+
+async function getDinnerTable(id: number): Promise<DinnerTable> {
+  return fetch(DINNER_URL + "/" + id).then(handleHttpErrors);
+}
+
 async function getCategories(): Promise<Array<string>> {
   if (categories.length > 0) return [...categories];
   const res = await fetch(CATEGORIES_URL).then(handleHttpErrors);
@@ -163,7 +192,7 @@ async function getInfo(): Promise<Info> {
   return info;
 }
 
-export type { Recipe, Info, Category, Product, AirHockey, BowlingLane };
+export type { Recipe, Info, Category, Product, AirHockey, BowlingLane, DinnerTable };
 // eslint-disable-next-line react-refresh/only-export-components
 export {
   getCategories,
@@ -179,4 +208,6 @@ export {
   getAirHockey,
   getBowlingLanes,
   getBowlingLane,
+  getDinnerTables,
+  getDinnerTable,
 };

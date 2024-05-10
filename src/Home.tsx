@@ -37,7 +37,7 @@ export default function Home() {
                   alt="🏒 Airhockey"
                 />
               </Link>
-              <Link to="/spisning" className="facility-card">
+              <Link to="/dinner" className="facility-card">
                 <h4> 🍽️ Spisning</h4>
                 <img
                   className="bowlingImg"
