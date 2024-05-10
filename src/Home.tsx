@@ -6,7 +6,7 @@ export default function Home() {
     <div className="home-container">
       <header className="hero-section">
         <img
-          className="logo1"
+          className="logo"
           src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
           alt="Big Bowl Logo"
         />

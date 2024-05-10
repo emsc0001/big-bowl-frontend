@@ -14,8 +14,14 @@ export const Dinner = () => {
 
   return (
     <div className="dinner-container">
-      <h1>Book Bord Her!</h1>
-
+      <header>
+        <h1>Book Et Bord Her!</h1>
+      </header>
+      <img
+        className="logo"
+        src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
+        alt="Big Bowl Logo"
+      />
       <div className="dinner-tables">
         {dinnerTables.map((table) => (
           <Link key={table.id} to={auth.isLoggedIn() ? `/dinner/${table.id}` : "/login"}>
