@@ -114,13 +114,11 @@
 .kids-lane {
   background-color: #28a745; /* Green for kids */
   color: white;
-  border-left: 5px solid #155724; /* Darker border */
 }
 
 .adults-lane {
-  background-color: #dc3545; /* Red for adults */
+  background-color: #0080ff; /* Red for adults */
   color: white;
-  border-left: 5px solid #721c24; /* Darker border */
 }
 
 .bowling-btn {
@@ -172,4 +170,26 @@
     width: 100%;
     height: auto;
   }
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.filter-buttons button:hover {
+  background-color: #0056b3;
 }

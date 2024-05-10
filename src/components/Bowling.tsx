@@ -6,6 +6,7 @@ import "./BowlingLanes.css";
 
 export const BowlingLanes = () => {
   const [bowlingLanes, setBowlingLanes] = useState<BowlingLane[]>();
+  const [filter, setFilter] = useState<string>("all"); // Filter state: 'all', 'kids', or 'adults'
   const auth = useAuth();
 
   useEffect(() => {
@@ -15,8 +16,17 @@ export const BowlingLanes = () => {
     });
   }, []);
 
+  // Filter function to determine which lanes to show
+  const filterLanes = (lane: BowlingLane) => {
+    if (filter === "all") return true;
+    if (filter === "kids") return lane.forKids;
+    if (filter === "adults") return !lane.forKids;
+    return true;
+  };
+
+  // Set filter label for kids or adults
   const getForKidsLabel = (isForKids: boolean) => {
-    return isForKids ? "🧒 Egnet til børn" : "🔞 Ikke egnet til børn";
+    return isForKids ? "🧒" : "🔞";
   };
 
   return (
@@ -31,11 +41,19 @@ export const BowlingLanes = () => {
         alt="Big Bowl Logo"
       />
       <main className="main-content">
+        <div className="filter-buttons">
+          {/* Filter Buttons */}
+          <button onClick={() => setFilter("all")}>Alle</button>
+          <button onClick={() => setFilter("kids")}>Kun Egnet til Børn</button>
+          <button onClick={() => setFilter("adults")}>Kun Egnet til voksne</button>
+        </div>
+
+        {/* Display Bowling Lanes based on the current filter */}
         <ul className="bowling-list">
-          {bowlingLanes?.map((bowlingLane, index) => (
+          {bowlingLanes?.filter(filterLanes).map((bowlingLane, index) => (
             <li className={`bowling-item ${bowlingLane.forKids ? "kids-lane" : "adults-lane"}`} key={index}>
               <Link to={`/${bowlingLane.id}`}>
-                🎳 Bowling lane: {bowlingLane.laneNumber} - {getForKidsLabel(bowlingLane.forKids)}
+                🎳 Bowling lane: {bowlingLane.laneNumber} {getForKidsLabel(bowlingLane.forKids)}
               </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="bowling-btn" to="/addBowlingLane" state={bowlingLane}>
