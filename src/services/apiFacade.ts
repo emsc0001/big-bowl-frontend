@@ -154,6 +154,36 @@ async function getAirHockey(id: number): Promise<AirHockey> {
   return fetch(AIRHOCKEY_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function addAirHockey(newAirHockey: AirHockey): Promise<AirHockey> {
+  const method = newAirHockey.id ? "PUT" : "POST";
+  const options = makeOptions(method, newAirHockey, true);
+  const URL = newAirHockey.id ? `${AIRHOCKEY_URL}/${newAirHockey.id}` : AIRHOCKEY_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function editAirHockey(newAirHockey: AirHockey): Promise<AirHockey> {
+  const method = newAirHockey.id ? "PUT" : "POST";
+  const options = makeOptions(method, newAirHockey, true);
+  const URL = newAirHockey.id ? `${AIRHOCKEY_URL}/${newAirHockey.id}` : AIRHOCKEY_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function deleteAirHockey(id: number): Promise<void> {
+  const options = makeOptions("DELETE", null, true); // Ensure headers and method are correctly set
+  return fetch(`${AIRHOCKEY_URL}/${id}`, options).then((response) => {
+    if (response.ok) {
+      // Handle both cases where the server might not return any content
+      return response.text().then((text) => (text ? JSON.parse(text) : {}));
+    } else {
+      // Extract error message from response, if any
+      return response.text().then((text) => {
+        const error = text ? JSON.parse(text) : { message: "Failed to delete the airhockey" };
+        throw new Error(error.message);
+      });
+    }
+  });
+}
+
 async function getDinnerTables(): Promise<Array<DinnerTable>> {
   if (dinnerTables.length > 0) return [...dinnerTables];
   try {
@@ -243,4 +273,7 @@ export {
   addBowlingLane,
   editBowlingLane,
   deleteBowlingLane,
+  addAirHockey,
+  editAirHockey,
+  deleteAirHockey,
 };
