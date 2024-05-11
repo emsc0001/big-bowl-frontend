@@ -25,13 +25,26 @@ export default function BowlingForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const action = formData.id ? editBowlingLane : addBowlingLane;
+    const isEditing = formData.id ? true : false; // Check if we're editing or adding
+    const action = isEditing ? editBowlingLane : addBowlingLane;
+
     action(formData)
       .then(() => {
-        navigate("/bowlinglanes");
-        getBowlingLanes().then(setBowlingLanes).catch(setError);
+        // Create a message based on whether it's an edit or add
+        const message = isEditing ? `Updated bowling lane ID ${formData.id}🎳` : "Created a new bowling lane🎳";
+        setNotification({ message: message, show: true });
+
+        // Display the notification, then navigate after a delay
+        setTimeout(() => {
+          setNotification({ message: "", show: false });
+          window.location.href = "/bowlinglanes";
+          getBowlingLanes().then(setBowlingLanes).catch(setError);
+        }, 3000); // Show notification for 2 seconds
       })
-      .catch(setError);
+      .catch((error) => {
+        setError("Error processing bowling lane: " + error.message);
+        console.error("Error processing bowling lane:", error);
+      });
   }
 
   function handleChange(event) {
@@ -47,11 +60,11 @@ export default function BowlingForm() {
 
     deleteBowlingLane(formData.id)
       .then(() => {
-        setNotification({ message: `Deleted bowling lane ID ${formData.id}`, show: true });
+        setNotification({ message: `Deleted bowling lane ID ${formData.id}🎳`, show: true });
 
         setTimeout(() => {
           window.location.href = "/bowlinglanes";
-        }, 4000);
+        }, 3000);
       })
       .catch((error) => {
         setError("Error deleting bowling lane: " + error.message);
