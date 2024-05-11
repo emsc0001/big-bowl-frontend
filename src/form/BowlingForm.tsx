@@ -36,7 +36,7 @@ export default function BowlingForm() {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/bowlinglanes";
           getBowlingLanes().then(setBowlingLanes).catch(setError);
-        }, 3000);
+        }, 1900);
       })
       .catch((error) => {
         setError("Error processing bowling lane: " + error.message);
@@ -61,7 +61,7 @@ export default function BowlingForm() {
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/bowlinglanes";
-        }, 3000);
+        }, 1900);
       })
       .catch((error) => {
         setError("Error deleting bowling lane: " + error.message);

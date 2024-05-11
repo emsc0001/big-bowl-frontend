@@ -35,7 +35,7 @@ export default function AirHockeyForm() {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/airhockey";
           getAirHockeys().then(setAirHockeys).catch(setError);
-        }, 3000);
+        }, 1900);
       })
       .catch((error) => {
         setError("Error processing air hockey table: " + error.message);
@@ -56,11 +56,11 @@ export default function AirHockeyForm() {
 
     deleteAirHockey(formData.id)
       .then(() => {
-        setNotification({ message: `Slettet Air Hockey Bord ${formData.id}`, show: true, type: "delete" });
+        setNotification({ message: `Slettet Air Hockey Bord ${formData.id}🗑`, show: true, type: "delete" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/airhockey";
-        }, 3000);
+        }, 1900);
       })
       .catch((error) => {
         setError("Error deleting air hockey table: " + error.message);
