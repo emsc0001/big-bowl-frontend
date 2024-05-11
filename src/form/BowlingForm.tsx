@@ -77,7 +77,7 @@ export default function BowlingForm() {
           </button>
         )}
       </form>
-      {error && <p>Error: {error}</p>}
+      {error && <p>Error: {error.message}</p>}{" "}
       <div className="bowling-lanes-list">
         <h2>Existing Bowling Lanes</h2>
         {bowlingLanes.map((lane) => (

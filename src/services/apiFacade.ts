@@ -116,7 +116,7 @@ async function editBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane
   return fetch(URL, options).then(handleHttpErrors);
 }
 
-async function deleteBowlingLane(id: number): Promise<BowlingLane> {
+async function deleteBowlingLane(id: number): Promise<void> {
   const options = makeOptions("DELETE", null, true);
   return fetch(`${BOWLING_URL}/${id}`, options).then(handleHttpErrors);
 }
