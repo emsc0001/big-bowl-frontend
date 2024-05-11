@@ -118,21 +118,20 @@ h2 {
   }
 }
 
-/* Kids and Adults Lane Styles */
 .kids-lane {
-  background-color: #28a745; /* Green for kids */
+  background-color: #28a745;
   color: white;
 }
 
 .adults-lane {
-  background-color: #0080ff; /* Red for adults */
+  background-color: #0080ff;
   color: white;
 }
 
 .bowling-btn {
   margin-top: 10px;
   display: inline-block;
-  background-color: #17a2b8; /* Uniform color for buttons */
+  background-color: #17a2b8;
   color: white;
   padding: 10px 15px;
   text-decoration: none;
@@ -142,7 +141,7 @@ h2 {
 }
 
 .bowling-btn:hover {
-  background-color: #ffffff; /* Slightly darker shade */
+  background-color: #ffffff;
   transform: scale(1.05);
 }
 
