@@ -102,6 +102,13 @@ async function getBowlingLane(id: number): Promise<BowlingLane> {
   return fetch(BOWLING_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function addBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane> {
+  const method = newBowlingLane.id ? "PUT" : "POST";
+  const options = makeOptions(method, newBowlingLane, true);
+  const URL = newBowlingLane.id ? `${BOWLING_URL}/${newBowlingLane.id}` : BOWLING_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
 async function editBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane> {
   const method = newBowlingLane.id ? "PUT" : "POST";
   const options = makeOptions(method, newBowlingLane, true);
@@ -222,6 +229,7 @@ export {
   getBowlingLane,
   getDinnerTables,
   getDinnerTable,
+  addBowlingLane,
   editBowlingLane,
   deleteBowlingLane,
 };
