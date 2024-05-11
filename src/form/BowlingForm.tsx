@@ -43,20 +43,20 @@ export default function BowlingForm() {
   }
 
   function handleDelete() {
-    if (formData.id) {
-      deleteBowlingLane(formData.id)
-        .then(() => {
-          setNotification({ message: `Deleted bowling lane ID ${formData.id}`, show: true });
-          setTimeout(() => {
-            navigate("/bowlinglanes");
-            setNotification({ message: "", show: false });
-          }, 2000);
-        })
-        .catch((error) => {
-          setError("Error deleting bowling lane: " + error.message);
-          console.error("Error deleting bowling lane:", error);
-        });
-    }
+    if (!formData.id) return;
+
+    deleteBowlingLane(formData.id)
+      .then(() => {
+        setNotification({ message: `Deleted bowling lane ID ${formData.id}`, show: true });
+
+        setTimeout(() => {
+          window.location.href = "/bowlinglanes";
+        }, 4000);
+      })
+      .catch((error) => {
+        setError("Error deleting bowling lane: " + error.message);
+        console.error("Error deleting bowling lane:", error);
+      });
   }
 
   function handleBack() {
