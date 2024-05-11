@@ -1,4 +1,3 @@
-/* Bowling Form Wrapper */
 .bowling-form {
   display: flex;
   justify-content: center;
@@ -19,7 +18,6 @@
   }
 }
 
-/* Bowling Form Styling */
 .bowling-form form {
   background-color: rgba(0, 0, 0, 0.85);
   border-radius: 16px;
@@ -42,7 +40,6 @@
   }
 }
 
-/* Inputs Styling */
 .bowling-form input[type="number"],
 .bowling-form input[type="checkbox"] {
   width: 100%;
@@ -61,7 +58,6 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* Button Styling */
 .bowling-form button {
   width: 100%;
   padding: 10px 0;
@@ -69,50 +65,48 @@
   border: none;
   cursor: pointer;
   font-weight: bold;
-  color: #ffffff; /* White text */
+  color: #ffffff;
   margin-top: 20px;
   transition: background-color 0.3s;
-  background-color: #007bff; /* Blue */
+  background-color: #007bff;
 }
 
 .bowling-form button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
-/* Error Messages */
 .error {
   margin-top: 15px;
   padding: 10px;
   border-radius: 8px;
   font-weight: bold;
   color: #ffffff;
-  background-color: #dc3545; /* Red */
+  background-color: #dc3545;
 }
 
-/* General Adjustments and Improvements for Bowling Lanes List */
 .bowling-lanes-list {
   margin: 2rem auto;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.1); /* Light translucent background */
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Creates a responsive grid */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
-  color: #ffffff; /* White text for visibility */
-  width: 90%; /* Control width to avoid too wide appearance */
-  max-width: 960px; /* Max width for large screens */
+  color: #ffffff;
+  width: 90%;
+  max-width: 960px;
 }
 
 .bowling-lanes-list h2 {
-  grid-column: 1 / -1; /* Makes the header span all columns */
+  grid-column: 1 / -1;
   text-align: center;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
 .bowling-lanes-list div {
-  background-color: rgba(0, 0, 0, 0.4); /* Dark background for each lane */
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 8px;
   padding: 0.8rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -125,7 +119,7 @@
 }
 
 .bowling-lanes-list div:hover {
-  background-color: rgba(0, 0, 0, 0.6); /* Darker on hover */
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .bowling-lanes-list div span {
@@ -133,10 +127,9 @@
   margin-top: 0.5rem;
 }
 
-/* Responsive Adjustments for Improved Visuals on Mobile Devices */
 @media (max-width: 768px) {
   .bowling-lanes-list {
-    grid-template-columns: 1fr; /* Stacks lanes vertically on smaller screens */
+    grid-template-columns: 1fr;
     padding: 0.5rem;
   }
 
@@ -149,7 +142,6 @@
   }
 }
 
-/* Ensure the Form is Centered Vertically and Horizontally */
 .bowling-form {
   display: flex;
   flex-direction: column;
@@ -159,5 +151,29 @@
 }
 
 .bowling-form form {
-  margin-top: -20px; /* Adjust the form position slightly if necessary */
+  margin-top: -20px;
+}
+
+.notification {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1000;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

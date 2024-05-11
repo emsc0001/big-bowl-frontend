@@ -17,6 +17,7 @@ export default function BowlingForm() {
   const bowlingLaneToEdit = location.state?.bowlingLane || EMPTY_BOWLINGLANE;
   const [formData, setFormData] = useState<BowlingLane>(bowlingLaneToEdit);
   const [error, setError] = useState("");
+  const [notification, setNotification] = useState({ message: "", show: false });
 
   useEffect(() => {
     getBowlingLanes().then(setBowlingLanes).catch(setError);
@@ -27,7 +28,7 @@ export default function BowlingForm() {
     const action = formData.id ? editBowlingLane : addBowlingLane;
     action(formData)
       .then(() => {
-        navigate("/bowlinglanes"); // Navigate to the lanes view after operation
+        navigate("/bowlinglanes");
         getBowlingLanes().then(setBowlingLanes).catch(setError);
       })
       .catch(setError);
@@ -45,10 +46,16 @@ export default function BowlingForm() {
     if (formData.id) {
       deleteBowlingLane(formData.id)
         .then(() => {
-          navigate("/bowlinglanes"); // Navigate to lanes view after deletion
-          getBowlingLanes().then(setBowlingLanes).catch(setError);
+          setNotification({ message: `Deleted bowling lane ID ${formData.id}`, show: true });
+          setTimeout(() => {
+            navigate("/bowlinglanes");
+            setNotification({ message: "", show: false });
+          }, 2000);
         })
-        .catch(setError);
+        .catch((error) => {
+          setError("Error deleting bowling lane: " + error.message);
+          console.error("Error deleting bowling lane:", error);
+        });
     }
   }
 
@@ -58,6 +65,7 @@ export default function BowlingForm() {
 
   return (
     <div className="bowling-form">
+      {notification.show && <div className="notification">{notification.message}</div>}
       <form onSubmit={handleSubmit}>
         <button className="buttonBack" type="button" onClick={handleBack}>
           Back to Lanes View
@@ -77,7 +85,7 @@ export default function BowlingForm() {
           </button>
         )}
       </form>
-      {error && <p>Error: {error.message}</p>}{" "}
+      {error && <p className="error">{error.message}</p>}
       <div className="bowling-lanes-list">
         <h2>Existing Bowling Lanes</h2>
         {bowlingLanes.map((lane) => (

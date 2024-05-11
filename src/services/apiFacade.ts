@@ -117,8 +117,19 @@ async function editBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane
 }
 
 async function deleteBowlingLane(id: number): Promise<void> {
-  const options = makeOptions("DELETE", null, true);
-  return fetch(`${BOWLING_URL}/${id}`, options).then(handleHttpErrors);
+  const options = makeOptions("DELETE", null, true); // Ensure headers and method are correctly set
+  return fetch(`${BOWLING_URL}/${id}`, options).then((response) => {
+    if (response.ok) {
+      // Handle both cases where the server might not return any content
+      return response.text().then((text) => (text ? JSON.parse(text) : {}));
+    } else {
+      // Extract error message from response, if any
+      return response.text().then((text) => {
+        const error = text ? JSON.parse(text) : { message: "Failed to delete the bowling lane" };
+        throw new Error(error.message);
+      });
+    }
+  });
 }
 
 async function getAirHockeys(): Promise<Array<AirHockey>> {
