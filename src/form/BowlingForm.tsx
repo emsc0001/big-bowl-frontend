@@ -17,7 +17,7 @@ export default function BowlingForm() {
   const bowlingLaneToEdit = location.state?.bowlingLane || EMPTY_BOWLINGLANE;
   const [formData, setFormData] = useState<BowlingLane>(bowlingLaneToEdit);
   const [error, setError] = useState("");
-  const [notification, setNotification] = useState({ message: "", show: false });
+  const [notification, setNotification] = useState({ message: "", show: false, type: "" });
 
   useEffect(() => {
     getBowlingLanes().then(setBowlingLanes).catch(setError);
@@ -25,21 +25,18 @@ export default function BowlingForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const isEditing = formData.id ? true : false; // Check if we're editing or adding
+    const isEditing = formData.id ? true : false;
     const action = isEditing ? editBowlingLane : addBowlingLane;
 
     action(formData)
       .then(() => {
-        // Create a message based on whether it's an edit or add
-        const message = isEditing ? `Updated bowling lane ID ${formData.id}🎳` : "Created a new bowling lane🎳";
-        setNotification({ message: message, show: true });
-
-        // Display the notification, then navigate after a delay
+        const message = isEditing ? `Updated bowling lane ID ${formData.id}🔨` : "Created a new bowling lane🆕";
+        setNotification({ message: message, show: true, type: "addEdit" });
         setTimeout(() => {
-          setNotification({ message: "", show: false });
-          window.location.href = "/bowlinglanes";
+          setNotification({ message: "", show: false, type: "" });
+          navigate("/bowlinglanes");
           getBowlingLanes().then(setBowlingLanes).catch(setError);
-        }, 3000); // Show notification for 2 seconds
+        }, 3000);
       })
       .catch((error) => {
         setError("Error processing bowling lane: " + error.message);
@@ -60,10 +57,10 @@ export default function BowlingForm() {
 
     deleteBowlingLane(formData.id)
       .then(() => {
-        setNotification({ message: `Deleted bowling lane ID ${formData.id}🎳`, show: true });
-
+        setNotification({ message: `Deleted bowling lane ID ${formData.id}🗑`, show: true, type: "delete" });
         setTimeout(() => {
-          window.location.href = "/bowlinglanes";
+          setNotification({ message: "", show: false, type: "" });
+          navigate("/bowlinglanes");
         }, 3000);
       })
       .catch((error) => {
@@ -73,12 +70,13 @@ export default function BowlingForm() {
   }
 
   function handleBack() {
-    navigate("/bowlinglanes"); // Navigate back to the list of lanes
+    navigate("/bowlinglanes");
   }
 
   return (
     <div className="bowling-form">
-      {notification.show && <div className="notification">{notification.message}</div>}
+      {notification.show && notification.type === "delete" && <div className="notificationDelete">{notification.message}</div>}
+      {notification.show && notification.type === "addEdit" && <div className="notificationAddEdit">{notification.message}</div>}
       <form onSubmit={handleSubmit}>
         <button className="buttonBack" type="button" onClick={handleBack}>
           Back to Lanes View
@@ -98,7 +96,7 @@ export default function BowlingForm() {
           </button>
         )}
       </form>
-      {error && <p className="error">{error.message}</p>}
+      {error && <p className="error">{error}</p>}
       <div className="bowling-lanes-list">
         <h2>Existing Bowling Lanes</h2>
         {bowlingLanes.map((lane) => (

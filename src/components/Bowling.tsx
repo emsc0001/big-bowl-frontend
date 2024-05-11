@@ -53,11 +53,11 @@ export const BowlingLanes = () => {
           {bowlingLanes?.filter(filterLanes).map((bowlingLane, index) => (
             <li className={`bowling-item ${bowlingLane.forKids ? "kids-lane" : "adults-lane"}`} key={index}>
               <Link to={`/${bowlingLane.id}`}>
-                🎳 Bowling lane: {bowlingLane.laneNumber} {getForKidsLabel(bowlingLane.forKids)}
+                🎳 Bowling Bane: {bowlingLane.laneNumber} {getForKidsLabel(bowlingLane.forKids)}
               </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="bowling-btn" to="/addBowlingLane" state={bowlingLane}>
-                  Edit
+                  Rediger
                 </Link>
               )}
             </li>
