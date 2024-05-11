@@ -29,7 +29,7 @@ export default function AirHockeyForm() {
 
     action(formData)
       .then(() => {
-        const message = isEditing ? `Updated air hockey table ID ${formData.id}` : "Created a new air hockey table";
+        const message = isEditing ? `Opdateret Air Hockey bord ${formData.id}🔨` : "Oprettet et nyt Air Hockey bord🆕";
         setNotification({ message: message, show: true, type: "addEdit" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
@@ -56,7 +56,7 @@ export default function AirHockeyForm() {
 
     deleteAirHockey(formData.id)
       .then(() => {
-        setNotification({ message: `Deleted air hockey table ID ${formData.id}`, show: true, type: "delete" });
+        setNotification({ message: `Slettet Air Hockey Bord ${formData.id}`, show: true, type: "delete" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/airhockey";
@@ -78,25 +78,25 @@ export default function AirHockeyForm() {
       {notification.show && notification.type === "addEdit" && <div className="notificationAddEdit">{notification.message}</div>}
       <form onSubmit={handleSubmit}>
         <button className="buttonBack" type="button" onClick={handleBack}>
-          Back to Tables View
+          Tilbage
         </button>
         <label>
-          Table Number:
+          Bord Nummer:
           <input type="number" name="tableNumber" value={formData.tableNumber} onChange={handleChange} />
         </label>
-        <button type="submit">{formData.id ? "Edit" : "Add"} Air Hockey Table</button>
+        <button type="submit">{formData.id ? "Rediger" : "Opret"} Air Hockey Bord</button>
         {formData.id && (
           <button type="button" onClick={handleDelete}>
-            Delete Air Hockey Table
+            Slet Air Hockey Bord
           </button>
         )}
       </form>
       {error && <p className="error">{error}</p>}
       <div className="air-hockey-tables-list">
-        <h2>Existing Air Hockey Tables</h2>
+        <h2>Eksisterende Air Hockey Borde</h2>
         {airHockeys.map((table) => (
           <div key={table.id} onClick={() => setFormData(table)}>
-            Table {table.tableNumber}
+            Bord {table.tableNumber}
           </div>
         ))}
       </div>

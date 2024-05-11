@@ -30,7 +30,7 @@ export default function BowlingForm() {
 
     action(formData)
       .then(() => {
-        const message = isEditing ? `Updated bowling lane ID ${formData.id}🔨` : "Created a new bowling lane🆕";
+        const message = isEditing ? `Opdateret Bowling Bane ${formData.id}🔨` : "Oprettet En Nyt Bowling Bane🆕";
         setNotification({ message: message, show: true, type: "addEdit" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
@@ -57,7 +57,7 @@ export default function BowlingForm() {
 
     deleteBowlingLane(formData.id)
       .then(() => {
-        setNotification({ message: `Deleted bowling lane ID ${formData.id}🗑`, show: true, type: "delete" });
+        setNotification({ message: `Slettet Bowling Bane ${formData.id}🗑`, show: true, type: "delete" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/bowlinglanes";
@@ -79,29 +79,29 @@ export default function BowlingForm() {
       {notification.show && notification.type === "addEdit" && <div className="notificationAddEdit">{notification.message}</div>}
       <form onSubmit={handleSubmit}>
         <button className="buttonBack" type="button" onClick={handleBack}>
-          Back to Lanes View
+          Tilbage
         </button>
         <label>
-          Lane Number:
+          Bane Nummer:
           <input type="number" name="laneNumber" value={formData.laneNumber} onChange={handleChange} />
         </label>
         <label>
-          For Kids:
+          For Børn
           <input type="checkbox" name="forKids" checked={formData.forKids} onChange={handleChange} />
         </label>
-        <button type="submit">{formData.id ? "Edit" : "Add"} Bowling Lane</button>
+        <button type="submit">{formData.id ? "Rediger" : "Opret"} Bowling Bane</button>
         {formData.id && (
           <button type="button" onClick={handleDelete}>
-            Delete Bowling Lane
+            Slet Bowling Bane
           </button>
         )}
       </form>
       {error && <p className="error">{error}</p>}
       <div className="bowling-lanes-list">
-        <h2>Existing Bowling Lanes</h2>
+        <h2>Eksisterende Bowling Baner</h2>
         {bowlingLanes.map((lane) => (
           <div key={lane.id} onClick={() => setFormData(lane)}>
-            Lane {lane.laneNumber} - {lane.forKids ? "For Kids" : "Standard"}
+            Bane {lane.laneNumber} - {lane.forKids ? "For Børn" : "Standard"}
           </div>
         ))}
       </div>

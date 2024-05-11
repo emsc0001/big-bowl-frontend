@@ -38,7 +38,7 @@ export const AirHockeys = () => {
               </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="airhockey-btn" to="/addAirHockey" state={airHockey}>
-                  Edit
+                  Tilføj / Rediger
                 </Link>
               )}
             </li>
