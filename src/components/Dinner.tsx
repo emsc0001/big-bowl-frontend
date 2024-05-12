@@ -22,14 +22,23 @@ export const Dinner = () => {
         src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
         alt="Big Bowl Logo"
       />
-      <div className="dinner-tables">
-        {dinnerTables.map((table) => (
-          <Link key={table.id} to={auth.isLoggedIn() ? `/dinner/${table.id}` : "/login"}>
-            <div className="dinner-table">
+      <div className="dinner-tables-list">
+        {dinnerTables.map((table, index) => (
+          <li key={index} className="dinner-table-item">
+            <Link to={`/dinner/${table.id}`}>
               <h2>Bord {table.tableNumber}</h2>
-              {/* <p>{ "Optaget" : "Ledigt"}</p> */}
-            </div>
-          </Link>
+              <div className="decorations">
+                {" "}
+                {/* Placeholder for visual effects */}
+                <div className="plate"></div> {/* Example for a plate */}
+              </div>
+            </Link>
+            {auth.isLoggedInAs(["ADMIN", "USER"]) && (
+              <Link className="dinner-btn" to="/addDinnerTable" state={{ table }}>
+                Tilføj / Rediger
+              </Link>
+            )}
+          </li>
         ))}
       </div>
     </div>
