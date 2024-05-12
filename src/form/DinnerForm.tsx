@@ -54,8 +54,12 @@ export default function DinnerForm() {
       .catch((error) => setError("Error deleting dinner table: " + error.message));
   }
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
-    throw new Error("Function not implemented.");
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }
 
   return (
