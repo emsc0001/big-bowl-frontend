@@ -5,6 +5,7 @@ import { BowlingLanes } from "./components/Bowling";
 import { Dinner } from "./components/Dinner";
 import BowlingForm from "./form/BowlingForm";
 import AirHockeyForm from "./form/AirHockeyForm";
+import DinnerForm from "./form/DinnerForm";
 
 import Login from "./security/Login";
 import Logout from "./security/Logout";
@@ -39,6 +40,15 @@ export default function App() {
           element={
             <RequireAuth roles={["ADMIN"]}>
               <AirHockeyForm />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/addDinnerTable"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <DinnerForm />
             </RequireAuth>
           }
         />

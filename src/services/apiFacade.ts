@@ -206,6 +206,36 @@ async function getDinnerTable(id: number): Promise<DinnerTable> {
   return fetch(DINNER_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function addDinnerTable(newDinnerTable: DinnerTable): Promise<DinnerTable> {
+  const method = newDinnerTable.id ? "PUT" : "POST";
+  const options = makeOptions(method, newDinnerTable, true);
+  const URL = newDinnerTable.id ? `${DINNER_URL}/${newDinnerTable.id}` : DINNER_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function editDinnerTable(newDinnerTable: DinnerTable): Promise<DinnerTable> {
+  const method = newDinnerTable.id ? "PUT" : "POST";
+  const options = makeOptions(method, newDinnerTable, true);
+  const URL = newDinnerTable.id ? `${DINNER_URL}/${newDinnerTable.id}` : DINNER_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function deleteDinnerTable(id: number): Promise<void> {
+  const options = makeOptions("DELETE", null, true); // Ensure headers and method are correctly set
+  return fetch(`${DINNER_URL}/${id}`, options).then((response) => {
+    if (response.ok) {
+      // Handle both cases where the server might not return any content
+      return response.text().then((text) => (text ? JSON.parse(text) : {}));
+    } else {
+      // Extract error message from response, if any
+      return response.text().then((text) => {
+        const error = text ? JSON.parse(text) : { message: "Failed to delete the dinner table" };
+        throw new Error(error.message);
+      });
+    }
+  });
+}
+
 async function getCategories(): Promise<Array<string>> {
   if (categories.length > 0) return [...categories];
   const res = await fetch(CATEGORIES_URL).then(handleHttpErrors);
@@ -276,4 +306,7 @@ export {
   addAirHockey,
   editAirHockey,
   deleteAirHockey,
+  addDinnerTable,
+  editDinnerTable,
+  deleteDinnerTable,
 };

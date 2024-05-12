@@ -34,7 +34,7 @@ export const Dinner = () => {
               </div>
             </Link>
             {auth.isLoggedInAs(["ADMIN", "USER"]) && (
-              <Link className="dinner-btn" to="/addDinnerTable" state={{ table }}>
+              <Link className="add-edit-button" to="/addDinnerTable" state={{ table }}>
                 Tilføj / Rediger
               </Link>
             )}
