@@ -27,11 +27,11 @@ export default function DinnerForm() {
     const action = formData.id ? editDinnerTable : addDinnerTable;
     action(formData)
       .then(() => {
-        const message = formData.id ? `Opdateret Dinner Bord ${formData.id}` : "Oprettet Et Nyt Dinner Bord";
+        const message = formData.id ? `Opdateret Bord nr ${formData.id}🔨` : "Oprettet Et Nyt Bord🆕";
         setNotification({ message: message, show: true, type: "addEdit" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
-          navigate("/dinner");
+          window.location.href = "/dinner";
           getDinnerTables().then(setDinnerTables).catch(setError);
         }, 3000);
       })
@@ -44,10 +44,10 @@ export default function DinnerForm() {
     if (!formData.id) return;
     deleteDinnerTable(formData.id)
       .then(() => {
-        setNotification({ message: `Slettet Dinner Bord ${formData.id}`, show: true, type: "delete" });
+        setNotification({ message: `Slettet Bord Nr ${formData.id}🗑`, show: true, type: "delete" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
-          navigate("/dinner");
+          window.location.href = "/dinner";
           getDinnerTables().then(setDinnerTables).catch(setError);
         }, 3000);
       })
