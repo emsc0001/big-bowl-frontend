@@ -81,7 +81,7 @@ export default function DinnerForm() {
         )}
       </form>
       {error && <p className="error">{error}</p>}
-      <div className="dinner-tables-list">
+      <div className="dinner-tables-list1">
         <h2>Eksisterende Dinner Borde</h2>
         {dinnerTables.map((table) => (
           <div key={table.id} onClick={() => setFormData(table)}>
