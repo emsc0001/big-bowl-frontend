@@ -1,10 +1,9 @@
-/* Signup Form Wrapper */
 .signup-wrapper {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Start aligning items from the top */
+  align-items: flex-start;
   min-height: 100vh;
-  margin-top: 40px; /* Adjust this value to move the form up or down */
+  margin-top: 40px;
   background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
   background-size: cover;
   animation: moveBackground 40s linear infinite alternate;
@@ -19,9 +18,8 @@
   }
 }
 
-/* Signup Form */
 .signup-form {
-  background-color: rgba(0, 0, 0, 0.85); /* Dark overlay with transparency */
+  background-color: rgba(0, 0, 0, 0.85);
   border-radius: 16px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
   padding: 40px;
@@ -42,7 +40,6 @@
   }
 }
 
-/* Signup Logo */
 .login-logo-form,
 .logo {
   width: 80px;
@@ -62,7 +59,6 @@
   }
 } */
 
-/* Form Inputs */
 .signup-form-group {
   margin-bottom: 20px;
 }
@@ -88,7 +84,6 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* Buttons */
 .signup-form-group button,
 .back-to-login button {
   width: 100%;
@@ -108,12 +103,49 @@
   background-color: #0056b3;
 }
 
-/* Error Messages */
-.error {
-  margin-top: 15px;
+.error,
+.success {
   padding: 10px;
+  color: white;
+  border-radius: 4px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.error {
+  background-color: #dc3545;
+}
+
+.success {
+  background-color: #28a745;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #dc3545; /* Red */
+  color: white;
+  background-color: #007bff; /* Default for information messages */
+  animation: slideIn 0.5s forwards, fadeOut 3s 3s forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    right: -100px;
+  }
+  to {
+    opacity: 1;
+    right: 20px;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
