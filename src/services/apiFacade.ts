@@ -8,6 +8,22 @@ const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
 const DINNER_URL = API_URL + "/DinnerTable";
 
+interface BowlingLane {
+  id: number | null;
+  laneNumber: number;
+  forKids: boolean;
+}
+
+interface AirHockey {
+  id: number | null;
+  tableNumber: number;
+}
+
+interface DinnerTable {
+  id: number | null;
+  tableNumber: number;
+}
+
 interface Product {
   id: number | null;
   name: string;
