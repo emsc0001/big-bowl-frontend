@@ -15,7 +15,7 @@ export const Dinner = () => {
   return (
     <div className="dinner-container">
       <header>
-        <h1>Book Et Bord Her!</h1>
+        <h1>Book Et Bord Her!🍽️</h1>
       </header>
       <img
         className="logo"
