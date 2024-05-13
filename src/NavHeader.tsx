@@ -32,7 +32,7 @@ export default function NavHeader() {
 
         <li>
           {/* <a href="/categories">Categories</a> */}
-          <NavLink to="/airhockey">🍽️Spisning</NavLink>
+          <NavLink to="/dinner">🍽️Spisning</NavLink>
         </li>
 
         {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
