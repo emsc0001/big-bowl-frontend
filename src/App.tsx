@@ -7,6 +7,8 @@ import BowlingForm from "./form/BowlingForm";
 import AirHockeyForm from "./form/AirHockeyForm";
 import DinnerForm from "./form/DinnerForm";
 
+
+import ProductForm from "./form/ProductForm";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
 import OpretForm from "./security/OpretForm";
@@ -53,6 +55,21 @@ export default function App() {
           }
         />
         {/* <Route path="/add" */}
+      <Layout>
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products/" element={<Products />} />
+
+              {/* <Route path="/add" */}
+
+              <Route
+                  path="/addProduct"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <ProductForm />
+                      </RequireAuth>
+                  }
+              />
 
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
@@ -60,4 +77,5 @@ export default function App() {
       </Routes>
     </Layout>
   );
+  
 }

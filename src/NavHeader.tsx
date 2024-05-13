@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import AuthStatus from "./security/AuthStatus";
 import { useAuth } from "./security/AuthProvider";
+import AddDropdownMenu from "./components/AddDropdownMenu";
 
 import "./NavHeader.css";
 
@@ -27,11 +28,6 @@ export default function NavHeader() {
         <li>
           {/* <a href="/categories">Categories</a> */}
           <NavLink to="/airhockey">🏒AirHockey</NavLink>
-        </li>
-
-        <li>
-          {/* <a href="/categories">Categories</a> */}
-          <NavLink to="/dinner">🍽️Spisning</NavLink>
         </li>
 
         <AuthStatus />

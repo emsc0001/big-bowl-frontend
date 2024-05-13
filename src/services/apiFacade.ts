@@ -14,21 +14,6 @@ interface Product {
   price: number;
 }
 
-interface BowlingLane {
-  id: number | null;
-  laneNumber: number;
-  forKids: boolean;
-}
-interface AirHockey {
-  id: number | null;
-  tableNumber: number;
-}
-
-interface DinnerTable {
-  id: number | null;
-  tableNumber: number;
-}
-
 interface Recipe {
   id: number | null;
   name: string;
@@ -255,6 +240,13 @@ async function getRecipe(id: number): Promise<Recipe> {
   return fetch(RECIPE_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function addProduct(newProduct: Product): Promise<Product> {
+  const method = newProduct.id ? "PUT" : "POST";
+  const options = makeOptions(method, newProduct, true);
+  const URL = newProduct.id ? `${PRODUCT_URL}/${newProduct.id}` : PRODUCT_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
 async function addRecipe(newRecipe: Recipe): Promise<Recipe> {
   const method = newRecipe.id ? "PUT" : "POST";
   const options = makeOptions(method, newRecipe, true);
@@ -272,6 +264,11 @@ async function addCategory(newCategory: Category): Promise<Category> {
 async function deleteRecipe(id: number): Promise<Recipe> {
   const options = makeOptions("DELETE", null, true);
   return fetch(`${RECIPE_URL}/${id}`, options).then(handleHttpErrors);
+}
+
+async function deleteProduct(id: number): Promise<Product> {
+  const options = makeOptions("DELETE", null, true);
+  return fetch(`${PRODUCT_URL}/${id}`, options).then(handleHttpErrors);
 }
 
 async function getInfo(): Promise<Info> {
@@ -310,3 +307,5 @@ export {
   editDinnerTable,
   deleteDinnerTable,
 };
+export { addProduct };
+export { deleteProduct };

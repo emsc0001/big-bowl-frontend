@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 /**
  * Utility Method to create options for a fetch call
  * @param method GET, POST, PUT, DELETE
@@ -19,6 +21,8 @@ export function makeOptions(method: string, body: object | null, addToken?: bool
     //@ts-ignore
     opts.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
+  console.log("opts", opts, "body", body);
+  
   return opts;
 }
 
