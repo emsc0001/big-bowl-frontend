@@ -11,23 +11,43 @@ import "./EmployeeList.css";
 const localizer = momentLocalizer(moment);
 
 export const EmployeeList = () => {
-  const [employees, setEmployees] = useState<Employee[]>(); // Initialize to an empty array
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const navigate = useNavigate();
   const [viewType, setViewType] = useState("list"); // 'list' or 'calendar'
   const auth = useAuth();
 
   useEffect(() => {
-    getEmployees().then(setEmployees).catch(console.error); // Add error catching
+    getEmployees()
+      .then((data) => {
+        const today = moment().format("YYYY-MM-DD"); // Use today's date for the schedule
+        const mappedData = data.map((emp) => {
+          let shiftStart, shiftEnd;
+          if (emp.shift === "MORNING") {
+            shiftStart = moment(`${today}T09:00:00`).toDate();
+            shiftEnd = moment(`${today}T16:00:00`).toDate();
+          } else if (emp.shift === "EVENING") {
+            shiftStart = moment(`${today}T16:00:00`).toDate();
+            shiftEnd = moment(`${today}T24:00:00`).toDate();
+          }
+          return {
+            ...emp,
+            shiftStart,
+            shiftEnd,
+          };
+        });
+        setEmployees(mappedData);
+      })
+      .catch(console.error);
   }, []);
 
-  const events = employees
-    ? employees.map((emp) => ({
-        title: `${emp.name} - ${emp.role} (${emp.shift})`,
-        start: new Date(emp.shiftStart || new Date()), // Add default value if undefined
-        end: new Date(emp.shiftEnd || new Date()), // Add default value if undefined
-        allDay: false,
-      }))
-    : [];
+  const events = employees.map((emp) => ({
+    title: `${emp.name} - ${emp.role} (${emp.shift})`,
+    start: emp.shiftStart,
+    end: emp.shiftEnd,
+    allDay: false,
+  }));
+
+  console.log(events.map((e) => ({ start: e.start.toString(), end: e.end.toString() })));
 
   return (
     <div className="employee-container">
@@ -40,7 +60,7 @@ export const EmployeeList = () => {
       </header>
       {viewType === "list" ? (
         <ul className="employee-list">
-          {employees?.map((employee, index) => (
+          {employees.map((employee, index) => (
             <li key={index} className="employee-item">
               <Link to={`/employee/${employee.id}`}>
                 <h2>
@@ -61,3 +81,5 @@ export const EmployeeList = () => {
     </div>
   );
 };
+
+export default EmployeeList;
