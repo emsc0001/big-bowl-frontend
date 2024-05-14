@@ -57,7 +57,7 @@ export const BowlingLanes = () => {
               </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="bowling-btn" to="/addBowlingLane" state={bowlingLane}>
-                  Tilføj / Rediger
+                  Rediger
                 </Link>
               )}
             </li>
