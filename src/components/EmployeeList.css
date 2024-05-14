@@ -112,3 +112,14 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.buttonBack {
+  background-color: #007bff;
+  color: rgb(255, 255, 255);
+  padding: 10px 15px;
+  border-radius: 8px;
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  transition: background-color 0.3s, transform 0.2s;
+}

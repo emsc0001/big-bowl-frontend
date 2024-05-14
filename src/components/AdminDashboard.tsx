@@ -17,13 +17,19 @@ const AdminDashboard = () => {
       <main className="admin-links">
         <ul>
           <li>
-            <Link to="/bowlinglanes">Se Bowling Baner</Link>
+            <Link to="/bowlinglanes">Bowling Baner Administration</Link>
           </li>
           <li>
-            <Link to="/airhockey">Se Air Hockey Borde</Link>
+            <Link to="/airhockey">Air Hockey Borde Administration</Link>
           </li>
           <li>
-            <Link to="/dinner">Se Spise Borde</Link>
+            <Link to="/dinner">Borde Administration</Link>
+          </li>
+        </ul>
+
+        <ul>
+          <li>
+            <Link to="/employees">Medarbejder Administration</Link>
           </li>
         </ul>
       </main>

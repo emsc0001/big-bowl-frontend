@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getEmployees, Employee } from "../services/apiFacade";
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
@@ -6,6 +7,7 @@ import "./EmployeeList.css";
 
 export const EmployeeList = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const navigate = useNavigate();
   const [filter, setFilter] = useState("all"); // Filter state for shifts
   const auth = useAuth();
 
@@ -20,6 +22,10 @@ export const EmployeeList = () => {
     setFilter(shift);
   };
 
+  function handleBack() {
+    navigate("/admin");
+  }
+
   const filteredEmployees = filter === "all" ? employees : employees.filter((emp) => emp.shift === filter);
 
   return (
@@ -33,6 +39,9 @@ export const EmployeeList = () => {
           <button onClick={() => handleFilterChange("EVENING")}>Evening Shift</button>
         </div>
       </header>
+      <button className="buttonBack" type="button" onClick={handleBack}>
+        Tilbage
+      </button>
       <ul className="employee-list">
         {filteredEmployees.map((employee, index) => (
           <li key={index} className="employee-item">
