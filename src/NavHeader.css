@@ -5,6 +5,7 @@ nav {
   border-radius: 10px;
   padding: 15px 30px;
   margin: 20px auto;
+  z-index: 1000;
   max-width: 1200px;
   text-align: center;
   animation: fadeInDown 1s ease-in forwards;
@@ -27,6 +28,8 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
+  z-index: 1000;
+
   justify-content: center;
   gap: 30px; /* Spacing between items */
   flex-wrap: wrap; /* Wrap items on smaller screens */
@@ -34,6 +37,7 @@ ul {
 
 li {
   position: relative;
+  z-index: 1000;
 }
 
 /* Navigation link styles */
@@ -45,6 +49,7 @@ a {
   transition: all 0.3s ease;
   padding: 8px 15px;
   border-radius: 8px;
+  z-index: 1000;
 }
 
 a:hover,
