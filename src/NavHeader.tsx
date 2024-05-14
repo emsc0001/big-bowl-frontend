@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import AuthStatus from "./security/AuthStatus";
 import { useAuth } from "./security/AuthProvider";
 import AddDropdownMenu from "./components/AddDropdownMenu";
-import AdminDashBoard from "./components/AdminDashboard";
+import AdminDashboard from "./components/AdminDashboard";
 
 import "./NavHeader.css";
 
@@ -17,6 +17,10 @@ export default function NavHeader() {
         </li>
         <li>
           <NavLink to="/products">📦Produkter</NavLink>
+        </li>
+
+        <li>
+          <NavLink to="/admin">Admin Dashboard</NavLink>
         </li>
 
         {/* <li>
@@ -34,12 +38,6 @@ export default function NavHeader() {
         {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
           <>
             <AddDropdownMenu />
-          </>
-        )}
-
-        {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
-          <>
-            <AdminDashBoard />
           </>
         )}
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getBowlingLanes, BowlingLane } from "../services/apiFacade";
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
@@ -6,6 +7,7 @@ import "./BowlingLanes.css";
 
 export const BowlingLanes = () => {
   const [bowlingLanes, setBowlingLanes] = useState<BowlingLane[]>();
+  const navigate = useNavigate();
   const [filter, setFilter] = useState<string>("all"); // Filter state: 'all', 'kids', or 'adults'
   const auth = useAuth();
 
@@ -29,6 +31,10 @@ export const BowlingLanes = () => {
     return isForKids ? "🧒" : "🔞";
   };
 
+  function handleBack() {
+    navigate("/admin");
+  }
+
   return (
     <div className="bowling-container">
       <header className="header">
@@ -41,6 +47,9 @@ export const BowlingLanes = () => {
         alt="Big Bowl Logo"
       />
       <main className="main-content">
+        <button className="buttonBack" type="button" onClick={handleBack}>
+          Tilbage
+        </button>
         <div className="filter-buttons">
           {/* Filter Buttons */}
           <button onClick={() => setFilter("all")}>Alle</button>
