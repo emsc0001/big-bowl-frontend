@@ -1,0 +1,59 @@
+#bookingBowlingForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+}
+
+#bookingBowlingForm label {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#bookingBowlingForm input,
+#bookingBowlingForm select,
+#bookingBowlingForm .react-datetime-picker {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#bookingBowlingForm button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#bookingBowlingForm button:hover {
+    background-color: #45a049;
+}
+
+.react-datetime-picker__inputGroup__input {
+    color: black;
+}
+
+.rdtPicker {
+    color: black;
+}
+
+.rdtPicker .rdtTime .rdtCounter {
+    color: black;
+}
+
+.rdtPicker .rdtDay {
+    color: black;
+}
+
+.rdtPicker .rdtMonth {
+    color: black;
+}
+
+.rdtPicker .rdtYear {
+    color: black;
+}

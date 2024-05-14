@@ -2,11 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Products } from "./components/Products";
 import { AirHockeys } from "./components/AirHockey";
 import { BowlingLanes } from "./components/Bowling";
+import { Booking } from "./components/Booking";
 import { Dinner } from "./components/Dinner";
 import BowlingForm from "./form/BowlingForm";
 import AirHockeyForm from "./form/AirHockeyForm";
 import DinnerForm from "./form/DinnerForm";
 import ProductForm from "./form/ProductForm";
+import BookingBowlingForm from "./form/BookingBowlingForm";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
 import OpretForm from "./security/OpretForm";
@@ -24,6 +26,12 @@ export default function App() {
         <Route path="/airhockey" element={<AirHockeys />} />
         <Route path="/bowlinglanes" element={<BowlingLanes />} />
         <Route path="/dinner" element={<Dinner />} />
+
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/booking/bowling" element={<BookingBowlingForm />} />
+        {/* <Route path="/booking/airhockey" element={<BookingAirhockey />} /> */}
+        {/* <Route path="/booking/dinner" element={<BookingDinner />} /> */}
+
         <Route
           path="/addBowlingLane"
           element={

@@ -35,6 +35,24 @@ interface Info {
   info: string;
 }
 
+interface BookingActivity {
+    id: number | null;
+    startTime: string;
+    endTime: string;
+    activityType: string;
+    bowlingLanes: BowlingLane[];
+    airHockeyTables: AirHockey[];
+    dinnerTables: DinnerTable[];
+    booking: Booking | null;
+}
+
+interface Booking {
+    id: number | null;
+    activities: BookingActivity[];
+    products: Product[];
+    user: null;
+}
+
 let products: Array<Product> = [];
 let bowlingLanes: Array<BowlingLane> = [];
 let airhockey: Array<AirHockey> = [];
@@ -84,6 +102,13 @@ async function getBowlingLane(id: number): Promise<BowlingLane> {
   return fetch(BOWLING_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function getAvailableBowlingLanes(startTime: string, endTime: string): Promise<BowlingLane[]> {
+    const params = new URLSearchParams({
+        startTime: startTime,
+        endTime: endTime,
+    });
+    return fetch(`${BOWLING_URL}/available?${params.toString()}`).then(handleHttpErrors);
+}
 async function addBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane> {
   const method = newBowlingLane.id ? "PUT" : "POST";
   const options = makeOptions(method, newBowlingLane, true);
@@ -238,7 +263,7 @@ async function getInfo(): Promise<Info> {
   return info;
 }
 
-export type { Product, AirHockey, BowlingLane, DinnerTable };
+export type { Product, AirHockey, BowlingLane, DinnerTable, Booking, BookingActivity};
 // eslint-disable-next-line react-refresh/only-export-components
 export {
   getInfo,
@@ -259,6 +284,7 @@ export {
   addDinnerTable,
   editDinnerTable,
   deleteDinnerTable,
+  getAvailableBowlingLanes
 };
 export { addProduct };
 export { deleteProduct };
