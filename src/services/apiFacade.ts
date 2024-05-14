@@ -5,6 +5,7 @@ const PRODUCT_URL = API_URL + "/products";
 const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
 const DINNER_URL = API_URL + "/DinnerTable";
+const EMPLOYEE_URL = API_URL + "/api/employees";
 
 interface BowlingLane {
   id: number | null;
@@ -29,6 +30,14 @@ interface Product {
   image: string;
 }
 
+interface Employee {
+  id: number | null;
+  name: string;
+  role: string;
+  email: string;
+  phone: number;
+}
+
 interface Info {
   reference: string;
   created: string;
@@ -39,6 +48,7 @@ let products: Array<Product> = [];
 let bowlingLanes: Array<BowlingLane> = [];
 let airhockey: Array<AirHockey> = [];
 let dinnerTables: Array<DinnerTable> = [];
+let employees: Array<Employee> = [];
 let info: Info | null = null;
 
 async function getProducts(): Promise<Array<Product>> {
@@ -238,7 +248,59 @@ async function getInfo(): Promise<Info> {
   return info;
 }
 
-export type { Product, AirHockey, BowlingLane, DinnerTable };
+async function getEmployees(): Promise<Array<Employee>> {
+  if (employees.length > 0) return [...employees];
+  try {
+    const res = await fetch(EMPLOYEE_URL);
+    if (!res.ok) {
+      throw new Error("Fetch request failed");
+    }
+
+    const employeesData = await res.json(); // Parse responsen som JSON
+    console.log("Employees fetched successfully:", employeesData); // Log dataene
+    employees = employeesData; // Tildel dataene til biografer-arrayen
+    return employees;
+  } catch (error) {
+    console.log("An error occurred while fetching employees:", error);
+    return [];
+  }
+}
+
+async function getEmployee(id: number): Promise<Employee> {
+  return fetch(EMPLOYEE_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function addEmployee(newEmployee: Employee): Promise<Employee> {
+  const method = newEmployee.id ? "PUT" : "POST";
+  const options = makeOptions(method, newEmployee, true);
+  const URL = newEmployee.id ? `${EMPLOYEE_URL}/${newEmployee.id}` : EMPLOYEE_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function editEmployee(newEmployee: Employee): Promise<Employee> {
+  const method = newEmployee.id ? "PUT" : "POST";
+  const options = makeOptions(method, newEmployee, true);
+  const URL = newEmployee.id ? `${EMPLOYEE_URL}/${newEmployee.id}` : EMPLOYEE_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function deleteEmployee(id: number): Promise<void> {
+  const options = makeOptions("DELETE", null, true); // Ensure headers and method are correctly set
+  return fetch(`${EMPLOYEE_URL}/${id}`, options).then((response) => {
+    if (response.ok) {
+      // Handle both cases where the server might not return any content
+      return response.text().then((text) => (text ? JSON.parse(text) : {}));
+    } else {
+      // Extract error message from response, if any
+      return response.text().then((text) => {
+        const error = text ? JSON.parse(text) : { message: "Failed to delete the employee" };
+        throw new Error(error.message);
+      });
+    }
+  });
+}
+
+export type { Product, AirHockey, BowlingLane, DinnerTable, Employee };
 // eslint-disable-next-line react-refresh/only-export-components
 export {
   getInfo,
@@ -250,15 +312,9 @@ export {
   getBowlingLane,
   getDinnerTables,
   getDinnerTable,
-  addBowlingLane,
-  editBowlingLane,
-  deleteBowlingLane,
-  addAirHockey,
-  editAirHockey,
-  deleteAirHockey,
-  addDinnerTable,
-  editDinnerTable,
-  deleteDinnerTable,
+  getEmployees,
+  getEmployee,
 };
-export { addProduct };
-export { deleteProduct };
+export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable };
+export { editAirHockey, editBowlingLane, editDinnerTable, editEmployee };
+export { deleteProduct, deleteEmployee, deleteAirHockey, deleteBowlingLane, deleteDinnerTable };

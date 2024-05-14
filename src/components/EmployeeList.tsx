@@ -1,71 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import './EmployeeList.css';
+import React, { useState, useEffect } from "react";
+import { getEmployees, Employee } from "../services/apiFacade";
+import { Link } from "react-router-dom";
+import { useAuth } from "../security/AuthProvider";
 
-interface Employee {
-  id: number;
-  name: string;
-  role: string;
-  email: string;
-  phone: string;
-}
+import "./EmployeeList.css";
 
-const EmployeeList: React.FC = () => {
-    console.log('Rendering EmployeeList component');
+export const EmployeeList = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const auth = useAuth();
 
   useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        setLoading(true);
-        const response: AxiosResponse<Employee[]> = await axios.get('/api/employees');
-        setEmployees(response.data);
-      } catch (error) {
-        setError('Error fetching employees: ' + error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEmployees();
+    getEmployees().then((res) => {
+      console.log("Fetched Employee List:", res);
+      setEmployees(res);
+    });
   }, []);
 
-  if (loading) {
-    return <div className="loading-message">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
-
   return (
-    <div className="employee-list">
-      <h2>Liste over medarbejdere</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Navn</th>
-            <th>Rolle</th>
-            <th>Email</th>
-            <th>Telefon</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employees.map((employee) => (
-            <tr key={employee.id}>
-              <td>{employee.name}</td>
-              <td>{employee.role}</td>
-              <td>{employee.email}</td>
-              <td>{employee.phone}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="employee-container">
+      <header>
+        <h1>Employee List👩‍💼👨‍💼</h1>
+      </header>
+      <div className="employee-list">
+        {employees.map((employee, index) => (
+          <li key={index} className="employee-item">
+            <Link to={`/employee/${employee.id}`}>
+              <h2>
+                {employee.name} {employee.role}
+              </h2>
+            </Link>
+            {auth.isLoggedInAs(["ADMIN"]) && (
+              <Link className="add-edit-button" to="/addEmployee" state={{ employee }}>
+                Rediger
+              </Link>
+            )}
+          </li>
+        ))}
+      </div>
     </div>
   );
 };
-
-export default EmployeeList;
-
