@@ -5,7 +5,7 @@ const PRODUCT_URL = API_URL + "/products";
 const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
 const DINNER_URL = API_URL + "/DinnerTable";
-const EMPLOYEE_URL = API_URL + "/api/employees";
+const EMPLOYEE_URL = API_URL + "/employees";
 
 interface BowlingLane {
   id: number | null;
@@ -34,6 +34,7 @@ interface Employee {
   id: number | null;
   name: string;
   role: string;
+  shift: string;
   email: string;
   phone: number;
 }
