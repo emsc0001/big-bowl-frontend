@@ -40,67 +40,9 @@
   }
 }
 
-.employee-list input[type="text"],
-.employee-list input[type="number"],
-.employee-list input[type="checkbox"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background: rgba(255, 255, 255, 0.1); /* Slightly visible input background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-  color: #ffffff; /* White text color for inputs */
-  outline: none;
-  transition: box-shadow 0.3s ease;
-}
-
-.employee-list input[type="text"]:focus,
-.employee-list input[type="number"]:focus,
-.employee-list input[type="checkbox"]:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.employee-list input[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  background: #007bff; /* Bootstrap primary color */
-  color: #ffffff;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-}
-
-.employee-list input[type="submit"]:hover {
-  background-color: #0056b3; /* Darker shade of primary color */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .employee-container {
-    padding: 10px;
-  }
-
-  .employee-list {
-    width: 90%;
-    padding: 20px;
-  }
-
-  .employee-list input[type="text"],
-  .employee-list input[type="number"],
-  .employee-list input[type="checkbox"] {
-    padding: 8px;
-  }
-
-  .employee-list input[type="submit"] {
-    padding: 8px;
-  }
-}
-
 button {
-  color: #000000;
+  color: #fff;
+  background-color: #007bff;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
@@ -114,12 +56,20 @@ button:hover {
 }
 
 .buttonBack {
-  background-color: #007bff;
-  color: rgb(255, 255, 255);
-  padding: 10px 15px;
-  border-radius: 8px;
-  display: block;
   margin-top: 10px;
+}
+
+.add-edit-button {
+  display: block;
+  margin-top: 5px;
+  color: #fff;
+  background-color: #28a745;
+  padding: 5px 10px;
+  border-radius: 5px;
   text-align: center;
-  transition: background-color 0.3s, transform 0.2s;
+  text-decoration: none;
+}
+
+.add-edit-button:hover {
+  background-color: #218838;
 }

@@ -1,63 +1,63 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getEmployees, Employee } from "../services/apiFacade";
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./EmployeeList.css";
 
+const localizer = momentLocalizer(moment);
+
 export const EmployeeList = () => {
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>(); // Initialize to an empty array
   const navigate = useNavigate();
-  const [filter, setFilter] = useState("all"); // Filter state for shifts
+  const [viewType, setViewType] = useState("list"); // 'list' or 'calendar'
   const auth = useAuth();
 
   useEffect(() => {
-    getEmployees().then((res) => {
-      console.log("Fetched Employee List:", res);
-      setEmployees(res);
-    });
+    getEmployees().then(setEmployees).catch(console.error); // Add error catching
   }, []);
 
-  const handleFilterChange = (shift: "all" | "morning" | "evening") => {
-    setFilter(shift);
-  };
-
-  function handleBack() {
-    navigate("/admin");
-  }
-
-  const filteredEmployees = filter === "all" ? employees : employees.filter((emp) => emp.shift === filter);
+  const events = employees
+    ? employees.map((emp) => ({
+        title: `${emp.name} - ${emp.role} (${emp.shift})`,
+        start: new Date(emp.shiftStart || new Date()), // Add default value if undefined
+        end: new Date(emp.shiftEnd || new Date()), // Add default value if undefined
+        allDay: false,
+      }))
+    : [];
 
   return (
     <div className="employee-container">
       <header>
         <h1>Employee List 👩‍💼👨‍💼</h1>
-        {/* Shift Filters */}
         <div>
-          <button onClick={() => handleFilterChange("all")}>All</button>
-          <button onClick={() => handleFilterChange("MORNING")}>Morning Shift</button>
-          <button onClick={() => handleFilterChange("EVENING")}>Evening Shift</button>
+          <button onClick={() => setViewType("list")}>List View</button>
+          <button onClick={() => setViewType("calendar")}>Calendar View</button>
         </div>
       </header>
-      <button className="buttonBack" type="button" onClick={handleBack}>
-        Tilbage
-      </button>
-      <ul className="employee-list">
-        {filteredEmployees.map((employee, index) => (
-          <li key={index} className="employee-item">
-            <Link to={`/employee/${employee.id}`}>
-              <h2>
-                {employee.name} - {employee.role} ({employee.shift})
-              </h2>
-            </Link>
-            {auth.isLoggedInAs(["ADMIN"]) && (
-              <Link className="add-edit-button" to="/addEmployee" state={{ employee }}>
-                Edit
+      {viewType === "list" ? (
+        <ul className="employee-list">
+          {employees?.map((employee, index) => (
+            <li key={index} className="employee-item">
+              <Link to={`/employee/${employee.id}`}>
+                <h2>
+                  {employee.name} - {employee.role} ({employee.shift})
+                </h2>
               </Link>
-            )}
-          </li>
-        ))}
-      </ul>
+              {auth.isLoggedInAs(["ADMIN"]) && (
+                <Link className="add-edit-button" to="/addEmployee" state={{ employee }}>
+                  Edit
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" style={{ height: 500, margin: "50px" }} />
+      )}
     </div>
   );
 };
