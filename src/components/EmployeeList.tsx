@@ -13,6 +13,8 @@ const localizer = momentLocalizer(moment);
 export const EmployeeList = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const navigate = useNavigate();
+  const [filterShift, setFilterShift] = useState("all");
+  const [filterRole, setFilterRole] = useState("all");
   const [viewType, setViewType] = useState("list"); // 'list' or 'calendar'
   const auth = useAuth();
 
@@ -36,6 +38,18 @@ export const EmployeeList = () => {
       .catch(console.error);
   }, []);
 
+  const handleShiftChange = (e) => {
+    setFilterShift(e.target.value);
+  };
+
+  const handleRoleChange = (e) => {
+    setFilterRole(e.target.value);
+  };
+
+  const filteredEmployees = employees.filter((emp) => {
+    return (filterShift === "all" || emp.shift === filterShift) && (filterRole === "all" || emp.role === filterRole);
+  });
+
   const events = employees.map((emp) => ({
     title: `${emp.name} - ${emp.role} (${emp.shift})`,
     start: emp.shiftStart,
@@ -54,11 +68,28 @@ export const EmployeeList = () => {
           <button className="buttonsChange" onClick={() => setViewType("calendar")}>
             Calendar View
           </button>
+
+          {viewType === "list" && (
+            <>
+              <select className="filterButton" onChange={handleShiftChange}>
+                <option value="all">All Shifts</option>
+                <option value="MORNING">Morning Shift</option>
+                <option value="EVENING">Evening Shift</option>
+              </select>
+              <select className="filterButton" onChange={handleRoleChange}>
+                <option value="all">All Roles</option>
+                <option value="MANAGER">Manager</option>
+                <option value="TICKET_SELLER">Ticket Seller</option>
+                <option value="EQUIPMENT_OPERATOR">Equipment Operator</option>
+                <option value="CLEANING_STAFF">Cleaning Staff</option>
+              </select>
+            </>
+          )}
         </div>
       </header>
       {viewType === "list" ? (
         <ul className="employee-list">
-          {employees.map((employee, index) => (
+          {filteredEmployees.map((employee, index) => (
             <li key={index} className="employee-item">
               <Link to={`/employee/${employee.id}`}>
                 <h2>
