@@ -12,8 +12,6 @@ const localizer = momentLocalizer(moment);
 
 export const EmployeeList = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
-  const [filterShift, setFilterShift] = useState("all");
-  const [filterRole, setFilterRole] = useState("all");
   const navigate = useNavigate();
   const [viewType, setViewType] = useState("list"); // 'list' or 'calendar'
   const auth = useAuth();
@@ -23,14 +21,10 @@ export const EmployeeList = () => {
       .then((data) => {
         const today = moment().format("YYYY-MM-DD"); // Use today's date for the schedule
         const mappedData = data.map((emp) => {
-          let shiftStart, shiftEnd;
-          if (emp.shift === "MORNING") {
-            shiftStart = moment(`${today}T09:00:00`).toDate();
-            shiftEnd = moment(`${today}T16:00:00`).toDate();
-          } else if (emp.shift === "EVENING") {
-            shiftStart = moment(`${today}T16:00:00`).toDate();
-            shiftEnd = moment(`${today}T24:00:00`).toDate();
-          }
+          // Combine the current date with time from backend to ensure correct Date object creation
+          const shiftStart = moment(`${today}T${emp.shiftStart}`).toDate();
+          const shiftEnd = moment(`${today}T${emp.shiftEnd}`).toDate();
+
           return {
             ...emp,
             shiftStart,
@@ -49,18 +43,6 @@ export const EmployeeList = () => {
     allDay: false,
   }));
 
-  const handleShiftChange = (e) => {
-    setFilterShift(e.target.value);
-  };
-
-  const handleRoleChange = (e) => {
-    setFilterRole(e.target.value);
-  };
-
-  const filteredEmployees = employees.filter((emp) => {
-    return (filterShift === "all" || emp.shift === filterShift) && (filterRole === "all" || emp.role === filterRole);
-  });
-
   return (
     <div className="employee-container">
       <header>
@@ -72,27 +54,11 @@ export const EmployeeList = () => {
           <button className="buttonsChange" onClick={() => setViewType("calendar")}>
             Calendar View
           </button>
-          {viewType === "list" && (
-            <>
-              <select className="filterButton" onChange={handleShiftChange}>
-                <option value="all">All Shifts</option>
-                <option value="MORNING">Morning Shift</option>
-                <option value="EVENING">Evening Shift</option>
-              </select>
-              <select className="filterButton" onChange={handleRoleChange}>
-                <option value="all">All Roles</option>
-                <option value="MANAGER">Manager</option>
-                <option value="TICKET_SELLER">Ticket Seller</option>
-                <option value="EQUIPMENT_OPERATOR">Equipment Operator</option>
-                <option value="CLEANING_STAFF">Cleaning Staff</option>
-              </select>
-            </>
-          )}
         </div>
       </header>
       {viewType === "list" ? (
         <ul className="employee-list">
-          {filteredEmployees.map((employee, index) => (
+          {employees.map((employee, index) => (
             <li key={index} className="employee-item">
               <Link to={`/employee/${employee.id}`}>
                 <h2>
