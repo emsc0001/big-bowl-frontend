@@ -1,10 +1,14 @@
-/* Product Form Wrapper */
-.product-form-wrapper {
+body {
+  font-family: Arial, sans-serif;
+}
+
+.product-form-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  margin-top: 40px;
+  align-items: center;
+  min-height: 100vh; /* Ensures that the container takes at least the height of the viewport */
+  padding: 20px;
   background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
   background-size: cover;
   animation: moveBackground 40s linear infinite alternate;
@@ -19,7 +23,6 @@
   }
 }
 
-/* Product Form Styling */
 .product-form {
   background-color: rgba(0, 0, 0, 0.85);
   border-radius: 16px;
@@ -34,7 +37,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-10%);
+    transform: translateY(-50px); /* Starts the form higher */
   }
   to {
     opacity: 1;
@@ -42,9 +45,8 @@
   }
 }
 
-/* Input Styling */
-.product-form input[type="number"],
-.product-form input[type="text"] {
+.product-form input[type="text"],
+.product-form input[type="number"] {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
@@ -56,11 +58,11 @@
   transition: box-shadow 0.3s ease;
 }
 
-.product-form input:focus {
+.product-form input[type="text"]:focus,
+.product-form input[type="number"]:focus {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* Button Styling */
 .product-form button {
   width: 100%;
   padding: 10px 0;
@@ -78,7 +80,6 @@
   background-color: #0056b3;
 }
 
-/* Error Styling */
 .error {
   margin-top: 15px;
   padding: 10px;
@@ -86,12 +87,4 @@
   font-weight: bold;
   color: #ffffff;
   background-color: #dc3545;
-}
-
-/* Adaptation for smaller devices */
-@media (max-width: 768px) {
-  .product-form {
-    width: 90%;
-    padding: 20px;
-  }
 }

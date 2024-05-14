@@ -11,13 +11,14 @@ const EMPTY_PRODUCT: Product = {
 };
 
 export default function ProductForm() {
-  const [product, setProduct] = useState<Product[]>([]);
-  const productToEdit = useLocation().state || EMPTY_PRODUCT;
-  const [formData, setFormData] = useState<Product>(productToEdit || EMPTY_PRODUCT);
+  const [products, setProducts] = useState<Product[]>([]);
+  const location = useLocation();
+  const productToEdit = location.state || EMPTY_PRODUCT;
+  const [formData, setFormData] = useState<Product>(productToEdit);
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    getProducts().then((res) => setProduct(res));
+    getProducts().then(setProducts);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,13 +29,11 @@ export default function ProductForm() {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      console.log(formData);
       const newProduct = await addProduct(formData);
       alert("New product added");
-      console.info("New/Edited Product", newProduct);
-      setFormData(newProduct);
+      setFormData(newProduct); // Refresh the form with new product data
     } catch (error) {
-      setError("Error adding/editing product");
+      setError("Error adding/editing product: " + error.message);
     }
   };
 
@@ -48,25 +47,31 @@ export default function ProductForm() {
   };
 
   return (
-    <div>
-      <h2>{productToEdit.id ? "Edit Product" : "Add Product"}</h2>
-      <form id="productForm">
-        <label>Name</label>
-        <input name="name" value={formData.name} onChange={handleChange} />
-        <label>Price</label>
-        <input name="price" value={formData.price} onChange={handleChange} />
-        <label>Image</label>
-        <input name="image" value={formData.image} onChange={handleChange} />
-        <button type="submit" onClick={handleSubmit}>
+    <div className="product-form-container">
+      <h2>{formData.id ? "Edit Product" : "Add Product"}</h2>
+      <form className="product-form">
+        <label>
+          Name:
+          <input type="text" name="name" value={formData.name || ""} onChange={handleChange} />
+        </label>
+        <label>
+          Price:
+          <input type="number" name="price" value={formData.price || 0} onChange={handleChange} />
+        </label>
+        <label>
+          Image URL:
+          <input type="text" name="image" value={formData.image || ""} onChange={handleChange} />
+        </label>
+        <button type="button" onClick={handleSubmit}>
           Save
         </button>
-        {productToEdit.id && (
+        {formData.id && (
           <button type="button" onClick={handleDelete}>
             Delete
           </button>
         )}
       </form>
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

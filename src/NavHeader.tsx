@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import AuthStatus from "./security/AuthStatus";
 import { useAuth } from "./security/AuthProvider";
 import AddDropdownMenu from "./components/AddDropdownMenu";
+import AdminDashBoard from "./components/AdminDashboard";
 
 import "./NavHeader.css";
 
@@ -12,32 +13,33 @@ export default function NavHeader() {
     <nav>
       <ul>
         <li>
-          {/* <a href="/">Home</a> */}
           <NavLink to="/">🏠Home</NavLink>
         </li>
         <li>
-          {/* <a href="/categories">Categories</a> */}
           <NavLink to="/products">📦Produkter</NavLink>
         </li>
 
-        <li>
-          {/* <a href="/categories">Categories</a> */}
+        {/* <li>
           <NavLink to="/bowlinglanes">🎳Bowling baner</NavLink>
         </li>
 
         <li>
-          {/* <a href="/categories">Categories</a> */}
           <NavLink to="/airhockey">🏒AirHockey</NavLink>
         </li>
 
         <li>
-          {/* <a href="/categories">Categories</a> */}
           <NavLink to="/dinner">🍽️Spisning</NavLink>
-        </li>
+        </li> */}
 
         {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
           <>
             <AddDropdownMenu />
+          </>
+        )}
+
+        {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
+          <>
+            <AdminDashBoard />
           </>
         )}
 
