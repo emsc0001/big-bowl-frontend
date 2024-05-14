@@ -112,3 +112,21 @@ button:hover {
     padding: 20px;
   }
 }
+
+.buttonsChange {
+  color: #fff;
+  background-color: #007bff;
+  margin: 5px;
+}
+
+.filterButton {
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin: 5px;
+}

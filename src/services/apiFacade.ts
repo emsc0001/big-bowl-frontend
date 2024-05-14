@@ -37,8 +37,8 @@ interface Employee {
   shift: string;
   email: string;
   phone: number;
-  shiftStart: number;
-  shiftEnd: number;
+  shiftStart: Date;
+  shiftEnd: Date;
 }
 
 interface Info {
