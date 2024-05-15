@@ -18,16 +18,21 @@ const EmployeeList: React.FC = () => {
 
   useEffect(() => {
     const fetchEmployees = async () => {
-      try {
-        setLoading(true);
-        const response: AxiosResponse<Employee[]> = await axios.get('/api/employees');
-        setEmployees(response.data);
-      } catch (error) {
-        setError('Error fetching employees: ' + error);
-      } finally {
-        setLoading(false);
-      }
-    };
+        try {
+          setLoading(true);
+          const response: AxiosResponse<Employee[]> = await axios.get('/api/employees');
+          console.log('Response data:', response.data);
+          console.log('Before setEmployees:', employees);
+setEmployees(response.data);
+console.log('After setEmployees:', employees);
+
+        } catch (error) {
+          setError('Error fetching employees: ' + error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      
 
     fetchEmployees();
   }, []);
