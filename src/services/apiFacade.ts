@@ -5,6 +5,7 @@ const PRODUCT_URL = API_URL + "/products";
 const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
 const DINNER_URL = API_URL + "/DinnerTable";
+const BOOKINGACTIVITY_URL = API_URL + "/booking-activities";
 
 interface BowlingLane {
   id: number | null;
@@ -57,6 +58,7 @@ let products: Array<Product> = [];
 let bowlingLanes: Array<BowlingLane> = [];
 let airhockey: Array<AirHockey> = [];
 let dinnerTables: Array<DinnerTable> = [];
+let BookingActivity: Array<BookingActivity> = [];
 let info: Info | null = null;
 
 async function getProducts(): Promise<Array<Product>> {
@@ -263,6 +265,13 @@ async function getInfo(): Promise<Info> {
   return info;
 }
 
+async function addBookingActivity(newBookingActivity: BookingActivity): Promise<BookingActivity> {
+  const method = newBookingActivity.id ? "PUT" : "POST";
+  const options = makeOptions(method, newBookingActivity, true);
+  const URL = newBookingActivity.id ? `${BOOKINGACTIVITY_URL}/${newBookingActivity.id}` : BOOKINGACTIVITY_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
 export type { Product, AirHockey, BowlingLane, DinnerTable, Booking, BookingActivity};
 // eslint-disable-next-line react-refresh/only-export-components
 export {
@@ -284,7 +293,8 @@ export {
   addDinnerTable,
   editDinnerTable,
   deleteDinnerTable,
-  getAvailableBowlingLanes
+  getAvailableBowlingLanes,
+  addBookingActivity
 };
 export { addProduct };
 export { deleteProduct };
