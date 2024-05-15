@@ -24,10 +24,38 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/airhockey" element={<AirHockeys />} />
+        {/* <Route path="/airhockey" element={<AirHockeys />} />
         <Route path="/bowlinglanes" element={<BowlingLanes />} />
-        <Route path="/dinner" element={<Dinner />} />
+        <Route path="/dinner" element={<Dinner />} /> */}
         <Route path="/employees" element={<EmployeeList />} />
+
+        <Route
+          path="/airhockey"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <AirHockeys />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/bowlinglanes"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <BowlingLanes />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/dinner"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <Dinner />
+            </RequireAuth>
+          }
+        />
+
         <Route
           path="/addBowlingLane"
           element={
