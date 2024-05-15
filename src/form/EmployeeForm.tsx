@@ -33,7 +33,7 @@ export default function EmployeeForm() {
 
     action(formData)
       .then(() => {
-        const message = isEditing ? `Opdateret Medarbejder ${formData.id}🔨` : "Tilføjet Ny Medarbejder🆕";
+        const message = isEditing ? `Opdateret Medarbejder ${formData.name}🔨` : `Tilføjet Ny Medarbejde🆕"${formData.name}🆕`;
         setNotification({ message: message, show: true, type: "addEdit" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
@@ -85,7 +85,7 @@ export default function EmployeeForm() {
 
     deleteEmployee(formData.id)
       .then(() => {
-        setNotification({ message: `Slettet Medarbejder ${formData.id}🗑`, show: true, type: "delete" });
+        setNotification({ message: `Slettet Medarbejder ${formData.name}🗑`, show: true, type: "delete" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/employees";
@@ -117,6 +117,7 @@ export default function EmployeeForm() {
         <label>
           Roller:
           <select name="role" value={formData.role || ""} onChange={handleChange}>
+            <option value="">Vælg En Rolle...</option>
             <option value="MANAGER">Manager</option>
             <option value="TICKET_SELLER">Ticket Seller</option>
             <option value="EQUIPMENT_OPERATOR">Equipment Operator</option>
@@ -126,6 +127,7 @@ export default function EmployeeForm() {
         <label>
           Vagt Type:
           <select name="shift" value={formData.shift || ""} onChange={handleChange}>
+            <option value="">Vælg En Vagttype...</option>
             <option value="MORNING">Morning</option>
             <option value="EVENING">Evening</option>
           </select>

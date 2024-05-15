@@ -98,15 +98,30 @@ select {
   width: auto;
 }
 
-.notificationDelete,
+.notificationDelete {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1000;
+  background-color: #ff0000;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease-out forwards;
+}
+
 .notificationAddEdit {
   position: fixed;
   right: 20px;
-  bottom: 20px;
-  padding: 10px;
+  top: 20px;
+  z-index: 1000;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-weight: bold;
-  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease-out forwards;
 }
 
 @media (max-width: 768px) {
