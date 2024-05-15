@@ -267,7 +267,7 @@ async function getInfo(): Promise<Info> {
 
 async function addBookingActivity(newBookingActivity: BookingActivity): Promise<BookingActivity> {
   const method = newBookingActivity.id ? "PUT" : "POST";
-  const options = makeOptions(method, newBookingActivity, true);
+  const options = makeOptions(method, newBookingActivity);
   const URL = newBookingActivity.id ? `${BOOKINGACTIVITY_URL}/${newBookingActivity.id}` : BOOKINGACTIVITY_URL;
   return fetch(URL, options).then(handleHttpErrors);
 }
