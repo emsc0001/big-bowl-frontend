@@ -53,23 +53,24 @@ export default function EmployeeForm() {
     if (name === "shift") {
       let shiftStart, shiftEnd;
 
+      const today = new Date();
+      const year = today.getUTCFullYear();
+      const month = today.getUTCMonth();
+      const date = today.getUTCDate();
+
       if (value === "MORNING") {
-        shiftStart = new Date();
-        shiftStart.setHours(9, 0, 0, 0);
-        shiftEnd = new Date();
-        shiftEnd.setHours(15, 59, 0, 0);
+        shiftStart = new Date(Date.UTC(year, month, date, 11 - 2, 0, 0));
+        shiftEnd = new Date(Date.UTC(year, month, date, 18 - 2, 0, 0));
       } else if (value === "EVENING") {
-        shiftStart = new Date();
-        shiftStart.setHours(16, 0, 0, 0);
-        shiftEnd = new Date();
-        shiftEnd.setHours(23, 59, 0, 0);
+        shiftStart = new Date(Date.UTC(year, month, date, 18 - 2, 0, 0));
+        shiftEnd = new Date(Date.UTC(year, month, date, 23, 61 - 2, 0));
       }
 
       setFormData((prevData) => ({
         ...prevData,
         shift: value,
-        shiftStart,
-        shiftEnd,
+        shiftStart: shiftStart,
+        shiftEnd: shiftEnd,
       }));
     } else {
       setFormData((prevData) => ({
