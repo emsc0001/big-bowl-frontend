@@ -9,6 +9,7 @@ const AddDropdownMenu = () => {
         Tilføj
       </a>
       <div className="dropdown-content">
+        <NavLink to="/addEmployee">Tilføj Ny Medarbejder</NavLink>
         <NavLink to="/addProduct">Tilføj Produkt</NavLink>
         <NavLink to="/addBowlingLane">Tilføj Bowling Bane</NavLink>
         <NavLink to="/addAirHockey">Tilføj Air Hockey Bord</NavLink>

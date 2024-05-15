@@ -8,7 +8,7 @@ const EMPTY_EMPLOYEE: Employee = {
   id: 0,
   name: "",
   role: "",
-  shift: "",
+  shift: "" as "MORNING" | "EVENING",
   shiftStart: new Date(),
   shiftEnd: new Date(),
 };
@@ -104,53 +104,36 @@ export default function EmployeeForm() {
   console.log(formData);
   // Send formData to server...
   return (
-    <div className="employee-form-container">
-      <button className="buttonBack" type="button" onClick={handleBack}>
-        Tilbage
-      </button>
-      <h2>{formData.id ? "Rediger medarbejder" : "Tilføj Medarbejder"}</h2>
-      <form className="employee-form">
+    <div className="employee-form">
+      {notification.show && notification.type === "delete" && <div className="notificationDelete">{notification.message}</div>}
+      <h2>{formData.id ? "Edit Employee" : "Add Employee"}</h2>
+      <form className="employee-form" onSubmit={handleSubmit}>
         <label>
           Name:
           <input type="text" name="name" value={formData.name || ""} onChange={handleChange} />
         </label>
         <label>
-          Roles:
-          <select name="role" value={formData.role || ""} onChange={handleChange}>
-            <option value="MANAGER">Manager</option>
-            <option value="TICKET_SELLER">Ticket Seller</option>
-            <option value="EQUIPMENT_OPERATOR">Equipment Operator</option>
-            <option value="CLEANING_STAFF">Cleaning Staff</option>
-          </select>
+          Role:
+          <input type="text" name="role" value={formData.role || ""} onChange={handleChange} />
         </label>
         <label>
           Shift:
-          <select name="shift" value={formData.shift || ""} onChange={handleChange}>
-            <option value="MORNING">Morning</option>
-            <option value="EVENING">Evening</option>
-          </select>
+          <input type="radio" name="shift" value="MORNING" checked={formData.shift === "MORNING" || false} onChange={handleChange} />
+          Morning
+          <input type="radio" name="shift" value="EVENING" checked={formData.shift === "EVENING" || false} onChange={handleChange} />
+          Evening
         </label>
-
-        <label>
-          Shift Start:
-          <input type="datetime-local" name="shiftStart" value={formData.shiftStart.toISOString().slice(0, 16)} onChange={handleChange} />
-        </label>
-        <label>
-          Shift End:
-          <input type="datetime-local" name="shiftEnd" value={formData.shiftEnd.toISOString().slice(0, 16)} onChange={handleChange} />
-        </label>
-        <button className="1" type="submit" onClick={handleSubmit}>
-          {formData.id ? "Redgier Medarbejder" : "Tilføj Medarbejder"}
-        </button>
+        <button type="submit">{formData.id ? "Update" : "Add"}</button>
         {formData.id && (
-          <button type="button" onClick={handleDelete}>
-            Slet Medarbejder
+          <button className="delete" type="button" onClick={handleDelete}>
+            Delete
           </button>
         )}
+        <button type="button" onClick={handleBack}>
+          Back
+        </button>
       </form>
-      {error && <p className="error">{error}</p>}
-      {notification.show && notification.type === "delete" && <div className="notificationDelete">{notification.message}</div>}
-      {notification.show && notification.type === "addEdit" && <div className="notificationAddEdit">{notification.message}</div>}
+      {error && <div className="error">{error}</div>}
     </div>
   );
 }
