@@ -33,7 +33,7 @@ export default function EmployeeForm() {
 
     action(formData)
       .then(() => {
-        const message = isEditing ? `Updated Employee ${formData.id}🔨` : "Added New Employee🆕";
+        const message = isEditing ? `Opdateret Medarbejder ${formData.id}🔨` : "Tilføjet Ny Medarbejder🆕";
         setNotification({ message: message, show: true, type: "addEdit" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
@@ -85,7 +85,7 @@ export default function EmployeeForm() {
 
     deleteEmployee(formData.id)
       .then(() => {
-        setNotification({ message: `Deleted Employee ${formData.id}🗑`, show: true, type: "delete" });
+        setNotification({ message: `Slettet Medarbejder ${formData.id}🗑`, show: true, type: "delete" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           window.location.href = "/employees";
@@ -111,11 +111,11 @@ export default function EmployeeForm() {
       <h2>{formData.id ? "Rediger medarbejder" : "Tilføj Medarbejder"}</h2>
       <form className="employee-form">
         <label>
-          Name:
+          Navn:
           <input type="text" name="name" value={formData.name || ""} onChange={handleChange} />
         </label>
         <label>
-          Roles:
+          Roller:
           <select name="role" value={formData.role || ""} onChange={handleChange}>
             <option value="MANAGER">Manager</option>
             <option value="TICKET_SELLER">Ticket Seller</option>
@@ -124,17 +124,17 @@ export default function EmployeeForm() {
           </select>
         </label>
         <label>
-          Shift:
+          Vagt Type:
           <select name="shift" value={formData.shift || ""} onChange={handleChange}>
             <option value="MORNING">Morning</option>
             <option value="EVENING">Evening</option>
           </select>
         </label>
-        <button className="1" type="submit" onClick={handleSubmit}>
+        <button className="editButton1" type="submit" onClick={handleSubmit}>
           {formData.id ? "Redgier Medarbejder" : "Tilføj Medarbejder"}
         </button>
         {formData.id && (
-          <button type="button" onClick={handleDelete}>
+          <button className="deleteButton1" type="button" onClick={handleDelete}>
             Slet Medarbejder
           </button>
         )}

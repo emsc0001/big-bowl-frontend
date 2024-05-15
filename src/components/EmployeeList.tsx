@@ -59,28 +59,28 @@ export const EmployeeList = () => {
   return (
     <div className="employee-container">
       <header>
-        <h1>Employee List 👩‍💼👨‍💼</h1>
+        <h1>Medarbejder Liste 👩‍💼👨‍💼</h1>
         <div>
           <button className="buttonsChange" onClick={() => setViewType("calendar")}>
-            Calendar View
+            Kalender Oversigt
           </button>
           <button className="buttonsChange" onClick={() => setViewType("list")}>
-            List View
+            Liste Oversigt
           </button>
 
           {viewType === "list" && (
             <>
               <select className="filterButton" onChange={handleShiftChange}>
-                <option value="all">All Shifts</option>
-                <option value="MORNING">Morning Shift</option>
-                <option value="EVENING">Evening Shift</option>
+                <option value="all">Alle Vagter</option>
+                <option value="MORNING">Morgen Vagt</option>
+                <option value="EVENING">Aften Vagt</option>
               </select>
               <select className="filterButton" onChange={handleRoleChange}>
-                <option value="all">All Roles</option>
+                <option value="all">Alle Roller</option>
                 <option value="MANAGER">Manager</option>
-                <option value="TICKET_SELLER">Ticket Seller</option>
-                <option value="EQUIPMENT_OPERATOR">Equipment Operator</option>
-                <option value="CLEANING_STAFF">Cleaning Staff</option>
+                <option value="TICKET_SELLER">Billet Sælger</option>
+                <option value="EQUIPMENT_OPERATOR">Udstyrsoperatør</option>
+                <option value="CLEANING_STAFF">Rengøringspersonale</option>
               </select>
             </>
           )}
@@ -97,7 +97,7 @@ export const EmployeeList = () => {
               </Link>
               {auth.isLoggedInAs(["ADMIN"]) && (
                 <Link className="add-edit-button" to="/addEmployee" state={{ employee }}>
-                  Edit
+                  Rediger
                 </Link>
               )}
             </li>

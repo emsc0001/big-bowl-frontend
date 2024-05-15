@@ -66,8 +66,12 @@ select {
   margin-top: 20px;
 }
 
-button:hover {
+.deleteButton1:hover {
   background-color: #b30000;
+}
+
+.editButton1:hover {
+  background-color: #004cff;
 }
 
 .buttonBack {
@@ -115,4 +119,30 @@ button:hover {
   .employee-form {
     padding: 15px;
   }
+}
+
+.editButton1 {
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 8px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.deleteButton1 {
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 8px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 20px;
 }
