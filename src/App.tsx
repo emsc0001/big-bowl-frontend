@@ -9,6 +9,7 @@ import AirHockeyForm from "./form/AirHockeyForm";
 import DinnerForm from "./form/DinnerForm";
 import ProductForm from "./form/ProductForm";
 import BookingBowlingForm from "./form/BookingBowlingForm";
+import {BookingOffers} from "./components/BookingOffers";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
 import OpretForm from "./security/OpretForm";
@@ -19,55 +20,57 @@ import "./App.css";
 
 export default function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/airhockey" element={<AirHockeys />} />
-        <Route path="/bowlinglanes" element={<BowlingLanes />} />
-        <Route path="/dinner" element={<Dinner />} />
+      <Layout>
+          <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/airhockey" element={<AirHockeys />} />
+              <Route path="/bowlinglanes" element={<BowlingLanes />} />
+              <Route path="/dinner" element={<Dinner />} />
 
-        <Route path="/booking" element={<Booking />} />
-        <Route path="/booking/bowling" element={<BookingBowlingForm />} />
-        {/* <Route path="/booking/airhockey" element={<BookingAirhockey />} /> */}
-        {/* <Route path="/booking/dinner" element={<BookingDinner />} /> */}
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/booking/bowling" element={<BookingBowlingForm />} />
+              {/* <Route path="/booking/airhockey" element={<BookingAirhockey />} /> */}
+              {/* <Route path="/booking/dinner" element={<BookingDinner />} /> */}
 
-        <Route
-          path="/addBowlingLane"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <BowlingForm />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/addAirHockey"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <AirHockeyForm />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/addDinnerTable"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <DinnerForm />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/addProduct"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <ProductForm />
-            </RequireAuth>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/opret" element={<OpretForm />} />
-      </Routes>
-    </Layout>
+              <Route path="/booking/offers" element={<BookingOffers />} />
+
+              <Route
+                  path="/addBowlingLane"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <BowlingForm />
+                      </RequireAuth>
+                  }
+              />
+              <Route
+                  path="/addAirHockey"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <AirHockeyForm />
+                      </RequireAuth>
+                  }
+              />
+              <Route
+                  path="/addDinnerTable"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <DinnerForm />
+                      </RequireAuth>
+                  }
+              />
+              <Route
+                  path="/addProduct"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <ProductForm />
+                      </RequireAuth>
+                  }
+              />
+              <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/opret" element={<OpretForm />} />
+          </Routes>
+      </Layout>
   );
 }

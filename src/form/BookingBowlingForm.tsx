@@ -1,6 +1,7 @@
 import { BowlingLane, BookingActivity, getAvailableBowlingLanes, addBookingActivity } from "../services/apiFacade";
 import { useState, useEffect } from "react";
 import Datetime from "react-datetime";
+import { useNavigate } from "react-router-dom";
 import "react-datetime/css/react-datetime.css";
 import"./bookingBowlingForm.css"
 
@@ -26,6 +27,7 @@ export default function BookingBowlingForm() {
     const [numChildFriendlyLanes, setNumChildFriendlyLanes] = useState(0);
     const [bookingStatus, setBookingStatus] = useState("");
     const [isBookingSuccessful, setIsBookingSuccessful] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkAvailability = async () => {
@@ -80,8 +82,8 @@ export default function BookingBowlingForm() {
 
      console.log(updatedFormData);
      addBookingActivity(updatedFormData);
+     navigate('/booking/offers', {state: {bookingActivity: updatedFormData}});
 
-     // TODO: Send the updatedFormData to the server
  };
 
     const handleStartTimeChange = (moment: moment.Moment | string) => {
@@ -150,7 +152,7 @@ export default function BookingBowlingForm() {
                     </>
                 )}
                 <p style={{ color: isBookingSuccessful ? "green" : "red", backgroundColor: "white" }}>{bookingStatus}</p>
-                <button onClick={handleSubmit}>Book Bowling</button>
+                <button onClick={handleSubmit}>videre</button>
             </form>
         </div>
     );

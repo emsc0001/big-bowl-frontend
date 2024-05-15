@@ -163,6 +163,14 @@ async function getAirHockey(id: number): Promise<AirHockey> {
   return fetch(AIRHOCKEY_URL + "/" + id).then(handleHttpErrors);
 }
 
+async function getAvailableAirHockeyTables(startTime: string, endTime: string): Promise<AirHockey[]> {
+    const params = new URLSearchParams({
+        startTime: startTime,
+        endTime: endTime,
+    });
+    return fetch(`${AIRHOCKEY_URL}/available?${params.toString()}`).then(handleHttpErrors);
+}
+
 async function addAirHockey(newAirHockey: AirHockey): Promise<AirHockey> {
   const method = newAirHockey.id ? "PUT" : "POST";
   const options = makeOptions(method, newAirHockey, true);
@@ -213,6 +221,14 @@ async function getDinnerTables(): Promise<Array<DinnerTable>> {
 
 async function getDinnerTable(id: number): Promise<DinnerTable> {
   return fetch(DINNER_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function getAvailableDinnerTables(startTime: string, endTime: string): Promise<DinnerTable[]> {
+    const params = new URLSearchParams({
+        startTime: startTime,
+        endTime: endTime,
+    });
+    return fetch(`${DINNER_URL}/available?${params.toString()}`).then(handleHttpErrors);
 }
 
 async function addDinnerTable(newDinnerTable: DinnerTable): Promise<DinnerTable> {
@@ -294,7 +310,9 @@ export {
   editDinnerTable,
   deleteDinnerTable,
   getAvailableBowlingLanes,
-  addBookingActivity
+  addBookingActivity,
+  getAvailableAirHockeyTables,
+  getAvailableDinnerTables,
 };
 export { addProduct };
 export { deleteProduct };
