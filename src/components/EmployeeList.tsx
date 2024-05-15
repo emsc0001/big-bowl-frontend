@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import './EmployeeList.css';
+import axios from 'axios';
+import "./EmployeeList.css";
 
 interface Employee {
   id: number;
@@ -11,50 +11,31 @@ interface Employee {
 }
 
 const EmployeeList: React.FC = () => {
-    console.log('Rendering EmployeeList component');
   const [employees, setEmployees] = useState<Employee[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchEmployees = async () => {
-        try {
-          setLoading(true);
-          const response: AxiosResponse<Employee[]> = await axios.get('/api/employees');
-          console.log('Response data:', response.data);
-          console.log('Before setEmployees:', employees);
-setEmployees(response.data);
-console.log('After setEmployees:', employees);
-
-        } catch (error) {
-          setError('Error fetching employees: ' + error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      
+      try {
+        const response = await axios.get('http://localhost:8080/api/employees');
+        setEmployees(response.data);
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+      }
+    };
 
     fetchEmployees();
   }, []);
 
-  if (loading) {
-    return <div className="loading-message">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="error-message">{error}</div>;
-  }
-
   return (
-    <div className="employee-list">
-      <h2>Liste over medarbejdere</h2>
+    <div>
+      <h2>Employee List</h2>
       <table>
         <thead>
           <tr>
-            <th>Navn</th>
-            <th>Rolle</th>
+            <th>Name</th>
+            <th>Role</th>
             <th>Email</th>
-            <th>Telefon</th>
+            <th>Phone</th>
           </tr>
         </thead>
         <tbody>
@@ -73,4 +54,3 @@ console.log('After setEmployees:', employees);
 };
 
 export default EmployeeList;
-
