@@ -139,7 +139,7 @@ export default function EmployeeForm() {
           Shift End:
           <input type="datetime-local" name="shiftEnd" value={formData.shiftEnd.toISOString().slice(0, 16)} onChange={handleChange} />
         </label>
-        <button type="submit" onClick={handleSubmit}>
+        <button className="1" type="submit" onClick={handleSubmit}>
           {formData.id ? "Redgier Medarbejder" : "Tilføj Medarbejder"}
         </button>
         {formData.id && (
