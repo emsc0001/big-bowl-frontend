@@ -1,0 +1,118 @@
+/* EmployeeForm.css */
+.employee-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 550px;
+  margin: 30px auto;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.employee-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.employee-form {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeIn 2s ease-in forwards;
+}
+
+label {
+  color: #ffffff;
+  font-size: 16px;
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+}
+
+input[type="text"],
+input[type="datetime-local"],
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+button {
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #b30000;
+}
+
+.buttonBack {
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  padding: 5px 10px;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: auto;
+}
+
+.notificationDelete,
+.notificationAddEdit {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .employee-form-container {
+    padding: 15px;
+    margin: 20px;
+    width: auto;
+  }
+
+  .employee-form {
+    padding: 15px;
+  }
+}

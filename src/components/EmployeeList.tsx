@@ -15,7 +15,7 @@ export const EmployeeList = () => {
   const navigate = useNavigate();
   const [filterShift, setFilterShift] = useState("all");
   const [filterRole, setFilterRole] = useState("all");
-  const [viewType, setViewType] = useState("list"); // 'list' or 'calendar'
+  const [viewType, setViewType] = useState("calendar"); // 'list' or 'calendar'
   const auth = useAuth();
 
   useEffect(() => {
@@ -23,7 +23,6 @@ export const EmployeeList = () => {
       .then((data) => {
         const today = moment().format("YYYY-MM-DD"); // Use today's date for the schedule
         const mappedData = data.map((emp) => {
-          // Combine the current date with time from backend to ensure correct Date object creation
           const shiftStart = moment(`${today}T${emp.shiftStart}`).toDate();
           const shiftEnd = moment(`${today}T${emp.shiftEnd}`).toDate();
 
@@ -62,11 +61,11 @@ export const EmployeeList = () => {
       <header>
         <h1>Employee List 👩‍💼👨‍💼</h1>
         <div>
-          <button className="buttonsChange" onClick={() => setViewType("list")}>
-            List View
-          </button>
           <button className="buttonsChange" onClick={() => setViewType("calendar")}>
             Calendar View
+          </button>
+          <button className="buttonsChange" onClick={() => setViewType("list")}>
+            List View
           </button>
 
           {viewType === "list" && (

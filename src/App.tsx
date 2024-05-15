@@ -9,6 +9,7 @@ import BowlingForm from "./form/BowlingForm";
 import AirHockeyForm from "./form/AirHockeyForm";
 import DinnerForm from "./form/DinnerForm";
 import ProductForm from "./form/ProductForm";
+import EmployeeForm from "./form/EmployeeForm";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
 import OpretForm from "./security/OpretForm";
@@ -48,6 +49,15 @@ export default function App() {
           element={
             <RequireAuth roles={["ADMIN"]}>
               <DinnerForm />
+            </RequireAuth>
+          }
+        />
+
+        <Route
+          path="/addEmployee"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <EmployeeForm />
             </RequireAuth>
           }
         />
