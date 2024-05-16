@@ -81,7 +81,7 @@ const handleTableBooking = async () => {
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         
-        navigate("/booking", { state: { bowlingBookingActivity, dinnerBookingActivity } });
+        navigate("/booking/finalise", { state: { bowlingBookingActivity, dinnerBookingActivity } });
  };
 
 return (

@@ -9,7 +9,8 @@ import AirHockeyForm from "./form/AirHockeyForm";
 import DinnerForm from "./form/DinnerForm";
 import ProductForm from "./form/ProductForm";
 import BookingBowlingForm from "./form/BookingBowlingForm";
-import {BookingOffers} from "./components/BookingOffers";
+import { BookingOffers } from "./components/BookingOffers";
+import BookingFinaliseForm  from "./form/BookingFinaliseForm";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
 import OpretForm from "./security/OpretForm";
@@ -34,6 +35,7 @@ export default function App() {
               {/* <Route path="/booking/dinner" element={<BookingDinner />} /> */}
 
               <Route path="/booking/offers" element={<BookingOffers />} />
+              <Route path="/booking/finalise" element={<BookingFinaliseForm />} />
 
               <Route
                   path="/addBowlingLane"
