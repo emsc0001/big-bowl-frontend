@@ -19,6 +19,8 @@ const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
         if (dinnerBookingActivity) {
             activities.push(dinnerBookingActivity);
         }
+        console.log("User", user);
+        
 
         const booking: Booking = {
             id: null,

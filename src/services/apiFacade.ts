@@ -52,7 +52,7 @@ interface Booking {
     id: number | null;
     activities: BookingActivity[];
     products: Product[];
-    user: null;
+    user: SpecialUserWithoutPassword | null;
 }
 
 interface SpecialUserWithoutPassword {
