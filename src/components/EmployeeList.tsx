@@ -125,6 +125,7 @@ export const EmployeeList = () => {
               <div className="modal-header">Position: {selectedEmployee.role}</div>
               <div className="modal-header">Email: {selectedEmployee.email}</div>
               <div className="modal-header">Tlf Nummer: {selectedEmployee.phone}</div>
+              <div className="modal-header">Vagt Type: {selectedEmployee.shift}</div>
               <div className="modal-header">Vagt Start: {moment(selectedEmployee.shiftStart).format("HH:mm:ss")}</div>
               <div className="modal-header">Vagt Slut: {moment(selectedEmployee.shiftEnd).format("HH:mm:ss")}</div>
             </div>
