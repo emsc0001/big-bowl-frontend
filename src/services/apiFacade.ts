@@ -308,7 +308,12 @@ async function addBooking(newBooking: Booking): Promise<Booking> {
 }
 
 async function getUserByUsername(username: string): Promise<SpecialUserWithoutPassword> {
-  return fetch(`${API_URL}/api/${username}`).then(handleHttpErrors);
+    const options = makeOptions("GET", null, true); // Assuming you want to add the token
+    const response = await fetch(`${API_URL}/api/${username}`, options);
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
 }
 
 export type { Product, AirHockey, BowlingLane, DinnerTable, Booking, BookingActivity, SpecialUserWithoutPassword};
