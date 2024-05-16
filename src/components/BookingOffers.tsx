@@ -58,7 +58,6 @@ const handleTableBooking = async () => {
 
             // Create a new booking activity with the dinner table
             const newBookingActivity: BookingActivity = {
-                ...bowlingBookingActivity,
                 startTime: startTime.toISOString(),
                 endTime: endTime.toISOString(),
                 dinnerTables: [dinnerTable],
