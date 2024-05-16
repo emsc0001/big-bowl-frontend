@@ -7,11 +7,16 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./EmployeeList.css";
+import { Modal } from "./Modal";
 
 const localizer = momentLocalizer(moment);
 
+//npm install react-big-calendar moment
+
 export const EmployeeList = () => {
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const [filterShift, setFilterShift] = useState("all");
   const [filterRole, setFilterRole] = useState("all");
@@ -45,11 +50,20 @@ export const EmployeeList = () => {
     setFilterRole(e.target.value);
   };
 
+  const handleEmployeeClick = (employee) => {
+    setSelectedEmployee(employee);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   const filteredEmployees = employees.filter((emp) => {
     return (filterShift === "all" || emp.shift === filterShift) && (filterRole === "all" || emp.role === filterRole);
   });
 
-  const events = employees.map((emp) => ({
+  const events = filteredEmployees.map((emp) => ({
     title: `${emp.name} - ${emp.role} (${emp.shift})`,
     start: emp.shiftStart,
     end: emp.shiftEnd,
@@ -88,13 +102,11 @@ export const EmployeeList = () => {
       </header>
       {viewType === "list" ? (
         <ul className="employee-list">
-          {filteredEmployees.map((employee, index) => (
-            <li key={index} className="employee-item">
-              <Link to={`/employee/${employee.id}`}>
-                <h2>
-                  {employee.name} - {employee.role} ({employee.shift})
-                </h2>
-              </Link>
+          {filteredEmployees.map((employee) => (
+            <li key={employee.id} className="employee-item" onClick={() => handleEmployeeClick(employee)}>
+              <h2>
+                {employee.name} - {employee.role} ({employee.shift})
+              </h2>
               {auth.isLoggedInAs(["ADMIN"]) && (
                 <Link className="add-edit-button" to="/addEmployee" state={{ employee }}>
                   Rediger
@@ -106,6 +118,22 @@ export const EmployeeList = () => {
       ) : (
         <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" style={{ height: 500, margin: "50px" }} />
       )}
+      <Modal isOpen={modalIsOpen} onClose={closeModal}>
+        {selectedEmployee && (
+          <div>
+            <div className="modal-profile-picture" style={{ backgroundImage: `url(${selectedEmployee.imageUrl || "default_image.jpg"})` }}></div>
+            <div className="modal-header">{selectedEmployee.name}</div>
+            <div className="modal-body">
+              <div className="modal-header">Position: {selectedEmployee.role}</div>
+              <div className="modal-header">Email: {selectedEmployee.email}</div>
+              <div className="modal-header">Tlf Nummer: {selectedEmployee.phone}</div>
+              <div className="modal-header">Vagt Type: {selectedEmployee.shift}</div>
+              <div className="modal-header">Vagt Start: {moment(selectedEmployee.shiftStart).format("HH:mm:ss")}</div>
+              <div className="modal-header">Vagt Slut: {moment(selectedEmployee.shiftEnd).format("HH:mm:ss")}</div>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };
