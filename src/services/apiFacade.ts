@@ -14,7 +14,8 @@ export interface Equipment {
   id: number | null;
   name: string;
   type: string;
-  // Add any other properties needed
+  status: string
+  additionalDetails: string;
 }
 
 interface AirHockey {

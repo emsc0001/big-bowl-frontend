@@ -73,14 +73,9 @@ export const EquipmentList = () => {
               <td>{eq.additionalDetails}</td>
               <td>
                 {auth.isLoggedInAs(["ADMIN"]) && (
-                  <>
-                    <button onClick={() => handleStatusUpdate(eq.id, "DEFECTIVE")}>
-                      Mark as Defective
-                    </button>
-                    <button onClick={() => handleStatusUpdate(eq.id, "UNDER_REPAIR")}>
-                      Mark as Under Repair
-                    </button>
-                  </>
+                  <button onClick={() => handleStatusUpdate(eq.id, "DEFECTIVE")}>
+                    Mark as Defective
+                  </button>
                 )}
               </td>
             </tr>
