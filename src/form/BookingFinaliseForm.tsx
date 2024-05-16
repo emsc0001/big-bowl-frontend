@@ -1,10 +1,35 @@
 import { useLocation } from "react-router-dom";
+import { Booking, addBooking, getUserByUsername, SpecialUserWithoutPassword } from "../services/apiFacade";
+import { useEffect, useState } from "react";
 
 export default function BookingFinaliseForm() {
     const location = useLocation();
     const { bowlingBookingActivity, dinnerBookingActivity } = location.state;
+const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
 
-    
+    useEffect(() => {
+        const username = localStorage.getItem("username");
+        if (username) {
+            getUserByUsername(username).then(setUser);
+        }
+    }, []);
+
+    const handleConfirmBooking = async () => {
+        const activities = [bowlingBookingActivity];
+        if (dinnerBookingActivity) {
+            activities.push(dinnerBookingActivity);
+        }
+
+        const booking: Booking = {
+            id: null,
+            activities: activities,
+            products: [], // Add any products here
+            user: user || null,
+        };
+
+        await addBooking(booking);
+    };
+
     return (
         <div>
             <h1>Finalise Booking</h1>
@@ -19,8 +44,7 @@ export default function BookingFinaliseForm() {
                     <p>End time: {new Date(dinnerBookingActivity.endTime).toLocaleTimeString()}</p>
                 </>
             )}
+            <button onClick={handleConfirmBooking}>Confirm Booking</button>
         </div>
     );
-
-
 }

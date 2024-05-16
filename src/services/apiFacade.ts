@@ -6,6 +6,7 @@ const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
 const DINNER_URL = API_URL + "/DinnerTable";
 const BOOKINGACTIVITY_URL = API_URL + "/booking-activities";
+const BOOKING_URL = API_URL + "/bookings";
 
 interface BowlingLane {
   id: number | null;
@@ -54,11 +55,22 @@ interface Booking {
     user: null;
 }
 
+interface SpecialUserWithoutPassword {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  city: string;
+  zipCode: string;
+}
+
 let products: Array<Product> = [];
 let bowlingLanes: Array<BowlingLane> = [];
 let airhockey: Array<AirHockey> = [];
 let dinnerTables: Array<DinnerTable> = [];
 let BookingActivity: Array<BookingActivity> = [];
+let Booking: Array<Booking> = [];
 let info: Info | null = null;
 
 async function getProducts(): Promise<Array<Product>> {
@@ -288,7 +300,18 @@ async function addBookingActivity(newBookingActivity: BookingActivity): Promise<
   return fetch(URL, options).then(handleHttpErrors);
 }
 
-export type { Product, AirHockey, BowlingLane, DinnerTable, Booking, BookingActivity};
+async function addBooking(newBooking: Booking): Promise<Booking> {
+  const method = newBooking.id ? "PUT" : "POST";
+  const options = makeOptions(method, newBooking);
+  const URL = newBooking.id ? `${BOOKING_URL}/${newBooking.id}` : BOOKING_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function getUserByUsername(username: string): Promise<SpecialUserWithoutPassword> {
+  return fetch(`${API_URL}/api/${username}`).then(handleHttpErrors);
+}
+
+export type { Product, AirHockey, BowlingLane, DinnerTable, Booking, BookingActivity, SpecialUserWithoutPassword};
 // eslint-disable-next-line react-refresh/only-export-components
 export {
   getInfo,
@@ -313,6 +336,9 @@ export {
   addBookingActivity,
   getAvailableAirHockeyTables,
   getAvailableDinnerTables,
+  addBooking,
+  getUserByUsername,
+
 };
 export { addProduct };
 export { deleteProduct };
