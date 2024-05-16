@@ -11,6 +11,8 @@ import { Modal } from "./Modal";
 
 const localizer = momentLocalizer(moment);
 
+//npm install react-big-calendar moment
+
 export const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
