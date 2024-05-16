@@ -111,6 +111,17 @@ export async function getEquipment(): Promise<Equipment[]> {
   }
 }
 
+export async function updateEquipmentStatus(id: number, newStatus: string): Promise<Equipment> {
+  const options = makeOptions("PUT", { id, status: newStatus }, true);
+  const response = await fetch(`${API_URL}/equipment/${id}`, options);
+  if (!response.ok) {
+    throw new Error("Failed to update equipment status");
+  }
+  const updatedEquipment = await response.json();
+  return updatedEquipment;
+}
+
+
 async function getBowlingLane(id: number): Promise<BowlingLane> {
   return fetch(BOWLING_URL + "/" + id).then(handleHttpErrors);
 }
