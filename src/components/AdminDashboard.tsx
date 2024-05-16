@@ -37,6 +37,14 @@ const AdminDashboard = () => {
             </li>
           </ul>
         </div>
+        <div className="link-section">
+          <h2>Equipment Management</h2>
+          <ul>
+            <li>
+              <Link to="/equipment">Manage equipment</Link>
+            </li>
+          </ul>
+        </div>
       </main>
 
       <footer className="admin-footer">

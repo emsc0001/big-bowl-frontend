@@ -100,6 +100,16 @@ export default function App() {
             </RequireAuth>
           }
         />
+
+        <Route
+          path="/equipment"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <AdminDashboard />
+            </RequireAuth>
+          }
+        />
+
         <Route
           path="/addProduct"
           element={

@@ -27,34 +27,55 @@
 .admin-links {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.link-section {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  width: 100%;
 }
 
 .link-section h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .link-section ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link-section li {
+  margin-bottom: 10px;
+  width: 100%;
 }
 
 .link-section li a {
   display: block;
   background-color: #007bff;
   color: white;
-  padding: 10px;
-  margin-bottom: 5px;
+  padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 100%;
 }
 
 .link-section li a:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 .admin-footer {
@@ -70,5 +91,6 @@
   .admin-links {
     flex-direction: column;
     align-items: center;
+    gap: 20px;
   }
 }
