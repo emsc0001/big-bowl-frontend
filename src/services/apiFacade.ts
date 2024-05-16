@@ -4,13 +4,17 @@ const INFO_URL = API_URL + "/info";
 const PRODUCT_URL = API_URL + "/products";
 const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
-const DINNER_URL = API_URL + "/DinnerTable";
-const EMPLOYEE_URL = API_URL + "/employees";
-
 interface BowlingLane {
   id: number | null;
   laneNumber: number;
   forKids: boolean;
+}
+
+export interface Equipment {
+  id: number | null;
+  name: string;
+  type: string;
+  // Add any other properties needed
 }
 
 interface AirHockey {
@@ -93,6 +97,20 @@ async function getBowlingLanes(): Promise<Array<BowlingLane>> {
   }
 }
 
+export async function getEquipment(): Promise<Equipment[]> {
+  try {
+    const response = await fetch(`${API_URL}/equipment`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch equipment");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching equipment:", error);
+    return [];
+  }
+}
+
 async function getBowlingLane(id: number): Promise<BowlingLane> {
   return fetch(BOWLING_URL + "/" + id).then(handleHttpErrors);
 }
@@ -103,6 +121,7 @@ async function addBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane>
   const URL = newBowlingLane.id ? `${BOWLING_URL}/${newBowlingLane.id}` : BOWLING_URL;
   return fetch(URL, options).then(handleHttpErrors);
 }
+
 
 async function editBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane> {
   const method = newBowlingLane.id ? "PUT" : "POST";

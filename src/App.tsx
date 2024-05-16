@@ -5,6 +5,7 @@ import { BowlingLanes } from "./components/Bowling";
 import { Dinner } from "./components/Dinner";
 import { EmployeeList } from "./components/EmployeeList";
 import AdminDashboard from "./components/AdminDashboard";
+import EquipmentList from "./components/EquipmentList";
 import BowlingForm from "./form/BowlingForm";
 import AirHockeyForm from "./form/AirHockeyForm";
 import DinnerForm from "./form/DinnerForm";
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="/bowlinglanes" element={<BowlingLanes />} />
         <Route path="/dinner" element={<Dinner />} /> */}
         <Route path="/employees" element={<EmployeeList />} />
+        <Route path="/equipment" element={<EquipmentList />} />
 
         <Route
           path="/airhockey"
