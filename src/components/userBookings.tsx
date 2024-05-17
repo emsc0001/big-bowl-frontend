@@ -12,7 +12,7 @@ export const UserBookings = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const bookingId = 2; // Static ID for demonstration; replace or adapt as necessary
+    const bookingId = 1; // Static ID for demonstration; replace or adapt as necessary
     setLoading(true);
     Promise.all([getBooking(bookingId), getBookingActivity(bookingId), getProduct(bookingId)])
       .then(([bookingRes, bookingActivityRes, productRes]) => {
