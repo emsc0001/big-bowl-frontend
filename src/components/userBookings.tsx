@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBooking, getBookingActivity, Booking, BookingActivity } from "../services/apiFacade";
+import { getBooking, getBookingActivity, Booking, BookingActivity, getProduct, Product } from "../services/apiFacade";
+
+import "./userBookings.css";
 
 export const UserBookings = () => {
   const [booking, setBooking] = useState<Booking | null>(null);
   const [bookingActivity, setBookingActivity] = useState<BookingActivity | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const bookingId = 1; // Static ID for demonstration; replace or adapt as necessary
+    const bookingId = 2; // Static ID for demonstration; replace or adapt as necessary
     setLoading(true);
-    Promise.all([getBooking(bookingId), getBookingActivity(bookingId)])
-      .then(([bookingRes, bookingActivityRes]) => {
+    Promise.all([getBooking(bookingId), getBookingActivity(bookingId), getProduct(bookingId)])
+      .then(([bookingRes, bookingActivityRes, productRes]) => {
         setBooking(bookingRes);
         setBookingActivity(bookingActivityRes);
+        setProducts([productRes]); // Fix: Pass an array of products
+
         setLoading(false);
+
+        console.log("Booking:", bookingRes);
+        console.log("Booking Activity:", bookingActivityRes);
+        console.log("Products:", productRes);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -33,47 +42,50 @@ export const UserBookings = () => {
   }
 
   return (
-    <div>
+    <div className="booking-container">
       <button className="buttonBack" type="button" onClick={handleBack}>
         Tilbage
       </button>
-      <h1>Booking Details</h1>
+      <h1 className="header">Velkommen {booking.user.username}! </h1>
       {booking && (
-        <div>
-          <p>Booking ID: {booking.id}</p>
+        <div className="main-content booking-details">
           {booking.user && (
-            <>
+            <div className="user-details">
+              <h2 className="activty-header">Booking Information:</h2>
+              <h3 className="booking-id">Booking ID: {booking.id}</h3>
               <p>Brugernavn: {booking.user.username}</p>
               <p>Email: {booking.user.email}</p>
-              <p>Bruger Status: {booking.user.enabled ? "Active" : "Inactive"}</p>
+              <p>Bruger Status: {booking.user.enabled ? "Aktiv" : "Inaktiv"}</p>
               <p>Rolle: {booking.user.roles.map((role) => role.roleName).join(", ")}</p>
-            </>
+            </div>
           )}
-          <h2>Booking Activities:</h2>
+          <h2 className="activity-header">Booking Tidspunkter:</h2>
           {bookingActivity && (
-            <>
-              <p>Start Time: {bookingActivity.startTime}</p>
-              <p>End Time: {bookingActivity.endTime}</p>
-              <p>Bowling Baner:</p>{" "}
+            <div className="activity-details">
+              <p>Start Tidspunkt: {bookingActivity.startTime}</p>
+              <p>Slut Tidspunkt: {bookingActivity.endTime}</p>
+              <p>Bowling Baner:</p>
               {bookingActivity.bowlingLanes.map((lane) => (
-                <div key={lane.id}>
-                  <p>{lane.laneNumber}</p>
-                  <p>{lane.forKids}</p>
+                <div key={lane.id} className="lane-details">
+                  <p>Bane Nummer: {lane.laneNumber}</p>
+                  <p>For Børn: {lane.forKids ? "Ja" : "Nej"}</p>
                 </div>
               ))}
-            </>
+            </div>
           )}
-
-          <h2>Products:</h2>
-          {booking.products &&
+          <h2 className="product-header">Medkøbte Produkter:</h2>
+          {booking.products && booking.products.length > 0 ? (
             booking.products.map((product) => (
-              <div key={product.id}>
+              <div key={product.id} className="product-details">
                 <p>
                   {product.name} - {product.price} kr
                 </p>
-                <img src={product.image} alt={product.name} style={{ width: "100px" }} />
+                <img src={product.image} alt={product.name} className="product-image" />
               </div>
-            ))}
+            ))
+          ) : (
+            <p>No products found.</p>
+          )}
         </div>
       )}
     </div>

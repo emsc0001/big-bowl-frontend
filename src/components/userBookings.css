@@ -1,0 +1,120 @@
+.booking-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 20px;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBackground 40s linear infinite alternate;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  text-align: center;
+  border-radius: 16px;
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in forwards;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  color: #f4f4f4;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.85);
+  margin: 20px 0;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 2s ease-in forwards;
+}
+
+.user-details,
+.activity-details,
+.product-details {
+  margin-bottom: 20px;
+}
+
+.user-details p,
+.activity-details p,
+.lane-details p,
+.product-details p {
+  margin: 5px 0;
+}
+
+.activity-header,
+.product-header {
+  margin-top: 20px;
+  color: #555;
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.product-details p {
+  margin-right: 10px;
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buttonBack {
+  background-color: #007bff;
+  color: #f4f4f4;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 20px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buttonBack:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
