@@ -36,7 +36,7 @@ export default function App() {
         <Route
           path="/userBookings"
           element={
-            <RequireAuth roles={["USER", "ADMIN"]}>
+            <RequireAuth>
               <UserBookings />
             </RequireAuth>
           }

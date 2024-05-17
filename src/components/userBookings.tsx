@@ -18,7 +18,7 @@ export const UserBookings = () => {
   }, []);
 
   function handleBack() {
-    navigate("/products");
+    navigate("/");
   }
 
   return (
@@ -26,11 +26,14 @@ export const UserBookings = () => {
       <button className="buttonBack" type="button" onClick={handleBack}>
         Tilbage
       </button>
-      <h1>Your Booking</h1>
+      <h1>Mine Bookninger</h1>
       {booking ? (
         <div>
           <p>Booking ID: {booking.id}</p>
-          {/* Display other properties of the booking as needed */}
+          <p>Brugernavn: {booking.user.username}</p>
+          <p>Email: {booking.user.email}</p>
+          <p>Bruger Status: {booking.user.enabled ? "Active" : "Inactive"}</p>
+          <p>Rolle: {booking.user.roles.map((role) => role.roleName).join(", ")}</p>
         </div>
       ) : (
         <p>Loading...</p>
