@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import AuthStatus from "./security/AuthStatus";
 import { useAuth } from "./security/AuthProvider";
 import AddDropdownMenu from "./components/AddDropdownMenu";
+import AdminDashboard from "./components/AdminDashboard";
 
 import "./NavHeader.css";
 
@@ -19,6 +20,10 @@ export default function NavHeader() {
         </li>
 
         <li>
+          <NavLink to="/admin">Admin Dashboard</NavLink>
+        </li>
+
+        {/* <li>
           <NavLink to="/bowlinglanes">🎳Bowling baner</NavLink>
         </li>
 
@@ -33,6 +38,7 @@ export default function NavHeader() {
         <li>
           <NavLink to="/booking">Book Online</NavLink>
         </li>
+        </li> */}
 
         {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
           <>

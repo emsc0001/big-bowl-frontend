@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { getAirHockeys, AirHockey } from "../services/apiFacade";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
 import "./AirHockey.css";
 
 export const AirHockeys = () => {
   const [airHockeys, setAirHockeys] = useState<AirHockey[]>();
+  const navigate = useNavigate();
 
   const auth = useAuth();
 
   useEffect(() => {
     getAirHockeys().then((res) => setAirHockeys(res));
   }, []);
+
+  function handleBack() {
+    navigate("/admin");
+  }
 
   return (
     <div className="airhockey-container">
@@ -25,6 +31,9 @@ export const AirHockeys = () => {
         alt="Big Bowl Logo"
       />
       <main className="main-content">
+        <button className="buttonBack" type="button" onClick={handleBack}>
+          Tilbage
+        </button>
         <ul className="airhockey-list">
           {airHockeys?.map((airHockey, index) => (
             <li className="airhockey-item" key={index}>
@@ -38,7 +47,7 @@ export const AirHockeys = () => {
               </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
                 <Link className="airhockey-btn" to="/addAirHockey" state={airHockey}>
-                  Tilføj / Rediger
+                  Rediger
                 </Link>
               )}
             </li>

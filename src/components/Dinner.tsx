@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getDinnerTables, DinnerTable } from "../services/apiFacade";
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
@@ -6,11 +7,16 @@ import "./Dinner.css";
 
 export const Dinner = () => {
   const [dinnerTables, setDinnerTables] = useState<DinnerTable[]>([]);
+  const navigate = useNavigate();
   const auth = useAuth();
 
   useEffect(() => {
     getDinnerTables().then((data) => setDinnerTables(data));
   }, []);
+
+  function handleBack() {
+    navigate("/admin");
+  }
 
   return (
     <div className="dinner-container">
@@ -22,6 +28,10 @@ export const Dinner = () => {
         src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
         alt="Big Bowl Logo"
       />
+
+      <button className="buttonBack" type="button" onClick={handleBack}>
+        Tilbage
+      </button>
       <div className="dinner-tables-list">
         {dinnerTables.map((table, index) => (
           <li key={index} className="dinner-table-item">
@@ -35,7 +45,7 @@ export const Dinner = () => {
             </Link>
             {auth.isLoggedInAs(["ADMIN", "USER"]) && (
               <Link className="add-edit-button" to="/addDinnerTable" state={{ table }}>
-                Tilføj / Rediger
+                Rediger
               </Link>
             )}
           </li>

@@ -1,0 +1,136 @@
+.employee-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBackground 40s linear infinite alternate;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.employee-list,
+.rbc-calendar {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+button {
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.buttonBack,
+.add-edit-button {
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.add-edit-button:hover {
+  background-color: #218838;
+}
+
+/* Specific styles for the calendar to ensure it fits into the theme */
+.rbc-calendar {
+  margin-top: 20px; /* Additional spacing */
+}
+
+.rbc-event {
+  background-color: #17a2b8; /* A color that fits the theme */
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: white;
+  border: none;
+  display: block;
+  text-align: center;
+}
+
+.rbc-event:hover {
+  background-color: #135a7d;
+}
+
+.rbc-toolbar button {
+  color: #fff;
+  background-color: #007bff;
+  margin: 5px;
+}
+
+.rbc-toolbar button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .employee-container {
+    padding: 10px;
+  }
+
+  .employee-list,
+  .rbc-calendar {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+.buttonsChange {
+  color: #fff;
+  background-color: #007bff;
+  margin: 5px;
+}
+
+.filterButton {
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin: 5px;
+}
+
+.text h2 {
+  color: #fff;
+}

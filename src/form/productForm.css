@@ -2,51 +2,89 @@ body {
   font-family: Arial, sans-serif;
 }
 
-#productForm {
-  max-width: 500px;
-  margin: 0 auto;
+.product-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensures that the container takes at least the height of the viewport */
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBackground 40s linear infinite alternate;
 }
 
-#productForm label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
-#productForm input {
+.product-form {
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  text-align: center;
   width: 100%;
-  padding: 12px;
-  border: 1px solid #dcdcdc;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  max-width: 400px;
+  animation: fadeIn 2s ease-in forwards;
 }
 
-#productForm button {
-  padding: 12px 24px;
-  color: #ffffff;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px); /* Starts the form higher */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-form input[type="text"],
+.product-form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 16px;
-  width: 100%;
-  margin-top: 10px; /* Tilføj lidt margin på toppen for at adskille knapperne */
+  background: rgba(255, 255, 255, 0.1); /* Slightly visible input background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  color: #ffffff; /* White text color for inputs */
+  outline: none;
+  transition: box-shadow 0.3s ease;
 }
 
-#productForm button[type="submit"] {
+.product-form input[type="text"]:focus,
+.product-form input[type="number"]:focus {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.product-form button {
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 20px;
+  transition: background-color 0.3s;
   background-color: #007bff;
 }
 
-#productForm button[type="submit"]:hover {
+.product-form button:hover {
   background-color: #0056b3;
 }
 
-#productForm button[type="button"] {
-  background-color: #dc3545; /* Gør "Delete" knappen rød */
-}
-
-#productForm button[type="button"]:hover {
-  background-color: #c82333; /* Gør "Delete" knappen mørkere rød når musen er over */
+.error {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #dc3545;
 }

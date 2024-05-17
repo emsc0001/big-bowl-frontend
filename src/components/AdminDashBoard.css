@@ -1,0 +1,96 @@
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background: #f8f9fa;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.dashboard-header {
+  padding: 40px;
+  text-align: center;
+  border-radius: 16px;
+  margin-top: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 2s ease-in forwards;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+}
+
+.admin-links {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.link-section {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  width: 100%;
+}
+
+.link-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.link-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link-section li {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.link-section li a {
+  display: block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 100%;
+}
+
+.link-section li a:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.admin-footer {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #343a40;
+  color: #f8f9fa;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .admin-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}
