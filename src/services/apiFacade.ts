@@ -7,6 +7,7 @@ const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
 const EMPLOYEE_URL = API_URL + "/employees";
 const BOOKINGACTIVITY_URL = API_URL + "/booking-activities";
 const BOOKING_URL = API_URL + "/bookings";
+const DINNER_URL = API_URL + "/DinnerTable";
 interface BowlingLane {
   id: number | null;
   laneNumber: number;
@@ -429,7 +430,7 @@ export {
   getEmployee,
 };
 export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable };
-export { editAirHockey, editBowlingLane, editDinnerTable, editEmployee   getAvailableBowlingLanes,
+export { editAirHockey, editBowlingLane, editDinnerTable, editEmployee, getAvailableBowlingLanes,
   addBookingActivity,
   getAvailableAirHockeyTables,
   getAvailableDinnerTables,
