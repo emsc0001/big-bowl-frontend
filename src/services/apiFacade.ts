@@ -4,6 +4,7 @@ const INFO_URL = API_URL + "/info";
 const PRODUCT_URL = API_URL + "/products";
 const BOWLING_URL = API_URL + "/BowlingLanes";
 const AIRHOCKEY_URL = API_URL + "/AirHockeyTables";
+const EMPLOYEE_URL = API_URL + "/employees";
 interface BowlingLane {
   id: number | null;
   laneNumber: number;
