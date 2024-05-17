@@ -57,6 +57,12 @@ interface Info {
   info: string;
 }
 
+interface Booking {
+  id: number | null;
+  activities: BookingActivity[];
+  products: Product[];
+  user: SpecialUserWithoutPassword | null;
+}
 interface BookingActivity {
   id: number | null;
   startTime: string;
@@ -66,13 +72,6 @@ interface BookingActivity {
   airHockeyTables: AirHockey[];
   dinnerTables: DinnerTable[];
   booking: Booking | null;
-}
-
-interface Booking {
-  id: number | null;
-  activities: BookingActivity[];
-  products: Product[];
-  user: SpecialUserWithoutPassword | null;
 }
 
 interface SpecialUserWithoutPassword {
@@ -89,6 +88,7 @@ let products: Array<Product> = [];
 let bowlingLanes: Array<BowlingLane> = [];
 let airhockey: Array<AirHockey> = [];
 let dinnerTables: Array<DinnerTable> = [];
+let bookings: Array<Booking> = [];
 let BookingActivity: Array<BookingActivity> = [];
 let Booking: Array<Booking> = [];
 let employees: Array<Employee> = [];
@@ -413,6 +413,94 @@ async function deleteEmployee(id: number): Promise<void> {
   });
 }
 
+async function getBookings(): Promise<Array<Booking>> {
+  try {
+    const response = await fetch(BOOKING_URL);
+    const text = await response.text(); // First, get the raw text
+    console.log("Raw JSON:", text); // Log the raw JSON text
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = JSON.parse(text); // Then parse it as JSON
+    return data;
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    return [];
+  }
+}
+
+async function getBooking(id: number): Promise<Booking> {
+  return fetch(BOOKING_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function editBooking(newBooking: Booking): Promise<Booking> {
+  const method = newBooking.id ? "PUT" : "POST";
+  const options = makeOptions(method, newBooking, true);
+  const URL = newBooking.id ? `${BOOKING_URL}/${newBooking.id}` : BOOKING_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function deleteBooking(id: number): Promise<void> {
+  const options = makeOptions("DELETE", null, true); // Ensure headers and method are correctly set
+  return fetch(`${BOOKING_URL}/${id}`, options).then((response) => {
+    if (response.ok) {
+      // Handle both cases where the server might not return any content
+      return response.text().then((text) => (text ? JSON.parse(text) : {}));
+    } else {
+      // Extract error message from response, if any
+      return response.text().then((text) => {
+        const error = text ? JSON.parse(text) : { message: "Failed to delete the Booking" };
+        throw new Error(error.message);
+      });
+    }
+  });
+}
+
+async function getBookingActivities(): Promise<Array<BookingActivity>> {
+  if (BookingActivity.length > 0) return [...BookingActivity];
+  try {
+    const res = await fetch(BOOKINGACTIVITY_URL);
+    if (!res.ok) {
+      throw new Error("Fetch request failed");
+    }
+
+    const BookingActivityData = await res.json(); // Parse responsen som JSON
+    console.log("BookingActivity fetched successfully:", BookingActivityData); // Log dataene
+    BookingActivity = BookingActivityData; // Tildel dataene til biografer-arrayen
+    return BookingActivity;
+  } catch (error) {
+    console.log("An error occurred while fetching BookingActivity:", error);
+    return [];
+  }
+}
+
+async function getBookingActivity(id: number): Promise<BookingActivity> {
+  return fetch(BOOKINGACTIVITY_URL + "/" + id).then(handleHttpErrors);
+}
+
+async function editBookingActivity(newBookingActivity: BookingActivity): Promise<BookingActivity> {
+  const method = newBookingActivity.id ? "PUT" : "POST";
+  const options = makeOptions(method, newBookingActivity, true);
+  const URL = newBookingActivity.id ? `${BOOKINGACTIVITY_URL}/${newBookingActivity.id}` : BOOKINGACTIVITY_URL;
+  return fetch(URL, options).then(handleHttpErrors);
+}
+
+async function deleteBookingActivity(id: number): Promise<void> {
+  const options = makeOptions("DELETE", null, true); // Ensure headers and method are correctly set
+  return fetch(`${BOOKINGACTIVITY_URL}/${id}`, options).then((response) => {
+    if (response.ok) {
+      // Handle both cases where the server might not return any content
+      return response.text().then((text) => (text ? JSON.parse(text) : {}));
+    } else {
+      // Extract error message from response, if any
+      return response.text().then((text) => {
+        const error = text ? JSON.parse(text) : { message: "Failed to delete the BookingActivity" };
+        throw new Error(error.message);
+      });
+    }
+  });
+}
+
 export type { Product, AirHockey, BowlingLane, DinnerTable, Employee, Booking, BookingActivity, SpecialUserWithoutPassword };
 // eslint-disable-next-line react-refresh/only-export-components
 export {
@@ -427,8 +515,12 @@ export {
   getDinnerTable,
   getEmployees,
   getEmployee,
+  getBookings,
+  getBooking,
+  getBookingActivities,
+  getBookingActivity,
 };
-export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable };
+export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable, addBooking };
 export {
   editAirHockey,
   editBowlingLane,
@@ -438,7 +530,8 @@ export {
   addBookingActivity,
   getAvailableAirHockeyTables,
   getAvailableDinnerTables,
-  addBooking,
+  editBooking,
   getUserByUsername,
+  editBookingActivity,
 };
-export { deleteProduct, deleteEmployee, deleteAirHockey, deleteBowlingLane, deleteDinnerTable };
+export { deleteProduct, deleteEmployee, deleteAirHockey, deleteBowlingLane, deleteDinnerTable, deleteBooking, deleteBookingActivity };
