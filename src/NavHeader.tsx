@@ -34,11 +34,11 @@ export default function NavHeader() {
         <li>
           <NavLink to="/dinner">🍽️Spisning</NavLink>
         </li>
-
+*/}
         <li>
           <NavLink to="/booking">Book Online</NavLink>
         </li>
-        </li> */}
+
 
         {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
           <>
