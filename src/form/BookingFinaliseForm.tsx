@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function BookingFinaliseForm() {
     const location = useLocation();
-    const { bowlingBookingActivity, dinnerBookingActivity } = location.state;
+    const { bowlingBookingActivity, dinnerBookingActivity, products } = location.state;
 const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
         const booking: Booking = {
             id: null,
             activities: activities,
-            products: [], // Add any products here
+            products: products, // Add any products here
             user: user || null,
         };
 
