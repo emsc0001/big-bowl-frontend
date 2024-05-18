@@ -13,7 +13,8 @@ import DinnerForm from "./form/DinnerForm";
 import ProductForm from "./form/ProductForm";
 import BookingBowlingForm from "./form/BookingBowlingForm";
 import { BookingOffers } from "./components/BookingOffers";
-import BookingFinaliseForm  from "./form/BookingFinaliseForm";
+import BookingFinaliseForm from "./form/BookingFinaliseForm";
+import BookingAirhockeyForm from "./form/BookingAirhockeyForm"
 import EmployeeForm from "./form/EmployeeForm";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
@@ -32,40 +33,39 @@ export default function App() {
               {/* <Route path="/airhockey" element={<AirHockeys />} />
               <Route path="/bowlinglanes" element={<BowlingLanes />} />
               <Route path="/dinner" element={<Dinner />} /> */}
-        <Route path="/employees" element={<EmployeeList />} />
-        <Route path="/equipment" element={<EquipmentList />} />
+              <Route path="/employees" element={<EmployeeList />} />
+              <Route path="/equipment" element={<EquipmentList />} />
 
-        <Route
-          path="/airhockey"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <AirHockeys />
-            </RequireAuth>
-          }
-        />
+              <Route
+                  path="/airhockey"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <AirHockeys />
+                      </RequireAuth>
+                  }
+              />
 
-        <Route
-          path="/bowlinglanes"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <BowlingLanes />
-            </RequireAuth>
-          }
-        />
+              <Route
+                  path="/bowlinglanes"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <BowlingLanes />
+                      </RequireAuth>
+                  }
+              />
 
-        <Route
-          path="/dinner"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <Dinner />
-            </RequireAuth>
-          }
-        />
-
+              <Route
+                  path="/dinner"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <Dinner />
+                      </RequireAuth>
+                  }
+              />
 
               <Route path="/booking" element={<Booking />} />
               <Route path="/booking/bowling" element={<BookingBowlingForm />} />
-              {/* <Route path="/booking/airhockey" element={<BookingAirhockey />} /> */}
+              <Route path="/booking/airhockey" element={<BookingAirhockeyForm />} />
               {/* <Route path="/booking/dinner" element={<BookingDinner />} /> */}
 
               <Route path="/booking/offers" element={<BookingOffers />} />
@@ -95,35 +95,35 @@ export default function App() {
                       </RequireAuth>
                   }
               />
-      
-        <Route
-          path="/addEmployee"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <EmployeeForm />
-            </RequireAuth>
-          }
-        />
 
-        <Route
-          path="/admin"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <AdminDashboard />
-            </RequireAuth>
-          }
-        />
+              <Route
+                  path="/addEmployee"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <EmployeeForm />
+                      </RequireAuth>
+                  }
+              />
 
-        <Route
-          path="/equipment"
-          element={
-            <RequireAuth roles={["ADMIN"]}>
-              <AdminDashboard />
-            </RequireAuth>
-          }
-        />
+              <Route
+                  path="/admin"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <AdminDashboard />
+                      </RequireAuth>
+                  }
+              />
 
-        <Route
+              <Route
+                  path="/equipment"
+                  element={
+                      <RequireAuth roles={["ADMIN"]}>
+                          <AdminDashboard />
+                      </RequireAuth>
+                  }
+              />
+
+              <Route
                   path="/addProduct"
                   element={
                       <RequireAuth roles={["ADMIN"]}>

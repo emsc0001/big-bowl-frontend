@@ -8,6 +8,7 @@ const EMPLOYEE_URL = API_URL + "/employees";
 const BOOKINGACTIVITY_URL = API_URL + "/booking-activities";
 const BOOKING_URL = API_URL + "/bookings";
 const DINNER_URL = API_URL + "/DinnerTable";
+
 interface BowlingLane {
   id: number | null;
   laneNumber: number;
