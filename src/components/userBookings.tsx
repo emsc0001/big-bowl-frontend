@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBooking, getBookingActivity, Booking, BookingActivity, getProduct, Product, SpecialUserWithoutPassword } from "../services/apiFacade";
+import { getBooking, getBookingActivity, getProduct, Booking, BookingActivity, Product, SpecialUserWithoutPassword } from "../services/apiFacade";
 
 import "./userBookings.css";
 
@@ -46,17 +46,17 @@ export const UserBookings = () => {
       <button className="buttonBack" type="button" onClick={handleBack}>
         Tilbage
       </button>
-      {booking && booking.user && <h1 className="header">Velkommen {booking.user.username}! </h1>}
+      {booking && booking.user && <h1 className="header">Velkommen {booking.user.username}!</h1>}
       {booking && (
         <div className="main-content booking-details">
           {booking.user && (
             <div className="user-details">
-              <h2 className="activty-header">Booking Information:</h2>
+              <h2 className="activity-header">Booking Information:</h2>
               <h3 className="booking-id">Booking ID: {booking.id}</h3>
               <p>Brugernavn: {booking.user.username}</p>
               <p>Email: {booking.user.email}</p>
               <p>Bruger Status: {booking.user.enabled ? "Aktiv" : "Inaktiv"}</p>
-              <p>Rolle: {(booking.user as SpecialUserWithoutPassword).roles.map((role) => role.roleName).join(", ")}</p>
+              <p>Rolle: {booking.user.roles.map((role) => role.roleName).join(", ")}</p>
             </div>
           )}
           <h2 className="activity-header">Booking Tidspunkter:</h2>
@@ -74,18 +74,15 @@ export const UserBookings = () => {
             </div>
           )}
           <h2 className="product-header">Medkøbte Produkter:</h2>
-          {booking.products && booking.products.length > 0 ? (
-            booking.products.map((product) => (
+          {products.length > 0 &&
+            products.map((product) => (
               <div key={product.id} className="product-details">
                 <p>
                   {product.name} - {product.price} kr
                 </p>
                 <img src={product.image} alt={product.name} className="product-image" />
               </div>
-            ))
-          ) : (
-            <p>No products found.</p>
-          )}
+            ))}
         </div>
       )}
     </div>
