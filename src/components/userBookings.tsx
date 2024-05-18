@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBooking, getBookingActivity, Booking, BookingActivity, getProduct, Product } from "../services/apiFacade";
+import { getBooking, getBookingActivity, Booking, BookingActivity, getProduct, Product, SpecialUserWithoutPassword } from "../services/apiFacade";
 
 import "./userBookings.css";
 
@@ -46,7 +46,7 @@ export const UserBookings = () => {
       <button className="buttonBack" type="button" onClick={handleBack}>
         Tilbage
       </button>
-      <h1 className="header">Velkommen {booking.user.username}! </h1>
+      {booking && booking.user && <h1 className="header">Velkommen {booking.user.username}! </h1>}
       {booking && (
         <div className="main-content booking-details">
           {booking.user && (
@@ -56,7 +56,7 @@ export const UserBookings = () => {
               <p>Brugernavn: {booking.user.username}</p>
               <p>Email: {booking.user.email}</p>
               <p>Bruger Status: {booking.user.enabled ? "Aktiv" : "Inaktiv"}</p>
-              <p>Rolle: {booking.user.roles.map((role) => role.roleName).join(", ")}</p>
+              <p>Rolle: {(booking.user as SpecialUserWithoutPassword).roles.map((role) => role.roleName).join(", ")}</p>
             </div>
           )}
           <h2 className="activity-header">Booking Tidspunkter:</h2>
