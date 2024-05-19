@@ -24,7 +24,6 @@ import RequireAuth from "./security/RequireAuth";
 import Layout from "./Layout";
 import Home from "./Home";
 import "./App.css";
-import BookingTableFinalise from "./form/BookingTableFinalise";
 
 export default function App() {
   return (
@@ -69,7 +68,6 @@ export default function App() {
               <Route path="/booking/bowling" element={<BookingBowlingForm />} />
               <Route path="/booking/airhockey" element={<BookingAirhockeyForm />} />
               <Route path="/booking/dinnerTable" element={<BookingTableForm />} />
-              <Route path="/booking/dinnerTable/finalise" element={<BookingTableFinalise />} />
 
               <Route path="/booking/offers" element={<BookingOffers />} />
               <Route path="/booking/finalise" element={<BookingFinaliseForm />} />

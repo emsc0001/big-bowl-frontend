@@ -2,7 +2,6 @@ import { DinnerTable, getAvailableDinnerTables, Booking, BookingActivity, addBoo
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const EMPTY_BOOKINGACTIVITY: BookingActivity = {
     id: null,
@@ -23,7 +22,6 @@ export default function BookingTableForm() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
     const [message, setMessage] = useState("");
-     const navigate = useNavigate();
 
 
 
@@ -77,17 +75,13 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         };
     addBookingActivity(bookingActivity);
          
-        // setTimeout(() => {
-        //     createbooking(createdBookingActivity);
-        // }, 3000);
-
-        
-        navigate("/booking/dinnerTable/finalise", { state: { tableBookingActivity: bookingActivity } });
-
+        setTimeout(() => {
+            createbooking(bookingActivity);
+        }, 1000);
 
         // Reset the form
-        // setFormData(EMPTY_BOOKINGACTIVITY);
-        // setPhoneNumber("");
+        setFormData(EMPTY_BOOKINGACTIVITY);
+        setPhoneNumber("");
 
         // Set the success message
         setMessage("Booking successful!");
@@ -97,7 +91,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     }
     };
     
-{/* <    const createbooking = async (createdBookingActivity) => {
+   const createbooking = async (createdBookingActivity) => {
         // Create the Booking
         const booking: Booking = {
             id: null,
@@ -107,7 +101,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
             phoneNumber: phoneNumber,
         };
         await addBooking(booking);
-    }> */}
+    }
 
     return (
         <div>
