@@ -4,15 +4,16 @@ import { getEquipment, Equipment, updateEquipmentStatus } from "../services/apiF
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
 import "./EquipmentList.css";
-import OrderEquipmentModal from './OrderEquipmentModal.tsx'; // Import the modal component
+import OrderEquipmentModal from './OrderEquipmentModal'; // Correct import
+
+
 
 export const EquipmentList = () => {
   const [equipment, setEquipment] = useState<Equipment[]>([]);
   const navigate = useNavigate();
   const [filterType, setFilterType] = useState("all");
   const auth = useAuth();
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // New state variable for controlling the visibility of the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getEquipment()
@@ -48,6 +49,10 @@ export const EquipmentList = () => {
     setIsModalOpen(false);
   };
 
+  const addNewEquipment = (newEquipment: Equipment) => {
+    setEquipment((prevEquipment) => [...prevEquipment, newEquipment]);
+  };
+
   return (
     <div className="equipment-container">
       <header>
@@ -59,7 +64,7 @@ export const EquipmentList = () => {
             <option value="AIR_HOCKEY">Air Hockey Tables</option>
             <option value="DINNER_TABLE">Dinner Tables</option>
           </select>
-          <button onClick={handleOpenModal}>Order New Equipment</button> {/* New button for opening the modal */}
+          <button onClick={handleOpenModal}>Order New Equipment</button>
         </div>
       </header>
       <table className="equipment-table">
@@ -94,9 +99,11 @@ export const EquipmentList = () => {
           ))}
         </tbody>
       </table>
-      {isModalOpen && <OrderEquipmentModal onClose={handleCloseModal} />} {/* New modal component */}
+      {isModalOpen && <OrderEquipmentModal onClose={handleCloseModal} addNewEquipment={addNewEquipment} />}
     </div>
   );
 };
 
 export default EquipmentList;
+
+
