@@ -8,7 +8,7 @@ export const Booking = () => {
             <p>Book your next event here</p>
             <Link to="/booking/bowling">Book Bowling</Link>
             <Link to="/booking/airhockey">Book AirHockey</Link>
-            <Link to="/booking/dinner">Book Dinner</Link>
+            <Link to="/booking/dinnerTable">Book Dinner</Link>
         </div>
     );
 }

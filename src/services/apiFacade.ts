@@ -72,7 +72,8 @@ interface Booking {
     id: number | null;
     activities: BookingActivity[];
     products: Product[];
-    user: SpecialUserWithoutPassword | null;
+  user: SpecialUserWithoutPassword | null;
+  phoneNumber: string;
 }
 
 interface SpecialUserWithoutPassword {

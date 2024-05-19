@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 export default function BookingFinaliseForm() {
     const location = useLocation();
     const { bowlingBookingActivity, dinnerBookingActivity, products } = location.state;
-const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
+    const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
+    const [phoneNumber, setPhoneNumber] = useState("");
 
     useEffect(() => {
         const username = localStorage.getItem("username");
@@ -25,8 +26,9 @@ const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
         const booking: Booking = {
             id: null,
             activities: activities,
-            products: products, // Add any products here
+            products: products, 
             user: user || null,
+            phoneNumber: phoneNumber,
         };
 
         await addBooking(booking);
@@ -46,6 +48,10 @@ return (
                 <p>End time: {new Date(dinnerBookingActivity.endTime).toLocaleTimeString()}</p>
             </>
         )}
+        <label>
+            Phone Number:
+            <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+        </label>
         <button onClick={handleConfirmBooking}>Confirm Booking</button>
     </div>
 );
