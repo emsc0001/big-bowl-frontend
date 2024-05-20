@@ -89,3 +89,21 @@
     transform: scale(1);
   }
 }
+
+.img-container {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc; /* Placeholder for the profile picture */
+  margin-bottom: 10px;
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

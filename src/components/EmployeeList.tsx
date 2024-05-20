@@ -121,7 +121,10 @@ export const EmployeeList = () => {
       <Modal isOpen={modalIsOpen} onClose={closeModal}>
         {selectedEmployee && (
           <div>
-            <div className="modal-profile-picture" style={{ backgroundImage: `url(${selectedEmployee.imageUrl || "default_image.jpg"})` }}></div>
+            {/* <div className="modal-profile-picture" style={{ backgroundImage: `url(${selectedEmployee.imageUrl || "default_image.jpg"})` }}></div> */}
+            <div className="modal-profile-picture">
+              <img className="img-container" src={selectedEmployee.employeeImg} />
+            </div>
             <div className="modal-header">{selectedEmployee.name}</div>
             <div className="modal-body">
               <div className="modal-header">Position: {selectedEmployee.role}</div>

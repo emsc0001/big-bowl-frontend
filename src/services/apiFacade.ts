@@ -19,7 +19,7 @@ export interface Equipment {
   id: number | null;
   name: string;
   type: string;
-  status: string
+  status: string;
   additionalDetails: string;
 }
 
@@ -44,6 +44,7 @@ interface Employee {
   id: number | null;
   name: string;
   role: string;
+  employeeImg: string;
   shift: string;
   email: string;
   phone: number;
@@ -58,14 +59,14 @@ interface Info {
 }
 
 interface BookingActivity {
-    id: number | null;
-    startTime: string;
-    endTime: string;
-    activityType: string;
-    bowlingLanes: BowlingLane[];
-    airHockeyTables: AirHockey[];
-    dinnerTables: DinnerTable[];
-    booking: Booking | null;
+  id: number | null;
+  startTime: string;
+  endTime: string;
+  activityType: string;
+  bowlingLanes: BowlingLane[];
+  airHockeyTables: AirHockey[];
+  dinnerTables: DinnerTable[];
+  booking: Booking | null;
 }
 
 interface Booking {
@@ -158,17 +159,16 @@ export async function updateEquipmentStatus(id: number, newStatus: string): Prom
   return updatedEquipment;
 }
 
-
 async function getBowlingLane(id: number): Promise<BowlingLane> {
   return fetch(BOWLING_URL + "/" + id).then(handleHttpErrors);
 }
 
 async function getAvailableBowlingLanes(startTime: string, endTime: string): Promise<BowlingLane[]> {
-    const params = new URLSearchParams({
-        startTime: startTime,
-        endTime: endTime,
-    });
-    return fetch(`${BOWLING_URL}/available?${params.toString()}`).then(handleHttpErrors);
+  const params = new URLSearchParams({
+    startTime: startTime,
+    endTime: endTime,
+  });
+  return fetch(`${BOWLING_URL}/available?${params.toString()}`).then(handleHttpErrors);
 }
 async function addBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane> {
   const method = newBowlingLane.id ? "PUT" : "POST";
@@ -176,7 +176,6 @@ async function addBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane>
   const URL = newBowlingLane.id ? `${BOWLING_URL}/${newBowlingLane.id}` : BOWLING_URL;
   return fetch(URL, options).then(handleHttpErrors);
 }
-
 
 async function editBowlingLane(newBowlingLane: BowlingLane): Promise<BowlingLane> {
   const method = newBowlingLane.id ? "PUT" : "POST";
@@ -224,11 +223,11 @@ async function getAirHockey(id: number): Promise<AirHockey> {
 }
 
 async function getAvailableAirHockeyTables(startTime: string, endTime: string): Promise<AirHockey[]> {
-    const params = new URLSearchParams({
-        startTime: startTime,
-        endTime: endTime,
-    });
-    return fetch(`${AIRHOCKEY_URL}/available?${params.toString()}`).then(handleHttpErrors);
+  const params = new URLSearchParams({
+    startTime: startTime,
+    endTime: endTime,
+  });
+  return fetch(`${AIRHOCKEY_URL}/available?${params.toString()}`).then(handleHttpErrors);
 }
 
 async function addAirHockey(newAirHockey: AirHockey): Promise<AirHockey> {
@@ -284,11 +283,11 @@ async function getDinnerTable(id: number): Promise<DinnerTable> {
 }
 
 async function getAvailableDinnerTables(startTime: string, endTime: string): Promise<DinnerTable[]> {
-    const params = new URLSearchParams({
-        startTime: startTime,
-        endTime: endTime,
-    });
-    return fetch(`${DINNER_URL}/available?${params.toString()}`).then(handleHttpErrors);
+  const params = new URLSearchParams({
+    startTime: startTime,
+    endTime: endTime,
+  });
+  return fetch(`${DINNER_URL}/available?${params.toString()}`).then(handleHttpErrors);
 }
 
 async function addDinnerTable(newDinnerTable: DinnerTable): Promise<DinnerTable> {
@@ -356,12 +355,12 @@ async function addBooking(newBooking: Booking): Promise<Booking> {
 }
 
 async function getUserByUsername(username: string): Promise<SpecialUserWithoutPassword> {
-    const options = makeOptions("GET", null, true); // Assuming you want to add the token
-    const response = await fetch(`${API_URL}/api/${username}`, options);
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return await response.json();
+  const options = makeOptions("GET", null, true); // Assuming you want to add the token
+  const response = await fetch(`${API_URL}/api/${username}`, options);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
 }
 
 async function getEmployees(): Promise<Array<Employee>> {
@@ -416,7 +415,7 @@ async function deleteEmployee(id: number): Promise<void> {
   });
 }
 
-export type { Product, AirHockey, BowlingLane, DinnerTable, Employee, Booking, BookingActivity, SpecialUserWithoutPassword};
+export type { Product, AirHockey, BowlingLane, DinnerTable, Employee, Booking, BookingActivity, SpecialUserWithoutPassword };
 // eslint-disable-next-line react-refresh/only-export-components
 export {
   getInfo,
@@ -432,12 +431,16 @@ export {
   getEmployee,
 };
 export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable };
-export { editAirHockey, editBowlingLane, editDinnerTable, editEmployee, getAvailableBowlingLanes,
+export {
+  editAirHockey,
+  editBowlingLane,
+  editDinnerTable,
+  editEmployee,
+  getAvailableBowlingLanes,
   addBookingActivity,
   getAvailableAirHockeyTables,
   getAvailableDinnerTables,
   addBooking,
   getUserByUsername,
-
 };
 export { deleteProduct, deleteEmployee, deleteAirHockey, deleteBowlingLane, deleteDinnerTable };
