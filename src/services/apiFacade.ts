@@ -10,9 +10,10 @@ const BOOKING_URL = API_URL + "/bookings";
 const DINNER_URL = API_URL + "/DinnerTable";
 
 interface BowlingLane {
-  id: number | null;
-  laneNumber: number;
-  forKids: boolean;
+    id: number | null;
+    laneNumber: number;
+    forKids: boolean;
+    underMaintenance: boolean;
 }
 
 export interface Equipment {

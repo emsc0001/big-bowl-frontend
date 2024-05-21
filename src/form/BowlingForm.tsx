@@ -5,9 +5,10 @@ import { addBowlingLane, editBowlingLane, deleteBowlingLane, getBowlingLanes, Bo
 import "./BowlingForm.css";
 
 const EMPTY_BOWLINGLANE: BowlingLane = {
-  id: 0,
-  laneNumber: 0,
-  forKids: false,
+    id: 0,
+    laneNumber: 0,
+    forKids: false,
+    underMaintenance: false,
 };
 
 export default function BowlingForm() {
@@ -88,6 +89,10 @@ export default function BowlingForm() {
         <label>
           For Børn
           <input type="checkbox" name="forKids" checked={formData.forKids} onChange={handleChange} />
+        </label>
+        <label>
+          Under Vedligeholdelse
+          <input type="checkbox" name="underMaintenance" checked={formData.underMaintenance} onChange={handleChange} />
         </label>
         <button type="submit">{formData.id ? "Rediger" : "Opret"} Bowling Bane</button>
         {formData.id && (

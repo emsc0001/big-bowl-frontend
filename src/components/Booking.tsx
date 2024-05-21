@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Booking.css";
+import "./booking.css";
 
 export const Booking = () => {
     return (
