@@ -4,6 +4,8 @@ import { AirHockeys } from "./components/AirHockey";
 import { BowlingLanes } from "./components/Bowling";
 import { Booking } from "./components/Booking";
 import { Dinner } from "./components/Dinner";
+import { AdminUserBookings } from "./components/AdminUserBookings";
+
 import { EmployeeList } from "./components/EmployeeList";
 import AdminDashboard from "./components/AdminDashboard";
 import { UserBookings } from "./components/userBookings";
@@ -34,6 +36,15 @@ export default function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/employees" element={<EmployeeList />} />
         <Route path="/equipment" element={<EquipmentList />} />
+
+        <Route
+          path="/adminUserBookings"
+          element={
+            <RequireAuth>
+              <AdminUserBookings />
+            </RequireAuth>
+          }
+        />
 
         <Route
           path="/userBookings"

@@ -27,6 +27,9 @@ const AdminDashboard = () => {
             <li>
               <Link to="/dinner">Borde Administration</Link>
             </li>
+            <li>
+              <Link to="/adminUserBookings">Booking Administration</Link>
+            </li>
           </ul>
         </div>
         <div className="link-section">
