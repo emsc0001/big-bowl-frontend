@@ -81,7 +81,7 @@ export default function BookingBowlingForm() {
      const updatedFormData = { ...formData, bowlingLanes: selectedLanes };
 
      console.log(updatedFormData);
-     addBookingActivity(updatedFormData);
+    //  addBookingActivity(updatedFormData);
      navigate('/booking/offers', {state: {bookingActivity: updatedFormData}});
 
     };
@@ -90,6 +90,7 @@ const handleStartTimeChange = (moment: moment.Moment | string) => {
     if (typeof moment !== "string") {
         const value = moment.toDate();
         const now = new Date();
+        now.setHours(0, 0, 0, 0); // Reset the time of the 'now' variable
         const hours = value.getHours();
 
         // Check if the selected time is in the past or outside the 10-22 range

@@ -62,7 +62,7 @@ const handleTableBooking = async () => {
                 endTime: endTime.toISOString(),
                 dinnerTables: [dinnerTable],
             };
-            await addBookingActivity(newBookingActivity);
+            // await addBookingActivity(newBookingActivity);
             console.log("Booking the dinner table");
             setTableIsBooked(true);
             setDinnerBookingActivity(newBookingActivity);
