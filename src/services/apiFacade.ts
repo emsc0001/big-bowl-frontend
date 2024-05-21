@@ -437,17 +437,19 @@ async function deleteEmployee(id: number): Promise<void> {
 }
 
 async function getBookings(): Promise<Array<Booking>> {
+  if (bookings.length > 0) return [...bookings];
   try {
-    const response = await fetch(BOOKING_URL);
-    const text = await response.text(); // First, get the raw text
-    console.log("Raw JSON:", text); // Log the raw JSON text
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+    const res = await fetch(BOOKING_URL);
+    if (!res.ok) {
+      throw new Error("Fetch request failed");
     }
-    const data = JSON.parse(text); // Then parse it as JSON
-    return data;
+
+    const bookingsData = await res.json(); // Parse responsen som JSON
+    console.log("Bookings fetched successfully:", bookingsData); // Log dataene
+    bookings = bookingsData; // Tildel dataene til biografer-arrayen
+    return bookings;
   } catch (error) {
-    console.error("Error fetching bookings:", error);
+    console.log("An error occurred while fetching bookings:", error);
     return [];
   }
 }

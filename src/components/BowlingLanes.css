@@ -211,3 +211,9 @@ h2 {
   text-align: center;
   transition: background-color 0.3s, transform 0.2s;
 }
+
+.under-maintenance {
+  background-color: #b88a00; /* Yellow background color */
+  color: #856404; /* Dark yellow text color for contrast */
+  border: 2px dashed #ffffff; /* Dashed border in a deeper yellow */
+}

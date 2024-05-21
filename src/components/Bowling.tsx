@@ -6,34 +6,35 @@ import { useAuth } from "../security/AuthProvider";
 import "./BowlingLanes.css";
 
 export const BowlingLanes = () => {
-  const [bowlingLanes, setBowlingLanes] = useState<BowlingLane[]>();
+  const [bowlingLanes, setBowlingLanes] = useState<BowlingLane[]>([]);
   const navigate = useNavigate();
-  const [filter, setFilter] = useState<string>("all"); // Filter state: 'all', 'kids', or 'adults'
+  const [filter, setFilter] = useState("all"); // Filter state can be 'all', 'kids', 'adults', 'maintenance'
   const auth = useAuth();
 
   useEffect(() => {
-    getBowlingLanes().then((res) => {
-      console.log("Fetched Bowling Lanes:", res);
-      setBowlingLanes(res);
+    getBowlingLanes().then((lanes) => {
+      console.log("Fetched Bowling Lanes:", lanes);
+      setBowlingLanes(lanes);
     });
   }, []);
 
-  // Filter function to determine which lanes to show
-  const filterLanes = (lane: BowlingLane) => {
-    if (filter === "all") return true;
-    if (filter === "kids") return lane.forKids;
-    if (filter === "adults") return !lane.forKids;
-    return true;
+  const filterLanes = (lane) => {
+    switch (filter) {
+      case "all":
+        return true;
+      case "kids":
+        return lane.forKids;
+      case "adults":
+        return !lane.forKids;
+      case "maintenance":
+        return lane.underMaintenance;
+      default:
+        return true;
+    }
   };
 
-  // Set filter label for kids or adults
-  const getForKidsLabel = (isForKids: boolean) => {
-    return isForKids ? "🧒" : "🔞";
-  };
-
-  function handleBack() {
-    navigate("/admin");
-  }
+  const getForKidsLabel = (isForKids) => (isForKids ? "🧒" : "🔞");
+  const getMaintenanceLabel = (isUnderMaintenance) => (isUnderMaintenance ? " ⚠️" : "");
 
   return (
     <div className="bowling-container">
@@ -41,31 +42,26 @@ export const BowlingLanes = () => {
         <h2>Bowlingbaner</h2>
         <p>Se Ledige Bowlingbaner:</p>
       </header>
-      <img
-        className="logo"
-        src="https://i.ibb.co/9rQBkgw/DALL-E-2024-05-09-14-25-21-A-vibrant-and-modern-logo-for-a-bowling-alley-named-Big-Bowl-The-logo-inc.webp"
-        alt="Big Bowl Logo"
-      />
       <main className="main-content">
-        <button className="buttonBack" type="button" onClick={handleBack}>
-          Tilbage
-        </button>
         <div className="filter-buttons">
-          {/* Filter Buttons */}
           <button onClick={() => setFilter("all")}>Alle</button>
           <button onClick={() => setFilter("kids")}>Kun Egnet til Børn</button>
           <button onClick={() => setFilter("adults")}>Kun Egnet til voksne</button>
+          <button onClick={() => setFilter("maintenance")}>Under Vedligeholdelse</button>
         </div>
-
-        {/* Display Bowling Lanes based on the current filter */}
         <ul className="bowling-list">
-          {bowlingLanes?.filter(filterLanes).map((bowlingLane, index) => (
-            <li className={`bowling-item ${bowlingLane.forKids ? "kids-lane" : "adults-lane"}`} key={index}>
-              <Link to={`/${bowlingLane.id}`}>
-                🎳 Bowling Bane: {bowlingLane.laneNumber} {getForKidsLabel(bowlingLane.forKids)}
+          {bowlingLanes?.filter(filterLanes).map((lane, index) => (
+            <li
+              key={index}
+              className={`bowling-item ${lane.forKids ? "kids-lane" : "adults-lane"} ${lane.underMaintenance ? "under-maintenance" : ""}`}
+            >
+              <Link to={`/${lane.id}`}>
+                🎳 Bowling Bane: {lane.laneNumber}
+                {getForKidsLabel(lane.forKids)}
+                {getMaintenanceLabel(lane.underMaintenance)}
               </Link>
               {auth.isLoggedInAs(["ADMIN", "USER"]) && (
-                <Link className="bowling-btn" to="/addBowlingLane" state={bowlingLane}>
+                <Link className="bowling-btn" to="/addBowlingLane" state={lane}>
                   Rediger
                 </Link>
               )}
@@ -73,7 +69,6 @@ export const BowlingLanes = () => {
           ))}
         </ul>
       </main>
-
       <footer className="footer">
         <p>&copy; {new Date().getFullYear()} Big Bowl. Alle rettigheder forbeholdes.</p>
       </footer>
