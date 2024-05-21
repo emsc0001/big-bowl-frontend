@@ -84,15 +84,24 @@ export default function BookingBowlingForm() {
      addBookingActivity(updatedFormData);
      navigate('/booking/offers', {state: {bookingActivity: updatedFormData}});
 
- };
+    };
+    
+const handleStartTimeChange = (moment: moment.Moment | string) => {
+    if (typeof moment !== "string") {
+        const value = moment.toDate();
+        const now = new Date();
+        const hours = value.getHours();
 
-    const handleStartTimeChange = (moment: moment.Moment | string) => {
-        if (typeof moment !== "string") {
-            const value = moment.toDate();
+        // Check if the selected time is in the past or outside the 10-22 range
+        if (value < now || hours < 10 || hours > 22) {
+            // Invalid time, you can handle this situation as you see fit
+            console.error("Invalid time selected");
+        } else {
             setStartTime(value);
             setFormData({ ...formData, startTime: value.toISOString() });
         }
-    };
+    }
+};
 
     const handleDurationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
             const duration = Number(e.target.value);
@@ -115,20 +124,37 @@ export default function BookingBowlingForm() {
     
         const maxChildFriendlyLanes = Math.min(numLanes, 4);
 
+        function handleBack() {
+            navigate("/booking");
+          }
 
     return (
         <div>
             <h2>Book Bowling</h2>
             <form id="bookingBowlingForm">
-                <label>Date and Time</label>
-                <Datetime onChange={handleStartTimeChange} value={startTime} dateFormat="YYYY-MM-DD" timeFormat="HH:00" />
-                <label>Duration</label>
+                <button onClick={handleBack}>Tilbage</button>
+                <label>Dag og Tid (Åbent: 10-22)</label>
+                <Datetime
+                    onChange={handleStartTimeChange}
+                    value={startTime}
+                    dateFormat="YYYY-MM-DD"
+                    timeFormat="HH:00"
+                    isValidDate={(currentDate) => {
+                        const now = new Date();
+                        return currentDate.isAfter(now);
+                    }}
+                    isValidTime={(currentDate) => {
+                        const hours = currentDate.hours();
+                        return hours >= 10 && hours <= 22;
+                    }}
+                />{" "}
+                <label>Hvor lang tid</label>
                 <select name="duration" onChange={handleDurationChange}>
-                    <option value="">Select Duration</option>
-                    <option value="1">1 hour</option>
-                    <option value="2">2 hours</option>
+                    <option value="">Vælg antal timer</option>
+                    <option value="1">1 time</option>
+                    <option value="2">2 timer</option>
                 </select>
-                <label>Number of Lanes</label>
+                <label>Antal Baner</label>
                 <select value={numLanes} onChange={handleNumLanesChange}>
                     {[1, 2, 3, 4].map((num) => (
                         <option key={num} value={num}>
@@ -136,14 +162,14 @@ export default function BookingBowlingForm() {
                         </option>
                     ))}
                 </select>
-                <label>Child Friendly</label>
+                <label>Børne Venlig baner</label>
                 <input type="checkbox" checked={isChildFriendly} onChange={handleIsChildFriendlyChange} />
                 {isChildFriendly && (
                     <>
-                        <label>Number of Child Friendly Lanes</label>
+                        <label>Antal børnevenlige baner</label>
                         <select value={numChildFriendlyLanes} onChange={handleNumChildFriendlyLanesChange}>
                             {/* Replace this with the actual number of available child friendly lanes */}
-                            {Array.from({length: maxChildFriendlyLanes}, (_, i) => i + 1).map((num) => (
+                            {Array.from({ length: maxChildFriendlyLanes }, (_, i) => i + 1).map((num) => (
                                 <option key={num} value={num}>
                                     {num}
                                 </option>

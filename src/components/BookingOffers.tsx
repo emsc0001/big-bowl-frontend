@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { BookingActivity, DinnerTable, Product, getProducts, getAvailableDinnerTables, addBookingActivity } from "../services/apiFacade";
 import { useEffect, useState } from "react";
-
+import "./BookingOffers.css"
 
 export const BookingOffers = () => {
     const location = useLocation();
-    const bowlingBookingActivity = location.state.bookingActivity;
+    const bookingActivity = location.state.bookingActivity;
     const [dinnerTable, setDinnerTable] = useState<DinnerTable>();
     const [products, setProducts] = useState<Product[]>([]);
     const [tableIsBooked, setTableIsBooked] = useState(false);
@@ -19,20 +19,20 @@ export const BookingOffers = () => {
         const checkAvailability = async () => {
             try {
                 // Parse the endTime to a Date object
-                const endTime = new Date(bowlingBookingActivity.endTime);
+                const endTime = new Date(bookingActivity.endTime);
 
                 // Add one hour to the endTime
                 endTime.setHours(endTime.getHours() + 1);
 
                 // Get available dinner tables from endTime and one hour ahead
-                const availableTables = await getAvailableDinnerTables(bowlingBookingActivity.endTime, endTime.toISOString());
+                const availableTables = await getAvailableDinnerTables(bookingActivity.endTime, endTime.toISOString());
                 setDinnerTable(availableTables[0]);
             } catch (error) {
                 console.error(error);
             }
         };
         checkAvailability();
-    }, [bowlingBookingActivity]);
+    }, [bookingActivity]);
     
 useEffect(() => {
     getProducts()
@@ -50,7 +50,7 @@ const handleTableBooking = async () => {
     if (!tableIsBooked && dinnerTable) {
         try {
             // Parse the endTime to a Date object
-            const startTime = new Date(bowlingBookingActivity.endTime);
+            const startTime = new Date(bookingActivity.endTime);
 
             // Add one hour to the startTime to get the endTime
             const endTime = new Date(startTime.getTime());
@@ -80,7 +80,7 @@ const handleTableBooking = async () => {
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         
-        navigate("/booking/finalise", { state: { bowlingBookingActivity, dinnerBookingActivity, products } });
+        navigate("/booking/finalise", { state: { bookingActivity, dinnerBookingActivity, products } });
  };
 
 return (
@@ -89,7 +89,7 @@ return (
         <div>
             <p>Book Dinner Table</p>
             <p>
-                Table Number: {dinnerTable?.tableNumber}, Time: {new Date(bowlingBookingActivity.endTime).toLocaleTimeString()}
+                Table Number: {dinnerTable?.tableNumber}, Time: {new Date(bookingActivity.endTime).toLocaleTimeString()}
             </p>
             <button onClick={handleTableBooking} disabled={tableIsBooked}>
                 {tableIsBooked ? "Bord booket" : "Book"}

@@ -1,28 +1,29 @@
-/* Centering the form container */
-#bookingBowlingForm {
+/* Centering and styling the dinner table booking form container */
+#dinnerTableForm {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centering the form elements horizontally */
-    justify-content: center; /* Centering the form elements vertically */
+    align-items: center; /* Centering form elements horizontally */
+    justify-content: center; /* Centering form elements vertically */
     width: 100%;
-    max-width: 400px; /* Limiting the width for better appearance */
+    max-width: 400px; /* Limiting width for better appearance */
     margin: 0 auto;
     padding: 20px; /* Adding padding for spacing inside the form */
-    background-color: rgba(0, 0, 0, 0.85); /* Black background for the form */
+    background-color: rgba(0, 0, 0, 0.85); /* Dark background for the form */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: white; /* White text color for form elements */
 }
 
-#bookingBowlingForm label {
+#dinnerTableForm label {
     margin-top: 20px;
     margin-bottom: 5px;
     font-weight: bold; /* Making labels bold for better readability */
     color: white; /* White color for labels */
 }
 
-#bookingBowlingForm input,
-#bookingBowlingForm select,
-#bookingBowlingForm .react-datetime-picker {
+#dinnerTableForm input,
+#dinnerTableForm select,
+#dinnerTableForm .react-datetime-picker {
     width: 100%; /* Making inputs and selects take full width */
     padding: 10px;
     margin-top: 5px; /* Adding margin for spacing */
@@ -35,12 +36,12 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding subtle shadow */
 }
 
-#bookingBowlingForm select {
+#dinnerTableForm select {
     background-color: rgba(0, 0, 0, 0.85); /* Matching the form background */
     color: white; /* White text color for select options */
 }
 
-#bookingBowlingForm button {
+#dinnerTableForm button {
     width: 100%; /* Making the button take full width */
     padding: 10px;
     background-color: #4CAF50;
@@ -54,7 +55,7 @@
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-#bookingBowlingForm button:hover {
+#dinnerTableForm button:hover {
     background-color: #45a049;
 }
 
@@ -84,8 +85,17 @@
 }
 
 /* Dropdown menu styling */
-#bookingBowlingForm select option {
+#dinnerTableForm select option {
     background-color: rgba(0, 0, 0, 0.85); /* Matching the form background */
     color: white; /* White text color for options */
 }
 
+/* Booking status message styling */
+#dinnerTableForm p {
+    color: white; /* White text color */
+    background-color: rgba(0, 0, 0, 0.85); /* Matching the form background */
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold; /* Bold text for better readability */
+    text-align: center; /* Centering the text */
+}

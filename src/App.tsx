@@ -15,6 +15,8 @@ import ProductForm from "./form/ProductForm";
 import BookingBowlingForm from "./form/BookingBowlingForm";
 import { BookingOffers } from "./components/BookingOffers";
 import BookingFinaliseForm from "./form/BookingFinaliseForm";
+import BookingAirhockeyForm from "./form/BookingAirhockeyForm";
+import BookingTableForm from "./form/BookingTableForm";
 import EmployeeForm from "./form/EmployeeForm";
 import Login from "./security/Login";
 import Logout from "./security/Logout";
@@ -71,8 +73,8 @@ export default function App() {
 
         <Route path="/booking" element={<Booking />} />
         <Route path="/booking/bowling" element={<BookingBowlingForm />} />
-        {/* <Route path="/booking/airhockey" element={<BookingAirhockey />} /> */}
-        {/* <Route path="/booking/dinner" element={<BookingDinner />} /> */}
+        <Route path="/booking/airhockey" element={<BookingAirhockeyForm />} />
+        <Route path="/booking/dinnerTable" element={<BookingTableForm />} />
 
         <Route path="/booking/offers" element={<BookingOffers />} />
         <Route path="/booking/finalise" element={<BookingFinaliseForm />} />

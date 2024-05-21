@@ -4,12 +4,16 @@ import { getEquipment, Equipment, updateEquipmentStatus } from "../services/apiF
 import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthProvider";
 import "./EquipmentList.css";
+import OrderEquipmentModal from './OrderEquipmentModal'; // Correct import
+
+
 
 export const EquipmentList = () => {
   const [equipment, setEquipment] = useState<Equipment[]>([]);
   const navigate = useNavigate();
   const [filterType, setFilterType] = useState("all");
   const auth = useAuth();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getEquipment()
@@ -37,6 +41,18 @@ export const EquipmentList = () => {
       .catch((error) => console.error("Error updating equipment status:", error));
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const addNewEquipment = (newEquipment: Equipment) => {
+    setEquipment((prevEquipment) => [...prevEquipment, newEquipment]);
+  };
+
   return (
     <div className="equipment-container">
       <header>
@@ -48,6 +64,7 @@ export const EquipmentList = () => {
             <option value="AIR_HOCKEY">Air Hockey Tables</option>
             <option value="DINNER_TABLE">Dinner Tables</option>
           </select>
+          <button onClick={handleOpenModal}>Order New Equipment</button>
         </div>
       </header>
       <table className="equipment-table">
@@ -56,21 +73,21 @@ export const EquipmentList = () => {
             <th>Type</th>
             <th>ID</th>
             <th>Name</th>
+            <th>Quantity</th>
             <th>Status</th>
-            <th>Additional Details</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredEquipment.map((eq) => (
-            <tr key={eq.id}>
-              <td>{eq.type}</td>
+           <tr key={`${eq.type}-${eq.name}`}>
+            <td>{eq.type}</td>
               <td>{eq.id}</td>
               <td>
                 <Link to={`/equipment/${eq.id}`}>{eq.name}</Link>
               </td>
+              <td>{eq.quantity}</td>
               <td>{eq.status}</td>
-              <td>{eq.additionalDetails}</td>
               <td>
                 {auth.isLoggedInAs(["ADMIN"]) && (
                   <button onClick={() => handleStatusUpdate(eq.id, "DEFECTIVE")}>
@@ -82,8 +99,11 @@ export const EquipmentList = () => {
           ))}
         </tbody>
       </table>
+      {isModalOpen && <OrderEquipmentModal onClose={handleCloseModal} addNewEquipment={addNewEquipment} />}
     </div>
   );
 };
 
 export default EquipmentList;
+
+

@@ -1,0 +1,42 @@
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centering the content horizontally */
+    padding: 40px; /* Adding padding for spacing */
+    text-align: center; /* Centering text */
+}
+
+.booking-heading {
+    font-size: 36px; /* Larger font size for the heading */
+    color: #ffffff; /* Darker text color */
+    margin-bottom: 20px; /* Adding margin below the heading */
+}
+
+.booking-description {
+    font-size: 18px; /* Slightly larger font size for the description */
+    color: #ffffff; /* Darker text color */
+    margin-bottom: 40px; /* Adding margin below the description */
+}
+
+.booking-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centering the links horizontally */
+}
+
+.booking-link {
+    width: 300px; /* Set a fixed width for the link containers */
+    padding: 15px 30px; /* Adding padding for the links */
+    margin-bottom: 15px; /* Adding margin between links */
+    background-color: #007bff; /* Blue background color */
+    color: white; /* White text color */
+    text-decoration: none; /* Removing underline from links */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 20px; /* Font size */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.booking-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

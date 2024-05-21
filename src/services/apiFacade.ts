@@ -13,6 +13,7 @@ interface BowlingLane {
   id: number | null;
   laneNumber: number;
   forKids: boolean;
+  underMaintenance: boolean;
 }
 
 export interface Equipment {
@@ -73,6 +74,14 @@ interface BookingActivity {
   airHockeyTables: AirHockey[];
   dinnerTables: DinnerTable[];
   booking: Booking | null;
+}
+
+interface Booking {
+  id: number | null;
+  activities: BookingActivity[];
+  products: Product[];
+  user: SpecialUserWithoutPassword | null;
+  phoneNumber: string;
 }
 
 interface SpecialUserWithoutPassword {
@@ -150,12 +159,25 @@ export async function getEquipment(): Promise<Equipment[]> {
 
 export async function updateEquipmentStatus(id: number, newStatus: string): Promise<Equipment> {
   const options = makeOptions("PUT", { id, status: newStatus }, true);
-  const response = await fetch(`${API_URL}/equipment/${id}`, options);
-  if (!response.ok) {
-    throw new Error("Failed to update equipment status");
+  try {
+    const response = await fetch(`${API_URL}/equipment/${id}`, options);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error(`Failed to update equipment status. Status: ${response.status}`, errorData);
+      if (response.status === 401) {
+        // Handle unauthorized error
+        // This could be redirecting to login, refreshing the token, etc.
+        handleUnauthorizedError();
+        return;
+      }
+      throw new Error(`Failed to update equipment status. Status: ${response.status}`);
+    }
+    const updatedEquipment = await response.json();
+    return updatedEquipment;
+  } catch (error) {
+    console.error("Error updating equipment status:", error);
+    throw error;
   }
-  const updatedEquipment = await response.json();
-  return updatedEquipment;
 }
 
 async function getBowlingLane(id: number): Promise<BowlingLane> {
