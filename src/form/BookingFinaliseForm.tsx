@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function BookingFinaliseForm() {
     const location = useLocation();
-    const { bowlingBookingActivity, dinnerBookingActivity, products } = location.state;
+    const { bookingActivity, dinnerBookingActivity, products } = location.state;
     const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
     const [phoneNumber, setPhoneNumber] = useState("");
 
@@ -16,7 +16,7 @@ export default function BookingFinaliseForm() {
     }, []);
 
     const handleConfirmBooking = async () => {
-        const activities = [bowlingBookingActivity];
+        const activities = [bookingActivity];
         if (dinnerBookingActivity) {
             activities.push(dinnerBookingActivity);
         }
@@ -38,9 +38,9 @@ return (
     <div>
         <h1>Finalise Booking</h1>
         <p>Finalise your booking here</p>
-        <h2>{bowlingBookingActivity.airHockeyTables ? "Airhockey" : "Bowling"}</h2>
-        <p>Start time: {new Date(bowlingBookingActivity.startTime).toLocaleTimeString()}</p>
-        <p>End time: {new Date(bowlingBookingActivity.endTime).toLocaleTimeString()}</p>
+        <h2>{bookingActivity.airHockeyTables ? "Airhockey" : "Bowling"}</h2>
+        <p>Start time: {new Date(bookingActivity.startTime).toLocaleTimeString()}</p>
+        <p>End time: {new Date(bookingActivity.endTime).toLocaleTimeString()}</p>
         {dinnerBookingActivity && (
             <>
                 <h2>Dinner</h2>
