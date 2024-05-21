@@ -115,11 +115,15 @@ export default function BookingBowlingForm() {
     
         const maxChildFriendlyLanes = Math.min(numLanes, 4);
 
+        function handleBack() {
+            navigate("/booking");
+          }
 
     return (
         <div>
             <h2>Book Bowling</h2>
             <form id="bookingBowlingForm">
+            <button onClick={handleBack}>Back</button>
                 <label>Date and Time</label>
                 <Datetime onChange={handleStartTimeChange} value={startTime} dateFormat="YYYY-MM-DD" timeFormat="HH:00" />
                 <label>Duration</label>

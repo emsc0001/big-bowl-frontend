@@ -2,6 +2,9 @@ import { DinnerTable, getAvailableDinnerTables, Booking, BookingActivity, addBoo
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import "./BookingTableForm.css"
 
 const EMPTY_BOOKINGACTIVITY: BookingActivity = {
     id: null,
@@ -16,6 +19,7 @@ const EMPTY_BOOKINGACTIVITY: BookingActivity = {
 
 
 export default function BookingTableForm() {
+    const navigate = useNavigate();
         const [formData, setFormData] = useState<BookingActivity>(EMPTY_BOOKINGACTIVITY);
     const [startTime, setStartTime] = useState<Date>(new Date());
     const [dinnerTable, setDinnerTable] = useState<DinnerTable>();
@@ -103,10 +107,15 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         await addBooking(booking);
     }
 
+    function handleBack() {
+        navigate("/booking");
+      }
+
     return (
         <div>
             <h1>Book Bord</h1>
             <form id="dinnerTableForm">
+            <button onClick={handleBack}>Back</button>
                 <label>Date and Time</label>
                 <Datetime onChange={handleStartTimeChange} value={startTime} dateFormat="YYYY-MM-DD" timeFormat="HH:00" />
                 <label>Antal mennesker</label>

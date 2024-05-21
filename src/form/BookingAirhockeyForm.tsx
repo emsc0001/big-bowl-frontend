@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Datetime from "react-datetime";
 import { useNavigate } from "react-router-dom";
 import "react-datetime/css/react-datetime.css";
-import "./bookingBowlingForm.css";
+import "./BookingAirhockeyForm.css";
 
 const EMPTY_BOOKINGACTIVITY: BookingActivity = {
     id: null,
@@ -88,10 +88,15 @@ export default function BookingAirhockeyForm() {
         setNumTables(event.target.value);
     };
 
+    function handleBack() {
+        navigate("/booking");
+      }
+
     return (
         <div>
             <h2>Book Air Hockey</h2>
             <form id="bookingAirHockeyForm">
+            <button onClick={handleBack}>Back</button>
                 <label>Date and Time</label>
                 <Datetime onChange={handleStartTimeChange} value={startTime} dateFormat="YYYY-MM-DD" timeFormat="HH:00" />
                 <label>Duration</label>

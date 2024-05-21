@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { BookingActivity, DinnerTable, Product, getProducts, getAvailableDinnerTables, addBookingActivity } from "../services/apiFacade";
 import { useEffect, useState } from "react";
-
+import "./BookingOffers.css"
 
 export const BookingOffers = () => {
     const location = useLocation();
