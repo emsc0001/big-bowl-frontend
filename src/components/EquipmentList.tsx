@@ -73,21 +73,21 @@ export const EquipmentList = () => {
             <th>Type</th>
             <th>ID</th>
             <th>Name</th>
+            <th>Quantity</th>
             <th>Status</th>
-            <th>Additional Details</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {filteredEquipment.map((eq) => (
-            <tr key={eq.id}>
-              <td>{eq.type}</td>
+           <tr key={`${eq.type}-${eq.name}`}>
+            <td>{eq.type}</td>
               <td>{eq.id}</td>
               <td>
                 <Link to={`/equipment/${eq.id}`}>{eq.name}</Link>
               </td>
+              <td>{eq.quantity}</td>
               <td>{eq.status}</td>
-              <td>{eq.additionalDetails}</td>
               <td>
                 {auth.isLoggedInAs(["ADMIN"]) && (
                   <button onClick={() => handleStatusUpdate(eq.id, "DEFECTIVE")}>

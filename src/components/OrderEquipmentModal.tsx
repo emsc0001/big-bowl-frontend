@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../settings';
+import "./OrderEquipmentModal.css";
 
 interface OrderEquipmentModalProps {
   onClose: () => void;
@@ -12,7 +13,7 @@ interface Equipment {
   name: string;
   type: string;
   status: string;
-  additionalDetails: string;
+  quantity: 1,
 }
 
 function OrderEquipmentModal({ onClose, addNewEquipment }: OrderEquipmentModalProps) {
