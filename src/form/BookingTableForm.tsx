@@ -60,8 +60,17 @@ export default function BookingTableForm() {
     const handleStartTimeChange = (moment: moment.Moment | string) => {
         if (typeof moment !== "string") {
             const value = moment.toDate();
-            setStartTime(value);
-            setFormData({ ...formData, startTime: value.toISOString() });
+            const now = new Date();
+            const hours = value.getHours();
+
+            // Check if the selected time is in the past or outside the 10-22 range
+            if (value < now || hours < 10 || hours > 22) {
+                // Invalid time, you can handle this situation as you see fit
+                console.error("Invalid time selected");
+            } else {
+                setStartTime(value);
+                setFormData({ ...formData, startTime: value.toISOString() });
+            }
         }
     };
 
@@ -115,16 +124,27 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         <div>
             <h1>Book Bord</h1>
             <form id="dinnerTableForm">
-            <button onClick={handleBack}>Back</button>
-                <label>Date and Time</label>
-                <Datetime onChange={handleStartTimeChange} value={startTime} dateFormat="YYYY-MM-DD" timeFormat="HH:00" />
+                <button onClick={handleBack}>Tilbage</button>
+                <label>Dato og Tid (Åbent: 10-22)</label>
+                <Datetime
+                    onChange={handleStartTimeChange}
+                    value={startTime}
+                    dateFormat="DD-MM-YYYY"
+                    timeFormat="HH:00"
+                    isValidDate={(currentDate) => {
+                        const now = new Date();
+                        return currentDate.isAfter(now);
+                    }}
+                    isValidTime={(currentDate) => {
+                        const hours = currentDate.hours();
+                        return hours >= 10 && hours <= 22;
+                    }}
+                />
                 <label>Antal mennesker</label>
                 <input type="number" name="numberOfPeople" />
-                <label>
-                    Phone Number:
-                    <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-                </label>
-                <button onClick={handleSubmit}>Confirm Booking</button>
+                <label>Telefonnummer:</label>
+                <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                <button onClick={handleSubmit}>Bekræft Booking</button>
                 <p>{message}</p>
             </form>
         </div>

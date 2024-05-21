@@ -69,13 +69,22 @@ export default function BookingAirhockeyForm() {
         navigate("/booking/offers", { state: { bookingActivity: updatedFormData } });
     };
 
-    const handleStartTimeChange = (moment: moment.Moment | string) => {
-        if (typeof moment !== "string") {
-            const value = moment.toDate();
+const handleStartTimeChange = (moment: moment.Moment | string) => {
+    if (typeof moment !== "string") {
+        const value = moment.toDate();
+        const now = new Date();
+        const hours = value.getHours();
+
+        // Check if the selected time is in the past or outside the 10-22 range
+        if (value < now || hours < 10 || hours > 22) {
+            // Invalid time, you can handle this situation as you see fit
+            console.error("Invalid time selected");
+        } else {
             setStartTime(value);
             setFormData({ ...formData, startTime: value.toISOString() });
         }
-    };
+    }
+};
 
     const handleDurationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const duration = Number(e.target.value);
@@ -96,16 +105,29 @@ export default function BookingAirhockeyForm() {
         <div>
             <h2>Book Air Hockey</h2>
             <form id="bookingAirHockeyForm">
-            <button onClick={handleBack}>Back</button>
-                <label>Date and Time</label>
-                <Datetime onChange={handleStartTimeChange} value={startTime} dateFormat="YYYY-MM-DD" timeFormat="HH:00" />
-                <label>Duration</label>
+                <button onClick={handleBack}>Tilbage</button>
+                <label>Dato og Tid</label>
+                <Datetime
+                    onChange={handleStartTimeChange}
+                    value={startTime}
+                    dateFormat="DD-MM-YYYY"
+                    timeFormat="HH:00"
+                    isValidDate={(currentDate) => {
+                        const now = new Date();
+                        return currentDate.isAfter(now);
+                    }}
+                    isValidTime={(currentDate) => {
+                        const hours = currentDate.hours();
+                        return hours >= 10 && hours <= 22;
+                    }}
+                />{" "}
+                <label>Varighed</label>
                 <select name="duration" onChange={handleDurationChange}>
-                    <option value="">Select Duration</option>
-                    <option value="1">1 hour</option>
-                    <option value="2">2 hours</option>
+                    <option value="">Vælg Varighed</option>
+                    <option value="1">1 time</option>
+                    <option value="2">2 timer</option>
                 </select>
-                <label>Number of Tables</label>
+                <label>Antal Borde</label>
                 <select value={numTables} onChange={handleNumTablesChange}>
                     {[1, 2, 3, 4].map((num) => (
                         <option key={num} value={num}>
@@ -114,7 +136,7 @@ export default function BookingAirhockeyForm() {
                     ))}
                 </select>
                 <p style={{ color: isBookingSuccessful ? "green" : "red", backgroundColor: "white" }}>{bookingStatus}</p>
-                <button onClick={handleSubmit}>videre</button>
+                <button onClick={handleSubmit}>Videre</button>
             </form>
         </div>
     );  
