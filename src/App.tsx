@@ -5,7 +5,6 @@ import { BowlingLanes } from "./components/Bowling";
 import { Booking } from "./components/Booking";
 import { Dinner } from "./components/Dinner";
 import { AdminUserBookings } from "./components/AdminUserBookings";
-
 import { EmployeeList } from "./components/EmployeeList";
 import AdminDashboard from "./components/AdminDashboard";
 import { UserBookings } from "./components/userBookings";
