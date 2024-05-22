@@ -2,57 +2,60 @@ import { useLocation } from "react-router-dom";
 import { Booking, addBooking, getUserByUsername, SpecialUserWithoutPassword } from "../services/apiFacade";
 import { useEffect, useState } from "react";
 
+import "./BookingFinaliseForm.css";
+
 export default function BookingFinaliseForm() {
-    const location = useLocation();
-    const { bookingActivity, dinnerBookingActivity, products } = location.state;
-    const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
-    const [phoneNumber, setPhoneNumber] = useState("");
+  const location = useLocation();
+  const { bookingActivity, dinnerBookingActivity, products } = location.state;
+  const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
 
-    useEffect(() => {
-        const username = localStorage.getItem("username");
-        if (username) {
-            getUserByUsername(username).then(setUser);
-        }
-    }, []);
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    if (username) {
+      getUserByUsername(username).then(setUser);
+    }
+  }, []);
 
-    const handleConfirmBooking = async () => {
-        const activities = [bookingActivity];
-        if (dinnerBookingActivity) {
-            activities.push(dinnerBookingActivity);
-        }
-        console.log("User", user);
-        
+  const handleConfirmBooking = async () => {
+    const activities = [bookingActivity];
+    if (dinnerBookingActivity) {
+      activities.push(dinnerBookingActivity);
+    }
+    console.log("User", user);
 
-        const booking: Booking = {
-            id: null,
-            activities: activities,
-            products: products, 
-            user: user || null,
-            phoneNumber: phoneNumber,
-        };
-
-        await addBooking(booking);
+    const booking: Booking = {
+      id: null,
+      activities: activities,
+      products: products,
+      user: user || null,
+      phoneNumber: phoneNumber,
     };
 
-return (
-    <div>
-        <h1>Finalise Booking</h1>
-        <p>Finalise your booking here</p>
-        <h2>{bookingActivity.airHockeyTables ? "Airhockey" : "Bowling"}</h2>
-        <p>Start time: {new Date(bookingActivity.startTime).toLocaleTimeString()}</p>
-        <p>End time: {new Date(bookingActivity.endTime).toLocaleTimeString()}</p>
-        {dinnerBookingActivity && (
-            <>
-                <h2>Dinner</h2>
-                <p>Start time: {new Date(dinnerBookingActivity.startTime).toLocaleTimeString()}</p>
-                <p>End time: {new Date(dinnerBookingActivity.endTime).toLocaleTimeString()}</p>
-            </>
-        )}
-        <label>
-            Phone Number:
-            <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-        </label>
-        <button onClick={handleConfirmBooking}>Confirm Booking</button>
+    await addBooking(booking);
+  };
+
+  return (
+    <div className="booking-finalise-container">
+      <h1>Finalise Booking</h1>
+      <h2>Finalise your booking here</h2>
+      <h2 className="booking-activity">{bookingActivity.airHockeyTables ? "Bowling" : "Airhockey"}</h2>
+      <h3 className="starTime">Start time: {new Date(bookingActivity.startTime).toLocaleTimeString()}</h3>
+      <h3>End time: {new Date(bookingActivity.endTime).toLocaleTimeString()}</h3>
+      {dinnerBookingActivity && (
+        <div className="dinner-booking">
+          <h2>Dinner</h2>
+          <p>Start time: {new Date(dinnerBookingActivity.startTime).toLocaleTimeString()}</p>
+          <p>End time: {new Date(dinnerBookingActivity.endTime).toLocaleTimeString()}</p>
+        </div>
+      )}
+      <label className="phone-number-label">
+        Phone Number:
+        <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+      </label>
+      <button className="confirm-booking-button" onClick={handleConfirmBooking}>
+        Confirm Booking
+      </button>
     </div>
-);
+  );
 }

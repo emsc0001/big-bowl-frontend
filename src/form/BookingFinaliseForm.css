@@ -1,0 +1,80 @@
+.booking-finalise-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 0 20px;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBackground 40s linear infinite alternate;
+}
+
+.booking-activity,
+.dinner-booking {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  text-align: center;
+  border-radius: 16px;
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in forwards;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.phone-number-label {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: white;
+}
+
+.starTime {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: white;
+}
+
+.phone-number-label input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.confirm-booking-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.confirm-booking-button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  .booking-finalise-container {
+    padding: 0 10px;
+  }
+
+  .phone-number-label input {
+    font-size: 14px;
+  }
+
+  .confirm-booking-button {
+    font-size: 14px;
+  }
+}
