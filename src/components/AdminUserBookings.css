@@ -1,0 +1,87 @@
+.booking-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 20px;
+  background: url("YOUR_BACKGROUND_IMAGE_URL") no-repeat center center fixed;
+  background-size: cover;
+  animation: moveBackground 40s linear infinite alternate;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.buttonBack {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttonBack:hover {
+  background-color: #0056b3;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  text-align: center;
+  border-radius: 16px;
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in forwards;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.main-content {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in forwards;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 20px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  .header,
+  .main-content {
+    padding: 20px;
+    margin: 10px 0;
+  }
+
+  .buttonBack {
+    padding: 10px 15px;
+  }
+}
