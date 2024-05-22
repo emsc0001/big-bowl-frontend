@@ -11,7 +11,6 @@ export const UserBookings = () => {
 
   useEffect(() => {
     if (auth.username) {
-      // Ensure username is not null or undefined
       setLoading(true);
       getBookingsByUsername(auth.username)
         .then((res) => {
@@ -23,7 +22,7 @@ export const UserBookings = () => {
           setLoading(false);
         });
     }
-  }, [auth.username]); // Dependency on username to refetch if it changes
+  }, [auth.username]);
 
   const handleBack = () => {
     navigate("/");
