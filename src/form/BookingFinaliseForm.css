@@ -78,3 +78,16 @@
     font-size: 14px;
   }
 }
+
+.notificationOprettet {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 1000;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease-out forwards;
+}

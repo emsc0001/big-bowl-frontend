@@ -9,6 +9,7 @@ export default function BookingFinaliseForm() {
   const { bookingActivity, dinnerBookingActivity, products } = location.state;
   const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [notification, setNotification] = useState({ message: "", show: false, type: "" });
 
   useEffect(() => {
     const username = localStorage.getItem("username");
@@ -33,11 +34,16 @@ export default function BookingFinaliseForm() {
     };
 
     await addBooking(booking);
+    setNotification({ show: true, message: "Booking Oprretet Succcesfuldt✅", type: "addedBooking" });
+    setTimeout(() => {
+      setNotification({ show: false, message: "", type: "" });
+      window.location.href = "/userBookings";
+    }, 1900);
   };
 
   return (
     <div className="booking-finalise-container">
-      <h1>Finalise Booking</h1>
+      {notification.show && notification.type === "addedBooking" && <div className="notificationOprettet">{notification.message}</div>}
       <h2>Finalise your booking here</h2>
       <h2 className="booking-activity">{bookingActivity.airHockeyTables ? "Bowling" : "Airhockey"}</h2>
       <h3 className="starTime">Start time: {new Date(bookingActivity.startTime).toLocaleTimeString()}</h3>
