@@ -19,16 +19,16 @@ export default function NavHeader() {
           <NavLink to="/products">📦Produkter</NavLink>
         </li>
 
-        <li>
-          <NavLink to="/admin">Admin Dashboard</NavLink>
-        </li>
+        {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
+          <li>
+            <NavLink to="/admin">Admin Dashboard</NavLink>
+          </li>
+        )}
 
         {auth.isLoggedIn() && auth.isLoggedInAs(["USER"]) && (
-          <>
-            <li>
-              <NavLink to="/booking">Book Online</NavLink>
-            </li>
-          </>
+          <li>
+            <NavLink to="/booking">Book Online</NavLink>
+          </li>
         )}
 
         {auth.isLoggedIn() && auth.isLoggedInAs(["USER"]) && (
