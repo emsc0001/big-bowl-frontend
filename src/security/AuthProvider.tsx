@@ -7,18 +7,21 @@ import { LoginResponse, LoginRequest } from "../services/authFacade";
 import React from "react";
 
 interface AuthContextType {
-  username: string | null;
-  signIn: (user: User) => Promise<LoginResponse>;
-  // signUp: (user: SpecialUser) => Promise<SpecialUserResponse>;
+  signIn: (user: LoginRequest) => Promise<User>;
   signOut: () => void;
   isLoggedIn: () => boolean;
   isLoggedInAs: (role: string[]) => boolean;
+  isAdmin: () => boolean;
+  username: string | null;
 }
 
-const AuthContext = createContext<AuthContextType>(null!);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
-  //We use this to distinguish between being logged in or not
   const initialUsername = localStorage.getItem("username") || null;
   const [username, setUsername] = useState<string | null>(initialUsername);
 
@@ -32,7 +35,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  //Observe how we can sign user out without involving the backend (is that (always) good?)
   const signOut = () => {
     setUsername(null);
     localStorage.removeItem("token");
@@ -40,20 +42,19 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem("roles");
   };
 
-  function isLoggedIn() {
+  const isLoggedIn = () => {
     return username != null;
-  }
+  };
 
-  function isLoggedInAs(role: string[]) {
+  const isLoggedInAs = (role: string[]) => {
     const roles: Array<string> = JSON.parse(localStorage.getItem("roles") || "[]");
-    return roles?.some((r) => role.includes(r)) || false;
-  }
+    return roles.some((r) => role.includes(r));
+  };
 
-  const value = { username, isLoggedIn, isLoggedInAs, signIn, signOut };
+  const isAdmin = () => {
+    const roles: Array<string> = JSON.parse(localStorage.getItem("roles") || "[]");
+    return roles.includes("ADMIN");
+  };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
+  return <AuthContext.Provider value={{ signIn, signOut, isLoggedIn, isLoggedInAs, isAdmin, username }}>{children}</AuthContext.Provider>;
 }

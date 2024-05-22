@@ -25,20 +25,19 @@ export default function NavHeader() {
           </li>
         )}
 
-        {auth.isLoggedIn() && auth.isLoggedInAs(["USER"]) && (
+        {auth.isLoggedIn() && !auth.isAdmin() && (
           <li>
             <NavLink to="/booking">Book Online</NavLink>
           </li>
         )}
 
-        {auth.isLoggedIn() && auth.isLoggedInAs(["USER"]) && (
+        {auth.isLoggedIn() && !auth.isAdmin() && (
           <>
             <li>
               <NavLink to="/userBookings">See Dine Bookninger!</NavLink>
             </li>
           </>
         )}
-
         {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
           <>
             <AddDropdownMenu />
