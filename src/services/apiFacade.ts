@@ -526,6 +526,11 @@ async function deleteBookingActivity(id: number): Promise<void> {
   });
 }
 
+async function getBookingsByUsername(username: string) {
+  const url = `${API_URL}/bookings/user/${username}`;
+  const options = makeOptions("GET"); // Ensure no body is included for GET requests
+  return fetch(url, options).then(handleHttpErrors);
+}
 export type { Product, AirHockey, BowlingLane, DinnerTable, Employee, Booking, BookingActivity, SpecialUserWithoutPassword };
 // eslint-disable-next-line react-refresh/only-export-components
 export {
@@ -544,6 +549,7 @@ export {
   getBooking,
   getBookingActivities,
   getBookingActivity,
+  getBookingsByUsername,
 };
 export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable, addBooking };
 export {

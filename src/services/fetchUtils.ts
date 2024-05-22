@@ -22,7 +22,7 @@ export function makeOptions(method: string, body: object | null, addToken?: bool
     opts.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   }
   console.log("opts", opts, "body", body);
-  
+
   return opts;
 }
 
