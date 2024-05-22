@@ -23,11 +23,15 @@ export default function NavHeader() {
           <NavLink to="/admin">Admin Dashboard</NavLink>
         </li>
 
-        <li>
-          <NavLink to="/booking">Book Online</NavLink>
-        </li>
+        {auth.isLoggedIn() && auth.isLoggedInAs(["USER"]) && (
+          <>
+            <li>
+              <NavLink to="/booking">Book Online</NavLink>
+            </li>
+          </>
+        )}
 
-        {auth.isLoggedIn() && auth.isLoggedInAs(["USER", "ADMIN"]) && (
+        {auth.isLoggedIn() && auth.isLoggedInAs(["USER"]) && (
           <>
             <li>
               <NavLink to="/userBookings">See Dine Bookninger!</NavLink>

@@ -40,7 +40,7 @@ export default function App() {
           path="/adminUserBookings"
           element={
             <RequireAuth>
-              <AdminUserBookings />
+              <AdminUserBookings roles={["ADMIN"]} />
             </RequireAuth>
           }
         />
@@ -48,7 +48,7 @@ export default function App() {
         <Route
           path="/userBookings"
           element={
-            <RequireAuth>
+            <RequireAuth roles={["USER"]}>
               <UserBookings />
             </RequireAuth>
           }
