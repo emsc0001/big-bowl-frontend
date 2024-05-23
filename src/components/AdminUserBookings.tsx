@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBookings, Booking } from "../services/apiFacade";
+import { Link } from "react-router-dom";
+import { useAuth } from "../security/AuthProvider";
 
 import "./AdminUserBookings.css";
 
@@ -9,6 +11,7 @@ export const AdminUserBookings = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const auth = useAuth();
 
   useEffect(() => {
     setLoading(true);
@@ -71,6 +74,11 @@ export const AdminUserBookings = () => {
                   {booking.activities.map((activity, index) => (
                     <div key={index}>
                       {formatDateTime(activity.startTime)} Til {formatDateTime(activity.endTime)}
+                      {auth.isLoggedInAs(["ADMIN", "USER"]) && (
+                        <Link className="bowling-btn" to="/editBooking" state={{ booking: booking }}>
+                          Rediger Booking
+                        </Link>
+                      )}
                     </div>
                   ))}
                 </td>
