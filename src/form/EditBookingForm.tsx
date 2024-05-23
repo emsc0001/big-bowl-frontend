@@ -1,29 +1,30 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { editBooking, deleteBooking, addBooking, getBookingsByUsername } from "../services/apiFacade";
+import { editBooking, addBooking, deleteBooking, Booking } from "../services/apiFacade";
 
 import "./EditBookingForm.css";
 
-const EMPTY_BOOKING = {
+const EMPTY_BOOKING: Booking = {
   id: 0,
   activities: [],
   products: [],
   user: null,
   phoneNumber: "",
+  selectedProduct: "", // Tilføj dette for at gemme værdien af det valgte produkt
 };
 
 export default function EditBookingForm() {
-  const [booking, setBooking] = useState(EMPTY_BOOKING);
+  const [booking, setBooking] = useState<Booking>(EMPTY_BOOKING);
+
   const location = useLocation();
   const navigate = useNavigate();
   const bookingToEdit = location.state?.booking || EMPTY_BOOKING;
-  const [formData, setFormData] = useState(bookingToEdit);
+  const [formData, setFormData] = useState<Booking>(bookingToEdit);
   const [error, setError] = useState("");
   const [notification, setNotification] = useState({ message: "", show: false, type: "" });
 
   useEffect(() => {
     setBooking(bookingToEdit);
-    setFormData(bookingToEdit); // Make sure formData is updated with the booking to edit
   }, [bookingToEdit]);
 
   function handleSubmit(event) {
@@ -31,16 +32,18 @@ export default function EditBookingForm() {
     const isEditing = formData.id ? true : false;
     const action = isEditing ? editBooking : addBooking;
 
-    action(formData)
+    const bookingData = {
+      ...formData,
+      activities: formData.activities || [],
+    };
+
+    action(bookingData)
       .then(() => {
         const message = isEditing ? `Updated Booking ${formData.id}🔨` : "Created A New Booking🆕";
         setNotification({ message: message, show: true, type: "addEdit" });
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           navigate("/userBookings");
-          if (formData.user && formData.user.username) {
-            getBookingsByUsername(formData.user.username).then(setBooking).catch(setError);
-          }
         }, 1900);
       })
       .catch((error) => {
@@ -57,6 +60,44 @@ export default function EditBookingForm() {
     }));
   }
 
+  function handleProductChange(index: number, event) {
+    const { name, value, type, checked } = event.target;
+    setFormData((prev) => {
+      const updatedProducts = prev.products.map((product, i) => {
+        if (i === index) {
+          return {
+            ...product,
+            [name]: type === "checkbox" ? checked : value,
+          };
+        }
+        return product;
+      });
+      return {
+        ...prev,
+        products: updatedProducts,
+      };
+    });
+  }
+
+  function handleActivityChange(index: number, event) {
+    const { name, value, type, checked } = event.target;
+    setFormData((prev) => {
+      const updatedActivities = prev.activities.map((activity, i) => {
+        if (i === index) {
+          return {
+            ...activity,
+            [name]: type === "checkbox" ? checked : value,
+          };
+        }
+        return activity;
+      });
+      return {
+        ...prev,
+        activities: updatedActivities,
+      };
+    });
+  }
+
   function handleDelete() {
     if (!formData.id) return;
 
@@ -66,7 +107,6 @@ export default function EditBookingForm() {
         setTimeout(() => {
           setNotification({ message: "", show: false, type: "" });
           navigate("/userBookings");
-          getBookingsByUsername(formData.user.username).then(setBooking).catch(setError);
         }, 1900);
       })
       .catch((error) => {
@@ -96,6 +136,36 @@ export default function EditBookingForm() {
           Phone Number:
           <input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} />
         </label>
+
+        {formData.activities.map((activity, index) => (
+          <div key={index}>
+            <h3>Booking time</h3>
+            <label>
+              Start Time:
+              <input type="datetime-local" name="startTime" value={activity.startTime} onChange={(e) => handleActivityChange(index, e)} />
+            </label>
+            <label>
+              End Time:
+              <input type="datetime-local" name="endTime" value={activity.endTime} onChange={(e) => handleActivityChange(index, e)} />
+            </label>
+          </div>
+        ))}
+
+        <div>
+          <h3>Produkter</h3>
+          <label>
+            Vælg produkt:
+            <select name="selectedProduct" value={formData.selectedProduct} onChange={handleChange}>
+              <option value="">Vælg et produkt</option>
+              {formData.products.map((product) => (
+                <option key={product.id} value={product.id}>
+                  {product.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
         <button type="submit">Save</button>
         <button type="button" onClick={handleDelete}>
           Delete
