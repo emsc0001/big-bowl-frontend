@@ -13,6 +13,7 @@ import BowlingForm from "./form/BowlingForm";
 import AirHockeyForm from "./form/AirHockeyForm";
 import DinnerForm from "./form/DinnerForm";
 import ProductForm from "./form/ProductForm";
+import EditBookingForm from "./form/EditBookingForm";
 import BookingBowlingForm from "./form/BookingBowlingForm";
 import { BookingOffers } from "./components/BookingOffers";
 import BookingFinaliseForm from "./form/BookingFinaliseForm";
@@ -35,7 +36,6 @@ export default function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/employees" element={<EmployeeList />} />
         <Route path="/equipment" element={<EquipmentList />} />
-
         <Route
           path="/adminUserBookings"
           element={
@@ -44,7 +44,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/userBookings"
           element={
@@ -53,7 +52,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/airhockey"
           element={
@@ -62,7 +60,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/bowlinglanes"
           element={
@@ -71,7 +68,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/dinner"
           element={
@@ -80,15 +76,21 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route path="/booking" element={<Booking />} />
         <Route path="/booking/bowling" element={<BookingBowlingForm />} />
         <Route path="/booking/airhockey" element={<BookingAirhockeyForm />} />
         <Route path="/booking/dinnerTable" element={<BookingTableForm />} />
-
         <Route path="/booking/offers" element={<BookingOffers />} />
         <Route path="/booking/finalise" element={<BookingFinaliseForm />} />
 
+        <Route
+          path="/editBooking"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <EditBookingForm />
+            </RequireAuth>
+          }
+        />
         <Route
           path="/addBowlingLane"
           element={
@@ -113,7 +115,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/addEmployee"
           element={
@@ -122,7 +123,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/admin"
           element={
@@ -131,7 +131,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/equipment"
           element={
@@ -140,7 +139,6 @@ export default function App() {
             </RequireAuth>
           }
         />
-
         <Route
           path="/addProduct"
           element={
