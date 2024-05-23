@@ -6,7 +6,7 @@ import "./BookingFinaliseForm.css";
 
 export default function BookingFinaliseForm() {
   const location = useLocation();
-  const { bookingActivity, dinnerBookingActivity, products } = location.state;
+  const { bookingActivity, dinnerBookingActivity, addedProducts } = location.state;
   const [user, setUser] = useState<SpecialUserWithoutPassword | null>(null);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [notification, setNotification] = useState({ message: "", show: false, type: "" });
@@ -28,17 +28,17 @@ export default function BookingFinaliseForm() {
     const booking: Booking = {
       id: null,
       activities: activities,
-      products: products,
+      products: addedProducts,
       user: user || null,
       phoneNumber: phoneNumber,
     };
 
     await addBooking(booking);
     setNotification({ show: true, message: "Booking Oprretet Succcesfuldt✅", type: "addedBooking" });
-    setTimeout(() => {
-      setNotification({ show: false, message: "", type: "" });
-      window.location.href = "/userBookings";
-    }, 1900);
+    // setTimeout(() => {
+    //   setNotification({ show: false, message: "", type: "" });
+    //   window.location.href = "/userBookings";
+    // }, 1900);
   };
 
   return (
