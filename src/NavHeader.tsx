@@ -25,11 +25,9 @@ export default function NavHeader() {
           </li>
         )}
 
-        {auth.isLoggedIn() && !auth.isAdmin() && (
-          <li>
-            <NavLink to="/booking">Book Online</NavLink>
-          </li>
-        )}
+        <li>
+          <NavLink to="/booking">Book Online</NavLink>
+        </li>
 
         {auth.isLoggedIn() && !auth.isAdmin() && (
           <>
