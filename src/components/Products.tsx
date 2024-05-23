@@ -30,7 +30,7 @@ export const Products = () => {
               <Link to={`/${product.id}`}>{product.name}</Link>
               <p>{product.price} kr.</p>
               <img src={product.image} alt={product.name} />
-              {auth.isLoggedInAs(["ADMIN", "USER"]) && (
+              {auth.isLoggedInAs(["ADMIN"]) && (
                 <Link className="product-btn" to="/addProduct" state={product}>
                   Edit
                 </Link>
