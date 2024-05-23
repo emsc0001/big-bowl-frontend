@@ -35,10 +35,10 @@ export default function BookingFinaliseForm() {
 
     await addBooking(booking);
     setNotification({ show: true, message: "Booking Oprretet Succcesfuldt✅", type: "addedBooking" });
-    // setTimeout(() => {
-    //   setNotification({ show: false, message: "", type: "" });
-    //   window.location.href = "/userBookings";
-    // }, 1900);
+    setTimeout(() => {
+      setNotification({ show: false, message: "", type: "" });
+      window.location.href = "/userBookings";
+    }, 1900);
   };
 
   return (
