@@ -48,6 +48,14 @@ const AdminDashboard = () => {
             </li>
           </ul>
         </div>
+        <div className="link-section">
+          <h2>Book hel dag for arrangement</h2>
+          <ul>
+            <li>
+              <Link to="/bookWholeDay">Book Hel dag</Link>
+            </li>
+          </ul>
+        </div>
       </main>
 
       <footer className="admin-footer">

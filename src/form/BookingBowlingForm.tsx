@@ -31,7 +31,9 @@ export default function BookingBowlingForm() {
 
     useEffect(() => {
         const checkAvailability = async () => {
-        try {
+            try {
+            console.log(formData.startTime, formData.endTime);
+            
             const availableLanes = await getAvailableBowlingLanes(formData.startTime, formData.endTime);
             setBowlingLanes(availableLanes);
             console.log(availableLanes);
@@ -58,10 +60,6 @@ export default function BookingBowlingForm() {
     }, [formData]);
 
 
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { name, value } = e.target;
-    //     setFormData({ ...formData, [name]: value });
-    // };
 
  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
      e.preventDefault();

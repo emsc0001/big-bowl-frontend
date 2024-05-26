@@ -526,6 +526,11 @@ async function deleteBookingActivity(id: number): Promise<void> {
   });
 }
 
+async function bookWholeDayForBowlingLanes(date: string): Promise<void> {
+  const options = makeOptions("POST", { date }, true);
+  return fetch(`${BOOKINGACTIVITY_URL}/book-whole-day?date=${date}`, options).then(handleHttpErrors);
+}
+
 async function getBookingsByUsername(username: string) {
   const url = `${API_URL}/bookings/user/${username}`;
   const options = makeOptions("GET");
@@ -551,7 +556,7 @@ export {
   getBookingActivity,
   getBookingsByUsername,
 };
-export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable, addBooking };
+export { addProduct, addEmployee, addAirHockey, addBowlingLane, addDinnerTable, addBooking, bookWholeDayForBowlingLanes };
 export {
   editAirHockey,
   editBowlingLane,

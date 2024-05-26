@@ -27,6 +27,7 @@ import RequireAuth from "./security/RequireAuth";
 import Layout from "./Layout";
 import Home from "./Home";
 import "./App.css";
+import BookWholeDay from "./components/BookWholeDay";
 
 export default function App() {
   return (
@@ -144,6 +145,14 @@ export default function App() {
           element={
             <RequireAuth roles={["ADMIN"]}>
               <ProductForm />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/bookWholeDay"
+          element={
+            <RequireAuth roles={["ADMIN"]}>
+              <BookWholeDay />
             </RequireAuth>
           }
         />
