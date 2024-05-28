@@ -22,6 +22,7 @@ export default function BookingBowlingForm() {
     const [numberOfBowlers, setNumberOfBowlers] = useState<number>(0);
     const [formData, setFormData] = useState<BookingActivity>(EMPTY_BOOKINGACTIVITY);
     const [startTime, setStartTime] = useState<Date>(new Date());
+    const [endTime, setEndTime] = useState<Date>(new Date());
     const [numLanes, setNumLanes] = useState(1);
     const [isChildFriendly, setIsChildFriendly] = useState(false);
     const [numChildFriendlyLanes, setNumChildFriendlyLanes] = useState(0);
@@ -29,19 +30,24 @@ export default function BookingBowlingForm() {
     const [isBookingSuccessful, setIsBookingSuccessful] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const checkAvailability = async () => {
-            try {
-            console.log(formData.startTime, formData.endTime);
-            
-            const availableLanes = await getAvailableBowlingLanes(formData.startTime, formData.endTime);
+useEffect(() => {
+    const checkAvailability = async () => {
+        try {
+            const adjustedStartTime = new Date(startTime.getTime());
+            adjustedStartTime.setMinutes(adjustedStartTime.getMinutes() - adjustedStartTime.getTimezoneOffset());
+
+            const adjustedEndTime = new Date(endTime.getTime());
+            adjustedEndTime.setMinutes(adjustedEndTime.getMinutes() - adjustedEndTime.getTimezoneOffset());
+
+            console.log(adjustedStartTime.toISOString(), adjustedEndTime.toISOString());
+
+            const availableLanes = await getAvailableBowlingLanes(adjustedStartTime.toISOString(), adjustedEndTime.toISOString());
             setBowlingLanes(availableLanes);
             console.log(availableLanes);
-            
 
             const childFriendlyLanes = availableLanes.filter((lane) => lane.forKids);
             console.log(childFriendlyLanes);
-            
+
             if (availableLanes.length >= numLanes && childFriendlyLanes.length >= numChildFriendlyLanes) {
                 setBookingStatus("The time is available!");
                 setIsBookingSuccessful(true);
@@ -52,12 +58,11 @@ export default function BookingBowlingForm() {
         } catch (error) {
             console.error(error);
             setBookingStatus("An error occurred while checking availability.");
-            setIsBookingSuccessful(false);
         }
-        };
+    };
 
-        checkAvailability();
-    }, [formData]);
+    checkAvailability();
+}, [startTime, endTime, numLanes, numChildFriendlyLanes]);
 
 
 
@@ -76,8 +81,12 @@ export default function BookingBowlingForm() {
      const selectedLanes = [...selectedChildFriendlyLanes, ...selectedRegularLanes];
 
      // Update the formData with the selected lanes
-     const updatedFormData = { ...formData, bowlingLanes: selectedLanes };
-
+    const updatedFormData = {
+        ...formData,
+        startTime: startTime.toISOString(),
+        endTime: endTime.toISOString(),
+        bowlingLanes: selectedLanes,
+    };
      console.log(updatedFormData);
     //  addBookingActivity(updatedFormData);
      navigate('/booking/offers', {state: {bookingActivity: updatedFormData}});
@@ -87,6 +96,10 @@ export default function BookingBowlingForm() {
 const handleStartTimeChange = (moment: moment.Moment | string) => {
     if (typeof moment !== "string") {
         const value = moment.toDate();
+        value.setMinutes(0); // Reset minutes
+        value.setSeconds(0); // Reset seconds
+        value.setMilliseconds(0); // Reset milliseconds
+
         const now = new Date();
         now.setHours(0, 0, 0, 0); // Reset the time of the 'now' variable
         const hours = value.getHours();
@@ -101,13 +114,16 @@ const handleStartTimeChange = (moment: moment.Moment | string) => {
         }
     }
 };
+const handleDurationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const duration = Number(e.target.value);
 
-    const handleDurationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-            const duration = Number(e.target.value);
-            const startTime = new Date(formData.startTime);
-            const endTime = new Date(startTime.getTime() + duration * 60 * 60 * 1000);
-            setFormData({ ...formData, endTime: endTime.toISOString() });
-    };
+    const startTime = new Date(formData.startTime);
+    const endTime = new Date(startTime.getTime());
+
+    endTime.setHours(startTime.getHours() + duration);
+    setEndTime(endTime); // Set the endTime state variable
+    setFormData({ ...formData, endTime: endTime.toISOString() });
+};
     
         const handleNumLanesChange = (event) => {
             setNumLanes(event.target.value);
